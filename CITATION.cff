@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use SteerDistill, please cite the paper."
+title: "SteerDistill: Quantizing LLM Agents via Closed-Loop Teacher Steering"
+type: software
+repository-code: "https://github.com/air-embodied-brain/SteerDistill"
+authors:
+  - family-names: Cui
+    given-names: Genming
+  - family-names: Li
+    given-names: Xiangyu
+  - family-names: Hao
+    given-names: Zixu
+  - family-names: Ding
+    given-names: Xin
+  - family-names: Liu
+    given-names: Yunxin
+  - family-names: Cao
+    given-names: Ting
+url: "https://air-embodied-brain.github.io/SteerDistill/"
+preferred-citation:
+  type: article
+  title: "SteerDistill: Quantizing LLM Agents via Closed-Loop Teacher Steering"
+  authors:
+    - family-names: Cui
+      given-names: Genming
+    - family-names: Li
+      given-names: Xiangyu
+    - family-names: Hao
+      given-names: Zixu
+    - family-names: Ding
+      given-names: Xin
+    - family-names: Liu
+      given-names: Yunxin
+    - family-names: Cao
+      given-names: Ting
+  journal: "arXiv"
+  year: 2026
+  date-published: "2026-11-10"
+  doi: "10.48550/arXiv.2611.13410"
+  url: "https://arxiv.org/abs/2611.13410"

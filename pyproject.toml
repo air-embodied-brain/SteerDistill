@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "steerdistill"
+version = "0.1.0"
+description = "Quantizing LLM agents via closed-loop teacher steering"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT AND Apache-2.0"
+license-files = ["LICENSE", "licenses/*", "docs/third_party_notices.md"]
+authors = [{name = "SteerDistill authors"}]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: POSIX :: Linux",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[project.entry-points."vllm.general_plugins"]
+steerdistill = "steerdistill.quantization.vllm_plugin:register"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+steerdistill = ["training/config/*.yaml", "training/config/*.json"]
