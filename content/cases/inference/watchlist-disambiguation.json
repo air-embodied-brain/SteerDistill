@@ -1,0 +1,1289 @@
+{
+  "schemaVersion": 1,
+  "id": "watchlist-disambiguation",
+  "kind": "inference",
+  "title": "移除自选股前，先确认公司名称",
+  "summary": "用户要求从自选列表中移除一家公司，却没有给出名称。列表中有 `NVDA` 和 `ZETA`；下一轮用户才说明，要移除的是 Zeta Corp。",
+  "template": "comparison",
+  "originalTask": {
+    "id": "multi_turn_miss_param_117",
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I'd like some assistance today with my investment portfolio. If a specific company is part of my watchlist, please remove it for me. The market trends for their extractions are concerning me recently."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "That specific company is Zeta Corp."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "With my watchlist refreshed, please retrieve the current stocks still listed. I need a clear view of what remains on my radar."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "I'm intrigued by the recent advancements in technology and wish to explore investment opportunities there. Could you provide a list of available technology stock symbols?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "I've been observing Microsoft's stock performance and I find it quite compelling. Could you give me a detailed update on its current status and trends?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "I'm ready to act on my analysis. Please purchase 50 shares of Microsoft at $320 each, given today's indicators."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Finally, before the end of the trading day, I intend to deposit 10 times the prices of OMEG rounded to nearest thousands into my trading account to secure liquidity for forthcoming ventures."
+        }
+      ]
+    ],
+    "initial_config": {
+      "TradingBot": {
+        "orders": {
+          "12345": {
+            "symbol": "AAPL",
+            "price": 210.65,
+            "num_shares": 10,
+            "status": "Completed"
+          },
+          "order_type": "Buy"
+        },
+        "account_info": {
+          "account_id": 98765,
+          "balance": 16000,
+          "binding_card": 1987654321098765
+        },
+        "authenticated": true,
+        "market_status": "Open",
+        "order_counter": 12446,
+        "stocks": {
+          "AAPL": {
+            "price": 227.16,
+            "percent_change": 0.17,
+            "volume": 2.552,
+            "MA(5)": 227.11,
+            "MA(20)": 227.09
+          },
+          "GOOG": {
+            "price": 2840.34,
+            "percent_change": 0.24,
+            "volume": 1.123,
+            "MA(5)": 2835.67,
+            "MA(20)": 2842.15
+          },
+          "TSLA": {
+            "price": 667.92,
+            "percent_change": -0.12,
+            "volume": 1.654,
+            "MA(5)": 671.15,
+            "MA(20)": 668.2
+          },
+          "MSFT": {
+            "price": 310.23,
+            "percent_change": 0.09,
+            "volume": 3.234,
+            "MA(5)": 309.88,
+            "MA(20)": 310.11
+          },
+          "NVDA": {
+            "price": 220.34,
+            "percent_change": 0.34,
+            "volume": 1.234,
+            "MA(5)": 220.45,
+            "MA(20)": 220.67
+          },
+          "ALPH": {
+            "price": 1320.45,
+            "percent_change": -0.08,
+            "volume": 1.567,
+            "MA(5)": 1321.12,
+            "MA(20)": 1325.78
+          },
+          "OMEG": {
+            "price": 457.23,
+            "percent_change": 0.12,
+            "volume": 2.345,
+            "MA(5)": 456.78,
+            "MA(20)": 458.12
+          },
+          "QUAS": {
+            "price": 725.89,
+            "percent_change": -0.03,
+            "volume": 1.789,
+            "MA(5)": 726.45,
+            "MA(20)": 728
+          },
+          "NEPT": {
+            "price": 88.34,
+            "percent_change": 0.19,
+            "volume": 0.654,
+            "MA(5)": 88.21,
+            "MA(20)": 88.67
+          },
+          "SYNX": {
+            "price": 345.67,
+            "percent_change": 0.11,
+            "volume": 2.112,
+            "MA(5)": 345.34,
+            "MA(20)": 346.12
+          }
+        },
+        "watch_list": [
+          "NVDA",
+          "ZETA"
+        ],
+        "transaction_history": []
+      }
+    },
+    "path": [
+      "TradingBot.get_symbol_by_name",
+      "TradingBot.remove_stock_from_watchlist",
+      "TradingBot.get_watchlist",
+      "TradingBot.get_stock_info",
+      "TradingBot.get_available_stocks",
+      "TradingBot.place_order",
+      "TradingBot.fund_account"
+    ],
+    "involved_classes": [
+      "TradingBot"
+    ]
+  },
+  "presentation": {
+    "methods": [
+      {
+        "id": "bf16",
+        "folder": "BF16",
+        "name": "BF16",
+        "description": "先询问公司名称，收到答复后删除 ZETA。",
+        "tones": [
+          "after",
+          "after",
+          "after"
+        ],
+        "result": "仅删除 ZETA，保留 NVDA。",
+        "turns": [
+          [
+            {
+              "type": "reply",
+              "text": "To address your request, I need to identify the specific company you wish to remove from your watchlist.",
+              "message": 4,
+              "excerpt": true
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_symbol_by_name",
+              "args": "name=\"Zeta Corp\"",
+              "result": "symbol: \"ZETA\"",
+              "message": 6,
+              "returnMessage": 7,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock ZETA removed from watchlist successfully.",
+              "message": 8,
+              "returnMessage": 9,
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 27,
+                    "text": "remove_stock_from_watchlist"
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\"]",
+              "message": 12,
+              "returnMessage": 13,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "But since the user hasn't provided the company name/symbol yet, I can't proceed without asking for that information.",
+            "message": 4,
+            "highlights": [
+              {
+                "start": 88,
+                "end": 115,
+                "text": "asking for that information"
+              }
+            ]
+          },
+          {
+            "message": 8,
+            "text": "Now that I have the symbol, the next step is to remove it from the watchlist."
+          },
+          {
+            "message": 12,
+            "text": "Since we already removed ZETA, the next step is to fetch the current watchlist."
+          }
+        ],
+        "passed": true,
+        "record": {
+          "sourceId": "BF16/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "仅删除 ZETA，保留 NVDA。"
+        ]
+      },
+      {
+        "id": "ours",
+        "folder": "Ours",
+        "name": "SteerDistill",
+        "description": "先查看列表并询问公司名称，收到答复后删除 ZETA。",
+        "tones": [
+          "after",
+          "after",
+          "after"
+        ],
+        "result": "仅删除 ZETA，保留 NVDA。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\", \"ZETA\"]",
+              "message": 4,
+              "returnMessage": 5,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "reply",
+              "text": "Could you please specify which company you'd like to remove from the watchlist?",
+              "message": 6,
+              "excerpt": true
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_symbol_by_name",
+              "args": "name=\"Zeta Corp\"",
+              "result": "symbol: \"ZETA\"",
+              "message": 8,
+              "returnMessage": 9,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock ZETA removed from watchlist successfully.",
+              "message": 10,
+              "returnMessage": 11,
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 27,
+                    "text": "remove_stock_from_watchlist"
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\"]",
+              "message": 14,
+              "returnMessage": 15,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "Since the user mentioned \"a specific company,\" but didn't specify the name or symbol, I need to ask for clarification.",
+            "message": 6,
+            "highlights": [
+              {
+                "start": 96,
+                "end": 117,
+                "text": "ask for clarification"
+              }
+            ]
+          },
+          {
+            "message": 10,
+            "text": "Since we've confirmed the symbol is ZETA, I'll call that tool with \"ZETA\" as the parameter.",
+            "highlights": [
+              {
+                "start": 12,
+                "end": 40,
+                "text": "confirmed the symbol is ZETA"
+              }
+            ]
+          },
+          {
+            "message": 14,
+            "text": "First, I remember that earlier they had a watchlist with NVDA and ZETA. Then they asked to remove Zeta Corp, which was mapped to ZETA. The removal was successful, so now the watchlist should have NVDA left."
+          }
+        ],
+        "passed": true,
+        "record": {
+          "sourceId": "Ours/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "仅删除 ZETA，保留 NVDA。"
+        ]
+      },
+      {
+        "id": "qerl",
+        "folder": "QeRL",
+        "name": "QeRL",
+        "description": "未等用户确认，便删除了 NVDA 和 ZETA。",
+        "tones": [
+          "before",
+          "before",
+          "before"
+        ],
+        "result": "首轮已经删去两家公司，列表为空。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\", \"ZETA\"]",
+              "message": 4,
+              "returnMessage": 5,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"NVDA\"",
+              "result": "Stock NVDA removed from watchlist successfully.",
+              "message": 6,
+              "returnMessage": 7,
+              "highlights": {
+                "args": [
+                  {
+                    "start": 0,
+                    "end": 13,
+                    "text": "symbol=\"NVDA\""
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock ZETA removed from watchlist successfully.",
+              "message": 8,
+              "returnMessage": 9,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: []",
+              "message": 10,
+              "returnMessage": 11,
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "reply",
+              "text": "Done. Zeta Corp (ZETA) has been successfully removed from your watchlist. Your watchlist is now empty.",
+              "message": 14
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: []",
+              "message": 16,
+              "returnMessage": 17,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "Given the constraints, the safest step is to remove the companies from the watchlist now, assuming the user considers them concerning based on their inclusion. Proceed with that.",
+            "message": 6,
+            "highlights": [
+              {
+                "start": 134,
+                "end": 158,
+                "text": "based on their inclusion"
+              }
+            ]
+          },
+          {
+            "message": 14,
+            "text": "There's no need for further tool calls because the task is done.",
+            "highlights": [
+              {
+                "start": 47,
+                "end": 63,
+                "text": "the task is done"
+              }
+            ]
+          },
+          {
+            "message": 16,
+            "text": "Given the prior interactions, it's likely empty, but better to check again to be certain."
+          }
+        ],
+        "passed": false,
+        "record": {
+          "sourceId": "QeRL/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "首轮已经删去两家公司，列表为空。"
+        ]
+      },
+      {
+        "id": "qad",
+        "folder": "On-Policy QAD",
+        "name": "On-Policy QAD",
+        "description": "把查不到行情当作股票无效，收到公司名后仍未删除。",
+        "tones": [
+          "",
+          "before",
+          "before"
+        ],
+        "result": "没有执行删除，ZETA 仍在列表中。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\", \"ZETA\"]",
+              "message": 4,
+              "returnMessage": 5,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "get_stock_info",
+              "args": "symbol=\"NVDA\"",
+              "result": "percent_change: 0.34（节选）",
+              "message": 6,
+              "returnMessage": 7,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "get_stock_info",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock with symbol 'ZETA' not found.",
+              "message": 8,
+              "returnMessage": 9,
+              "returnTone": "before"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_symbol_by_name",
+              "args": "name=\"Zeta Corp\"",
+              "result": "symbol: \"ZETA\"",
+              "message": 12,
+              "returnMessage": 13,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "reply",
+              "text": "The stock symbol for Zeta Corp is \"ZETA,\" but attempts to remove it from the watchlist failed due to its invalidity. No action could be taken. Done.",
+              "message": 14,
+              "highlights": {
+                "text": [
+                  {
+                    "start": 117,
+                    "end": 142,
+                    "text": "No action could be taken."
+                  }
+                ]
+              }
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\", \"ZETA\"]",
+              "message": 16,
+              "returnMessage": 17,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "But with the current tools, proceeding with get_stock_info for both stocks seems logical.",
+            "message": 6
+          },
+          {
+            "message": 14,
+            "text": "Given that the user confirmed the company is Zeta Corp, and the tool gives \"ZETA\" as the symbol, but removal fails, maybe the solution is to inform the user that the symbol isn't valid.",
+            "highlights": [
+              {
+                "start": 97,
+                "end": 114,
+                "text": "but removal fails"
+              },
+              {
+                "start": 166,
+                "end": 184,
+                "text": "symbol isn't valid"
+              }
+            ]
+          },
+          {
+            "message": 16,
+            "text": "The correct approach would be to call mcp_tool_get_watchlist again to confirm the current state. Since the previous attempt to remove ZETA failed, the watchlist might still show both, but the system might handle invalid symbols differently."
+          }
+        ],
+        "passed": false,
+        "record": {
+          "sourceId": "On-Policy QAD/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "没有执行删除，ZETA 仍在列表中。"
+        ]
+      },
+      {
+        "id": "bitdistiller",
+        "folder": "BitDistiller",
+        "name": "BitDistiller",
+        "description": "先询问股票代码，收到公司名后删除 ZETA。",
+        "tones": [
+          "after",
+          "after",
+          "after"
+        ],
+        "result": "仅删除 ZETA，保留 NVDA。",
+        "turns": [
+          [
+            {
+              "type": "reply",
+              "text": "Could you provide the company’s ticker symbol (e.g., AAPL)?",
+              "message": 4,
+              "excerpt": true
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_symbol_by_name",
+              "args": "name=\"Zeta Corp\"",
+              "result": "symbol: \"ZETA\"",
+              "message": 6,
+              "returnMessage": 7,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock ZETA removed from watchlist successfully.",
+              "message": 8,
+              "returnMessage": 9,
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 27,
+                    "text": "remove_stock_from_watchlist"
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\"]",
+              "message": 12,
+              "returnMessage": 13,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "But the user's message didn't provide the company name. So the assistant should ask for it.",
+            "message": 4
+          },
+          {
+            "message": 8,
+            "text": "Since we've obtained the symbol ZETA, the next step is to use this tool with \"ZETA\" as the parameter.",
+            "highlights": [
+              {
+                "start": 12,
+                "end": 36,
+                "text": "obtained the symbol ZETA"
+              }
+            ]
+          },
+          {
+            "message": 12,
+            "text": "Wait, earlier steps used mcp_tool_remove_stock_from_watchlist, which would have modified the watchlist. Now, retrieving it should show the remaining stocks."
+          }
+        ],
+        "passed": false,
+        "record": {
+          "sourceId": "BitDistiller/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "仅删除 ZETA，保留 NVDA。"
+        ]
+      },
+      {
+        "id": "efficientqat",
+        "folder": "EfficientQAT",
+        "name": "EfficientQAT",
+        "description": "先查行情，收到公司名后删除 ZETA。",
+        "tones": [
+          "",
+          "after",
+          "after"
+        ],
+        "result": "收到公司名后删除 ZETA，保留 NVDA。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\", \"ZETA\"]",
+              "message": 4,
+              "returnMessage": 5,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "get_stock_info",
+              "args": "symbol=\"NVDA\"",
+              "result": "percent_change: 0.34（节选）",
+              "message": 6,
+              "returnMessage": 7,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "get_stock_info",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock with symbol 'ZETA' not found.",
+              "message": 8,
+              "returnMessage": 9,
+              "returnTone": "before"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_symbol_by_name",
+              "args": "name=\"Zeta Corp\"",
+              "result": "symbol: \"ZETA\"",
+              "message": 12,
+              "returnMessage": 13,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock ZETA removed from watchlist successfully.",
+              "message": 14,
+              "returnMessage": 15,
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 27,
+                    "text": "remove_stock_from_watchlist"
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\"]",
+              "message": 18,
+              "returnMessage": 19,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "The most straightforward approach is to get stock details for NVDA and ZETA using mcp_tool_get_stock_info. By analyzing those details, I can determine if their market trends are concerning.",
+            "message": 6
+          },
+          {
+            "message": 14,
+            "text": "So, the plan is to remove \"ZETA\" from the watchlist. Therefore, invoking mcp_tool_remove_stock_from_watchlist with {\"symbol\": \"ZETA\"} should do that."
+          },
+          {
+            "message": 18,
+            "text": "So the next logical step is to call the mcp_tool_get_watchlist again to retrieve the updated list. Since the removal was successful, this tool should return the revised watchlist without ZETA."
+          }
+        ],
+        "passed": false,
+        "record": {
+          "sourceId": "EfficientQAT/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "收到公司名后删除 ZETA，保留 NVDA。"
+        ]
+      },
+      {
+        "id": "gptq",
+        "folder": "GPTQ",
+        "name": "GPTQ",
+        "description": "按自己设定的跌幅阈值删除 NVDA，随后又删除 ZETA。",
+        "tones": [
+          "before",
+          "after",
+          "before"
+        ],
+        "result": "随后删除了 ZETA，但 NVDA 也已误删。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: [\"NVDA\", \"ZETA\"]",
+              "message": 4,
+              "returnMessage": 5,
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "notify_price_change",
+              "args": "stocks=[\"NVDA\", \"ZETA\"], threshold=-10",
+              "result": "Stocks NVDA have significant price changes.",
+              "message": 6,
+              "returnMessage": 7,
+              "highlights": {
+                "args": [
+                  {
+                    "start": 25,
+                    "end": 38,
+                    "text": "threshold=-10"
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"NVDA\"",
+              "result": "Stock NVDA removed from watchlist successfully.",
+              "message": 8,
+              "returnMessage": 9,
+              "highlights": {
+                "args": [
+                  {
+                    "start": 0,
+                    "end": 13,
+                    "text": "symbol=\"NVDA\""
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "remove_stock_from_watchlist",
+              "args": "symbol=\"ZETA\"",
+              "result": "Stock ZETA removed from watchlist successfully.",
+              "message": 12,
+              "returnMessage": 13,
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 27,
+                    "text": "remove_stock_from_watchlist"
+                  }
+                ]
+              },
+              "returnTone": "neutral"
+            }
+          ],
+          [
+            {
+              "type": "action",
+              "name": "get_watchlist",
+              "args": "",
+              "result": "watchlist: []",
+              "message": 16,
+              "returnMessage": 17,
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "reasoning": [
+          {
+            "text": "Assuming the user considers a price drop over a period as concerning, I could set a threshold. For example, a 10% decrease.",
+            "message": 6,
+            "highlights": [
+              {
+                "start": 0,
+                "end": 40,
+                "text": "Assuming the user considers a price drop"
+              }
+            ]
+          },
+          {
+            "message": 12,
+            "text": "So, since the watchlist has ZETA, and the user is pointing out that the specific company is Zeta Corp., I should remove ZETA from the watchlist. Therefore, call mcp_tool_remove_stock_from_watchlist with symbol ZETA."
+          },
+          {
+            "message": 16,
+            "text": "Then, the user asked to remove NVDA, which was done, and later ZETA. So after those removals, the watchlist should be empty?",
+            "highlights": [
+              {
+                "start": 6,
+                "end": 35,
+                "text": "the user asked to remove NVDA"
+              }
+            ]
+          }
+        ],
+        "passed": false,
+        "record": {
+          "sourceId": "GPTQ/trajectory.json",
+          "message": 4
+        },
+        "outcomes": [
+          "",
+          "",
+          "随后删除了 ZETA，但 NVDA 也已误删。"
+        ]
+      }
+    ],
+    "defaultPair": [
+      "bf16",
+      "ours"
+    ],
+    "turns": [
+      {
+        "label": "首轮行动"
+      },
+      {
+        "title": "用户补充：那家公司是 Zeta Corp。",
+        "label": "收到公司名后"
+      },
+      {
+        "title": "再看自选列表里剩下什么",
+        "summary": "用户要求查看更新后的列表。此时应该只留下 `NVDA`。",
+        "label": "查询当前列表",
+        "showOutcome": true
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "Ours/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "BF16/actions.json",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/cot_and_actions.txt",
+        "label": "BF16/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BF16/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/done.json",
+        "label": "BF16/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/result.json",
+        "label": "BF16/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16 · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BF16/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/actions.json",
+        "label": "BitDistiller/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BitDistiller/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/cot_and_actions.txt",
+        "label": "BitDistiller/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BitDistiller/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/done.json",
+        "label": "BitDistiller/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BitDistiller/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/result.json",
+        "label": "BitDistiller/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BitDistiller/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/score.json",
+        "label": "BitDistiller · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BitDistiller/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/trajectory.json",
+        "label": "BitDistiller · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/BitDistiller/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/actions.json",
+        "label": "EfficientQAT/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/EfficientQAT/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/cot_and_actions.txt",
+        "label": "EfficientQAT/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/EfficientQAT/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/done.json",
+        "label": "EfficientQAT/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/EfficientQAT/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/result.json",
+        "label": "EfficientQAT/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/EfficientQAT/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/score.json",
+        "label": "EfficientQAT · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/EfficientQAT/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/trajectory.json",
+        "label": "EfficientQAT · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/EfficientQAT/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/actions.json",
+        "label": "GPTQ/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/GPTQ/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/cot_and_actions.txt",
+        "label": "GPTQ/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/GPTQ/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/done.json",
+        "label": "GPTQ/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/GPTQ/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/result.json",
+        "label": "GPTQ/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/GPTQ/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/score.json",
+        "label": "GPTQ · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/GPTQ/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/trajectory.json",
+        "label": "GPTQ · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/GPTQ/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/actions.json",
+        "label": "On-Policy QAD/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/On-Policy QAD/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/cot_and_actions.txt",
+        "label": "On-Policy QAD/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/On-Policy QAD/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/done.json",
+        "label": "On-Policy QAD/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/On-Policy QAD/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/result.json",
+        "label": "On-Policy QAD/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/On-Policy QAD/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/score.json",
+        "label": "On-Policy QAD · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/On-Policy QAD/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/trajectory.json",
+        "label": "On-Policy QAD · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/On-Policy QAD/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/actions.json",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/cot_and_actions.txt",
+        "label": "Ours/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/Ours/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/done.json",
+        "label": "Ours/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/result.json",
+        "label": "Ours/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/score.json",
+        "label": "SteerDistill · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/Ours/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/trajectory.json",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/actions.json",
+        "label": "QeRL/actions.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/QeRL/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/cot_and_actions.txt",
+        "label": "QeRL/cot_and_actions.txt",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/QeRL/cot_and_actions.txt",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/done.json",
+        "label": "QeRL/done.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/QeRL/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/result.json",
+        "label": "QeRL/result.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/QeRL/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/score.json",
+        "label": "QeRL · 完整任务核验",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/QeRL/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/trajectory.json",
+        "label": "QeRL · 轨迹",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/QeRL/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "analysis.json",
+        "label": "analysis.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ground_truth.json",
+        "label": "ground_truth.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/inference/watchlist-disambiguation/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/inference/watchlist-disambiguation/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/inference/watchlist-disambiguation/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0,
+    1,
+    2
+  ]
+}

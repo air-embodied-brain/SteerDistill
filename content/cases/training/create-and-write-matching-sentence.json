@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "id": "create-and-write-matching-sentence",
+  "kind": "training",
+  "title": "新建文件，写入第二个包含关键词的句子",
+  "summary": "用户要求新建 `1.txt`，写入 `dev_summary.txt` 中第二个包含 `server error` 的完整句子。第一处说初期没有发生错误，第二处说最终测试发现错误。环境中的 `echo` 只能向已有文件写入。",
+  "template": "training",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "Could you go to temp directory, and for each file in there, count the number of lines."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Now, scour through the mysterious 'dev_summary.txt' and hunt for any mentions or whispers of 'server error'."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Make a new file whose name is the number of line but in txt format and append the second sentence containing 'server error' to it."
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "branches": [
+      {
+        "title": "无指导",
+        "summary": "第一次写入因文件不存在而报错。随后创建了文件，但写入的仍是选错的句子片段。",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "echo",
+            "args": "content=\"resolving the server error.\", file_name=\"1.txt\"",
+            "result": "echo: cannot write to '1.txt': No such file",
+            "tone": "before",
+            "returnTone": "before",
+            "highlights": {
+              "result": [
+                {
+                  "start": 31,
+                  "end": 43,
+                  "text": "No such file",
+                  "tone": "before"
+                }
+              ],
+              "args": [
+                {
+                  "start": 9,
+                  "end": 36,
+                  "text": "resolving the server error.",
+                  "tone": "before"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/create-and-write-matching-sentence/raw/before/trajectory.json",
+              "message": 20,
+              "returnMessage": 21
+            }
+          },
+          {
+            "type": "action",
+            "name": "touch",
+            "args": "file_name=\"1.txt\"",
+            "result": "null",
+            "tone": "after",
+            "returnTone": "neutral",
+            "highlights": {},
+            "source": {
+              "file": "data/case-library/training/create-and-write-matching-sentence/raw/before/trajectory.json",
+              "message": 22,
+              "returnMessage": 23
+            }
+          },
+          {
+            "type": "action",
+            "name": "echo",
+            "args": "content=\"resolving the server error.\", file_name=\"1.txt\"",
+            "result": "null",
+            "tone": "before",
+            "returnTone": "neutral",
+            "highlights": {
+              "args": [
+                {
+                  "start": 9,
+                  "end": 36,
+                  "text": "resolving the server error.",
+                  "tone": "before"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/create-and-write-matching-sentence/raw/before/trajectory.json",
+              "message": 24,
+              "returnMessage": 25
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "无指导 · 推理节选",
+          "text": "1. \"However, a server error was detected\"\n2. \"resolving the server error\"\n…\nAssuming the user wants the second occurrence, which is \"resolving the server error.\"",
+          "highlights": [
+            {
+              "start": 0,
+              "end": 41,
+              "text": "1. \"However, a server error was detected\"",
+              "tone": "before"
+            },
+            {
+              "start": 132,
+              "end": 161,
+              "text": "\"resolving the server error.\"",
+              "tone": "before"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/training/create-and-write-matching-sentence/raw/before/trajectory.json",
+            "message": 20,
+            "field": "reasoning",
+            "excerpt": true,
+            "segments": [
+              {
+                "message": 20,
+                "text": "1. \"However, a server error was detected\"\n2. \"resolving the server error\""
+              },
+              {
+                "message": 20,
+                "text": "Assuming the user wants the second occurrence, which is \"resolving the server error.\""
+              }
+            ]
+          }
+        }
+      },
+      {
+        "title": "Teacher 指导后",
+        "summary": "先创建文件，再写入目标句子；推理中重新计数，纠正了最初选错句子的问题。",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "touch",
+            "args": "file_name=\"1.txt\"",
+            "result": "null",
+            "tone": "after",
+            "returnTone": "neutral",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 5,
+                  "text": "touch",
+                  "tone": "after"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/create-and-write-matching-sentence/raw/after/trajectory.json",
+              "message": 20,
+              "returnMessage": 21
+            }
+          },
+          {
+            "type": "action",
+            "name": "echo",
+            "args": "content=\"However, a server error was detected in the final testing phase.\", file_name=\"1.txt\"",
+            "result": "null",
+            "tone": "after",
+            "returnTone": "neutral",
+            "highlights": {
+              "args": [
+                {
+                  "start": 9,
+                  "end": 73,
+                  "text": "However, a server error was detected in the final testing phase.",
+                  "tone": "after"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/create-and-write-matching-sentence/raw/after/trajectory.json",
+              "message": 22,
+              "returnMessage": 23
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Teacher 指导后 · 推理节选",
+          "text": "So the second sentence containing 'server error' is sentence 2: \"No server error occurred during the initial phase.\" Wait, but looking at the actual sentences, sentence 2 says \"No server error...\" which is the second occurrence. Alternatively, maybe the user refers to the second instance where 'server error' appears. Let me recount:\n…\nSentence 1: \"This is...process.\" → no.\nSentence 2: \"No server error...\" → yes, first occurrence.\nSentence 3: \"However, a server error...\" → second occurrence. So the second sentence with 'server error' is sentence 3.",
+          "highlights": [
+            {
+              "start": 52,
+              "end": 116,
+              "text": "sentence 2: \"No server error occurred during the initial phase.\"",
+              "tone": "before"
+            },
+            {
+              "start": 376,
+              "end": 433,
+              "text": "Sentence 2: \"No server error...\" → yes, first occurrence.",
+              "tone": "after"
+            },
+            {
+              "start": 434,
+              "end": 495,
+              "text": "Sentence 3: \"However, a server error...\" → second occurrence.",
+              "tone": "after"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/training/create-and-write-matching-sentence/raw/after/trajectory.json",
+            "message": 20,
+            "field": "reasoning",
+            "excerpt": true,
+            "segments": [
+              {
+                "message": 20,
+                "text": "So the second sentence containing 'server error' is sentence 2: \"No server error occurred during the initial phase.\" Wait, but looking at the actual sentences, sentence 2 says \"No server error...\" which is the second occurrence. Alternatively, maybe the user refers to the second instance where 'server error' appears. Let me recount:"
+              },
+              {
+                "message": 20,
+                "text": "Sentence 1: \"This is...process.\" → no.\nSentence 2: \"No server error...\" → yes, first occurrence.\nSentence 3: \"However, a server error...\" → second occurrence. So the second sentence with 'server error' is sentence 3."
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "guidance": {
+      "title": "先创建文件，再写入目标句子",
+      "fields": {
+        "precondition": "Ensure the file '1.txt' exists and is properly initialized.",
+        "decision_rule": "Use mcp_tool_touch to create the file if it doesn't exist, then use mcp_tool_echo to append the second 'server error' sentence.",
+        "expected_transition": "The file '1.txt' should contain the second sentence mentioning 'server error' appended successfully.",
+        "recovery_check": "Verify the file '1.txt' exists and contains the correct sentence. If not, reattempt creation and appending."
+      },
+      "checks": {
+        "局部核验": "`touch` 创建了空文件 `1.txt`，状态与 Teacher 参考步骤一致，局部核验通过。",
+        "后续执行": "撤去指导后，agent 写入了原文中第二个包含 `server error` 的完整句子，任务核验通过。"
+      }
+    }
+  },
+  "records": {
+    "defaultSource": "after/trajectory.json",
+    "defaultMessage": 20,
+    "sources": [
+      {
+        "id": "after/local_gate.json",
+        "label": "局部核验 · 创建空文件",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/after/local_gate.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "after/score.json",
+        "label": "指导后 · 任务检查",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/after/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "after/trajectory.json",
+        "label": "Teacher 指导后 · 完整轨迹",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/after/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "before/score.json",
+        "label": "无指导 · 任务检查",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/before/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "before/trajectory.json",
+        "label": "无指导 · 完整轨迹",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/before/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "reference/trajectory.json",
+        "label": "Teacher · 参考轨迹",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/reference/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "steering/analysis.json",
+        "label": "Teacher · 指导推理",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/steering/analysis.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "steering/raw_steering_prompt.txt",
+        "label": "Teacher · 指导原文",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/steering/raw_steering_prompt.txt",
+        "primary": true,
+        "format": "guidance"
+      },
+      {
+        "id": "task.json",
+        "label": "完整任务与环境",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/task.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "after/cot_and_actions.txt",
+        "label": "after/cot_and_actions.txt",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/after/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "after/execution.json",
+        "label": "after/execution.json",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/after/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/cot_and_actions.txt",
+        "label": "before/cot_and_actions.txt",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/before/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "before/execution.json",
+        "label": "before/execution.json",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/before/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/cot_and_actions.txt",
+        "label": "reference/cot_and_actions.txt",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/reference/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "reference/execution.json",
+        "label": "reference/execution.json",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/reference/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/local_gate.json",
+        "label": "reference/local_gate.json",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/reference/local_gate.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/score.json",
+        "label": "reference/score.json",
+        "url": "data/case-library/training/create-and-write-matching-sentence/raw/reference/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/training/create-and-write-matching-sentence/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/training/create-and-write-matching-sentence/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0,
+    1,
+    2
+  ]
+}

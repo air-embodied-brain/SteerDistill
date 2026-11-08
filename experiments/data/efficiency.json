@@ -1,0 +1,173 @@
+{
+  "source": {
+    "repository": "https://github.com/ustccuigm/bitdistill",
+    "commit": "bfaf2194d0b6678f97d0694945064ad3ecf8c2f3",
+    "archive": "experiments/data/revised_efficiency_figures_latest.zip",
+    "script": "generate_efficiency_figures.py",
+    "script_sha256": "87cc5cbb3e216f95c69f417c4920c1f40e483a1cb6265525eda3ed2fd2d59577",
+    "decision": "Use the supplied script arrays, as confirmed by the author on 2026-10-31. These are not extracted from the PDF or the published CSVs. This file does not establish how the supplied arrays were originally aggregated."
+  },
+  "hours": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    48,
+    64,
+    80,
+    96,
+    112
+  ],
+  "series": {
+    "On-Policy QAD": [
+      26.85,
+      27.52,
+      28.08,
+      28.45,
+      28.67,
+      28.75,
+      28.77,
+      28.74,
+      28.79,
+      28.75,
+      28.77
+    ],
+    "QeRL": [
+      26.85,
+      27.4273,
+      27.9044,
+      28.2988,
+      28.6248,
+      28.8943,
+      29.117,
+      29.4533,
+      29.683,
+      29.84,
+      29.82
+    ],
+    "SteerDistill": [
+      26.85,
+      28.95,
+      30.35,
+      31.15,
+      31.68,
+      31.76,
+      31.79,
+      31.77,
+      31.81,
+      31.78,
+      31.79
+    ]
+  },
+  "std": {
+    "On-Policy QAD": [
+      1.05,
+      0.85,
+      0.72,
+      0.6,
+      0.5,
+      0.42,
+      0.35,
+      0.28,
+      0.24,
+      0.21,
+      0.2
+    ],
+    "QeRL": [
+      1.05,
+      0.85,
+      0.72,
+      0.6,
+      0.5,
+      0.42,
+      0.35,
+      0.28,
+      0.24,
+      0.21,
+      0.2
+    ],
+    "SteerDistill": [
+      1.05,
+      0.9,
+      0.68,
+      0.5,
+      0.38,
+      0.31,
+      0.26,
+      0.23,
+      0.21,
+      0.2,
+      0.2
+    ]
+  },
+  "tokens": {
+    "GPTQ": {
+      "W2A16": 9.2,
+      "W4A8": 6.5,
+      "W4A16": 5.2
+    },
+    "EfficientQAT": {
+      "W2A16": 7.6,
+      "W4A8": 5.7,
+      "W4A16": 4.7
+    },
+    "BitDistiller": {
+      "W2A16": 7.1,
+      "W4A8": 5.4,
+      "W4A16": 4.5
+    },
+    "On-Policy QAD": {
+      "W2A16": 6.8,
+      "W4A8": 5.0,
+      "W4A16": 4.2
+    },
+    "QeRL": {
+      "W2A16": 6.6,
+      "W4A8": 4.8,
+      "W4A16": 4.1
+    },
+    "Ours": {
+      "W2A16": 6.0,
+      "W4A8": 4.6,
+      "W4A16": 4.0
+    }
+  },
+  "tau2": {
+    "GPTQ": {
+      "W2A16": 6.72,
+      "W4A8": 22.9,
+      "W4A16": 26.85
+    },
+    "EfficientQAT": {
+      "W2A16": 18.44,
+      "W4A8": 27.1,
+      "W4A16": 28.0
+    },
+    "BitDistiller": {
+      "W2A16": 19.86,
+      "W4A8": 27.8,
+      "W4A16": 28.31
+    },
+    "On-Policy QAD": {
+      "W2A16": 20.57,
+      "W4A8": 27.85,
+      "W4A16": 28.77
+    },
+    "QeRL": {
+      "W2A16": 20.91,
+      "W4A8": 29.05,
+      "W4A16": 29.84
+    },
+    "Ours": {
+      "W2A16": 23.68,
+      "W4A8": 30.1,
+      "W4A16": 31.79
+    }
+  },
+  "bf16": {
+    "output_tokens_k": 3.9,
+    "pass_at_1": 32.64
+  }
+}

@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "id": "directory-navigation",
+  "kind": "training",
+  "title": "读取文件前，先确认所在目录",
+  "summary": "用户想查看 `workspace/project_analysis.txt` 的内容。agent 当前位于 `/alex`，而 `cat` 只能读取当前目录中的文件。",
+  "template": "training",
+  "originalTask": {
+    "id": "multi_turn_base_22",
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "There's a file I cooked up earlier named 'project_analysis.txt' in workspace folder, and I've just realized it desperately needs some extensive updating. Could you roll the content out for me to have a look-see?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Much appreciated! Now, I'm sprucing up my analysis here. Could you whip up a duplicate of 'project_analysis.txt' and shift it over to this folder I've named 'project_archive'?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Important stuff right there! I need to do a comparative review as my next step; be a champ and compare 'project_analysis.txt' with 'old_project_analysis.txt' to spotlight any differences."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "In this reflective summary, I'm keen to share some eye-opening insights with my colleagues. Toss a tweet out there about this comparative analysis, mentions @colleagues, and throw in #ProjectInsight to amplify its reach. Here is a the post content I am thinking about:Just completed a comparative analysis between the latest and previous project data. Some insightful findings! My user name is tech_guru and password is securePass123."
+        }
+      ]
+    ],
+    "initial_config": {
+      "GorillaFileSystem": {
+        "root": {
+          "alex": {
+            "type": "directory",
+            "contents": {
+              "workspace": {
+                "type": "directory",
+                "contents": {
+                  "project_analysis.txt": {
+                    "type": "file",
+                    "content": "Initial analysis content."
+                  },
+                  "old_project_analysis.txt": {
+                    "type": "file",
+                    "content": "Old analysis content."
+                  },
+                  "project_archive": {
+                    "type": "directory",
+                    "contents": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "TwitterAPI": {
+        "tweet_counter": 3,
+        "tweets": {
+          "0": {
+            "id": 0,
+            "username": "tech_guru",
+            "content": "Excited to share our latest project insights!",
+            "tags": [
+              "#project",
+              "#insights"
+            ],
+            "mentions": []
+          },
+          "1": {
+            "id": 1,
+            "username": "tech_guru",
+            "content": "Check out the differences in our project analysis!",
+            "tags": [
+              "#project",
+              "#analysis"
+            ],
+            "mentions": []
+          },
+          "2": {
+            "id": 2,
+            "username": "tech_guru",
+            "content": "Key members: @team_lead, @data_analyst",
+            "tags": [],
+            "mentions": [
+              "@team_lead",
+              "@data_analyst"
+            ]
+          }
+        },
+        "username": "tech_guru",
+        "password": "securePass123"
+      }
+    },
+    "path": [
+      "GorillaFileSystem.touch",
+      "GorillaFileSystem.diff",
+      "GorillaFileSystem.cp",
+      "GorillaFileSystem.mv",
+      "GorillaFileSystem.cat",
+      "TwitterAPI.post_tweet",
+      "TwitterAPI.mention"
+    ],
+    "involved_classes": [
+      "TwitterAPI",
+      "GorillaFileSystem"
+    ],
+    "excluded_function": [
+      "mv"
+    ]
+  },
+  "presentation": {
+    "branches": [
+      {
+        "title": "无指导",
+        "summary": "假定自己已在 workspace 中，直接读取文件。报错后没有切换目录，而是请用户确认文件位置。",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "cat",
+            "args": "file_name=\"project_analysis.txt\"",
+            "result": "No such file or directory",
+            "highlights": {
+              "result": [
+                {
+                  "start": 0,
+                  "end": 25,
+                  "text": "No such file or directory"
+                }
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "无指导 · 推理节选",
+          "text": "Or perhaps the workspace is the current directory.\n…\nAssuming that the file is in the current directory, I can use mcp_tool_cat with the filename 'project_analysis.txt'.",
+          "highlights": [
+            {
+              "start": 53,
+              "end": 103,
+              "text": "Assuming that the file is in the current directory"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Teacher 指导后",
+        "summary": "先确认当前位置，再进入 workspace，成功读出文件内容。",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "pwd",
+            "args": "",
+            "result": "/alex"
+          },
+          {
+            "type": "action",
+            "name": "cd",
+            "args": "folder=\"workspace\"",
+            "result": "workspace",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 22,
+                  "text": "cd(folder=\"workspace\")"
+                }
+              ]
+            }
+          },
+          {
+            "type": "action",
+            "name": "cat",
+            "args": "file_name=\"project_analysis.txt\"",
+            "result": "Initial analysis content.",
+            "highlights": {
+              "result": [
+                {
+                  "start": 0,
+                  "end": 25,
+                  "text": "Initial analysis content."
+                }
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Teacher 指导后 · 推理节选",
+          "text": "First, I need to confirm the current directory.\n…\nBut if not, we need to cd to the right folder first.",
+          "highlights": [
+            {
+              "start": 9,
+              "end": 46,
+              "text": "need to confirm the current directory"
+            },
+            {
+              "start": 65,
+              "end": 101,
+              "text": "need to cd to the right folder first"
+            }
+          ]
+        }
+      }
+    ],
+    "guidance": {
+      "title": "补上目录切换这一步",
+      "fields": {
+        "precondition": "File 'project_analysis.txt' not found in current directory('/alex').",
+        "decision_rule": "Navigate to the 'workspace' directory (identified via 'ls' and 'pwd') before attempting to access the file.",
+        "expected_transition": "Current working directory changes to '/alex/workspace', making 'project_analysis.txt' accessible.",
+        "recovery_check": "Call 'mcp_tool_cat' with 'project_analysis.txt' after confirming the directory transition."
+      },
+      "checks": {
+        "目录位置": "`/alex` → `/alex/workspace`",
+        "文件内容": "返回 `Initial analysis content.`，与目标文件一致。"
+      }
+    }
+  },
+  "records": {
+    "defaultSource": "before/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "BF16/execution.json",
+        "label": "BF16/execution.json",
+        "url": "data/case-library/training/directory-navigation/raw/BF16/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16/score.json",
+        "url": "data/case-library/training/directory-navigation/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16/trajectory.json",
+        "url": "data/case-library/training/directory-navigation/raw/BF16/trajectory.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "after/execution.json",
+        "label": "after/execution.json",
+        "url": "data/case-library/training/directory-navigation/raw/after/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "after/score.json",
+        "label": "after/score.json",
+        "url": "data/case-library/training/directory-navigation/raw/after/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "after/trajectory.json",
+        "label": "指导后 agent · 轨迹",
+        "url": "data/case-library/training/directory-navigation/raw/after/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "before/execution.json",
+        "label": "before/execution.json",
+        "url": "data/case-library/training/directory-navigation/raw/before/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/score.json",
+        "label": "before/score.json",
+        "url": "data/case-library/training/directory-navigation/raw/before/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/trajectory.json",
+        "label": "无指导 agent · 轨迹",
+        "url": "data/case-library/training/directory-navigation/raw/before/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "steering/response.json",
+        "label": "Teacher · 指导",
+        "url": "data/case-library/training/directory-navigation/raw/steering/response.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/training/directory-navigation/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "verification.json",
+        "label": "状态核验",
+        "url": "data/case-library/training/directory-navigation/raw/verification.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/training/directory-navigation/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/training/directory-navigation/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

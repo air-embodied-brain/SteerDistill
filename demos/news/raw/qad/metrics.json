@@ -1,0 +1,15 @@
+{
+  "label": "brownie-qad-step7",
+  "repeat": 2,
+  "env_id": "googlenews",
+  "task_id": "4",
+  "description": "Read at least 3 distinct articles from the 'Sports' category.",
+  "success": false,
+  "steps": 30,
+  "episode_seconds": 46.17095344502013,
+  "inference_seconds": 13.931951482198201,
+  "output_tokens": 1621,
+  "initial_image_sha256": "6c9ce52bc4c03e328c41ad4b0f220f628a5a84af7afbbb06e0448f6bf35381ac",
+  "directory": "/redacted/brownie-qad-benchmark4-20261106/results/repeat-2/googlenews-4",
+  "status": "completed"
+}

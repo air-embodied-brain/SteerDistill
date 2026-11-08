@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "id": "fuel-capacity",
+  "kind": "recovery",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "BF16/actions.json",
+      "bytes": 2582,
+      "sha256": "700d66e73a8df003e06e1790ee19394203ec9ad2c1c791c3c2b24e8c07649e47"
+    },
+    {
+      "path": "BF16/cot_and_actions.md",
+      "bytes": 45352,
+      "sha256": "5697a32f1eb9fb72f294be993175f93d2c247dab4b3dfe9ce4ad3fa630c89ad2"
+    },
+    {
+      "path": "BF16/done.json",
+      "bytes": 336,
+      "sha256": "7e55eeab87b52289a6477b4327456b29a028426b4566aa79b8b72da5e22fbea7"
+    },
+    {
+      "path": "BF16/recovery_excerpt.json",
+      "bytes": 3687,
+      "sha256": "0409ce193a66edc09313ec91a65745f64257f97329f29222c7d00c7d74e17530"
+    },
+    {
+      "path": "BF16/result.json",
+      "bytes": 840,
+      "sha256": "2b5f211ce9419556fdd8914ec9aab32c2bc827a4efc3b821da3efd766c460de6"
+    },
+    {
+      "path": "BF16/score.json",
+      "bytes": 513,
+      "sha256": "faa0ad296d1bd7ad9acba88bf6234a091771acbef376e5a32559e9947544eb5d"
+    },
+    {
+      "path": "BF16/trajectory.json",
+      "bytes": 56371,
+      "sha256": "4fa91e6ab7904bd8598127c780c40a855ac18e0921a6ac7165112cc2dcafdf84"
+    },
+    {
+      "path": "Ours/actions.json",
+      "bytes": 2567,
+      "sha256": "bcca4de3e86a2b5fe9675955a7bf47c8ebf75979342453a7c6326932fcece4ce"
+    },
+    {
+      "path": "Ours/cot_and_actions.md",
+      "bytes": 45856,
+      "sha256": "c10f5f8d7bee070a2b0f03adb0515522f75cdf4c6ca88cc28411252b05bfa2cc"
+    },
+    {
+      "path": "Ours/done.json",
+      "bytes": 328,
+      "sha256": "9214dc0b387037361b8734d760375e398490ddff8faadeb24d697e95cee7c394"
+    },
+    {
+      "path": "Ours/recovery_excerpt.json",
+      "bytes": 7700,
+      "sha256": "d4fd236b94ab5eff7619881abe39d2d349e1c524a6b6aecb351ca4a069b93545"
+    },
+    {
+      "path": "Ours/result.json",
+      "bytes": 832,
+      "sha256": "b71d3b642ea6fcf1953fc902d31532a545682b5a2c4cb2cf34e6541abedb8a3c"
+    },
+    {
+      "path": "Ours/score.json",
+      "bytes": 529,
+      "sha256": "c7b8cf0f130493359e9f9bb1e60cd11c77c59ea95751303be643b4555d0a07c2"
+    },
+    {
+      "path": "Ours/trajectory.json",
+      "bytes": 56829,
+      "sha256": "82ca56d15ba7d7edde78398cc46f1b1d6091a7b93ec679b9f15d95e496873cf5"
+    },
+    {
+      "path": "analysis.json",
+      "bytes": 624,
+      "sha256": "4305f4de052cf9ed25818bb0821048b1b8d0d727470be73cc345d77fe58c6d62"
+    },
+    {
+      "path": "ground_truth.json",
+      "bytes": 626,
+      "sha256": "41af18e406ee18719fdb290a8d695e6d3531e299213b8e9d1413f9f260162035"
+    },
+    {
+      "path": "task.json",
+      "bytes": 4074,
+      "sha256": "a5745f4af958a62f6401f9ec6406f6c0aec8be0093f41992c925e1380907b743"
+    }
+  ]
+}

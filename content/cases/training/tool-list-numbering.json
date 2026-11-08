@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "id": "tool-list-numbering",
+  "kind": "training",
+  "title": "解锁车门时，误把列表序号加进工具名",
+  "summary": "用户希望解锁全部车门，并打开车灯。工具列表中的第 16 项是 `lockDoors`，第 20 项是 `setHeadlights`。16 和 20 只是列表序号，不属于工具名。",
+  "template": "training",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "Hey there, I noticed that all of my car doors seem to have locked themselves up, and with my schedule being pretty tight today, I'm in quite a pinch. I could really use your help to get those doors unlocked. It'd be fantastic if you could also switch on the headlights. It's getting a bit darker out here than expected, and visibility's not great!"
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "branches": [
+      {
+        "title": "无指导",
+        "summary": "把列表序号加进工具名，解锁和开灯都报错，重试后仍未成功。",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "16_lockDoors",
+            "args": "unlock=true, door=[\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]",
+            "result": "Unknown or unavailable advertised tool: 16_lockDoors",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 3,
+                  "text": "16_",
+                  "tone": "before"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/tool-list-numbering/raw/before/trajectory.json",
+              "message": 4,
+              "returnMessage": 5
+            }
+          },
+          {
+            "type": "action",
+            "name": "20_setHeadlights",
+            "args": "mode=\"on\"",
+            "result": "Unknown or unavailable advertised tool: 20_setHeadlights",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 3,
+                  "text": "20_",
+                  "tone": "before"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/tool-list-numbering/raw/before/trajectory.json",
+              "message": 6,
+              "returnMessage": 7
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "无指导 · 推理节选",
+          "text": "From the list_tools response, there's mcp_tool_16 called LockDoors.\n…\nThen, for the headlights, there's mcp_tool_20 SetHeadlights.",
+          "highlights": [
+            {
+              "start": 38,
+              "end": 66,
+              "text": "mcp_tool_16 called LockDoors",
+              "tone": "before"
+            },
+            {
+              "start": 104,
+              "end": 129,
+              "text": "mcp_tool_20 SetHeadlights",
+              "tone": "before"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/training/tool-list-numbering/raw/before/trajectory.json",
+            "message": 4
+          }
+        },
+        "excerpt": true
+      },
+      {
+        "title": "Teacher 指导后",
+        "summary": "使用正确的工具名解锁车门，随后继续打开车灯。",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "lockDoors",
+            "args": "unlock=true, door=[\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]",
+            "result": "lockStatus: \"unlocked\", remainingUnlockedDoors: 4",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 9,
+                  "text": "lockDoors",
+                  "tone": "after"
+                }
+              ],
+              "result": [
+                {
+                  "start": 24,
+                  "end": 49,
+                  "text": "remainingUnlockedDoors: 4",
+                  "tone": "after"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/trajectory.json",
+              "message": 4,
+              "returnMessage": 5
+            }
+          },
+          {
+            "type": "action",
+            "name": "setHeadlights",
+            "args": "mode=\"on\"",
+            "result": "headlightStatus: \"on\"",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 13,
+                  "text": "setHeadlights",
+                  "tone": "after"
+                }
+              ],
+              "result": [
+                {
+                  "start": 17,
+                  "end": 21,
+                  "text": "\"on\"",
+                  "tone": "after"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/trajectory.json",
+              "message": 6,
+              "returnMessage": 7
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Teacher 指导后 · 推理节选",
+          "text": "From the list_tools response, there's mcp_tool_lockDoors which can unlock doors.\n…\nAlso, there's mcp_tool_setHeadlights with a mode parameter. Setting mode=\"on\" should activate the headlights.",
+          "highlights": [
+            {
+              "start": 38,
+              "end": 56,
+              "text": "mcp_tool_lockDoors",
+              "tone": "after"
+            },
+            {
+              "start": 97,
+              "end": 119,
+              "text": "mcp_tool_setHeadlights",
+              "tone": "after"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/trajectory.json",
+            "message": 4
+          }
+        }
+      }
+    ],
+    "guidance": {
+      "title": "用正确的工具名完成操作",
+      "fields": {
+        "precondition": "User reports car doors locked and requests unlocking along with activating headlights.",
+        "decision_rule": "Check available tools for door unlocking and headlight activation functions.",
+        "expected_transition": "Call mcp_tool_lockDoors with unlock=True and all doors, followed by mcp_tool_setHeadlights with mode=\"on\".",
+        "recovery_check": "Verify door status and headlight status post-tool execution to ensure functionality."
+      },
+      "checks": {
+        "局部核验": "四扇车门均已解锁，车灯尚未打开。环境状态与 Teacher 参考步骤一致，局部核验通过。",
+        "后续执行": "撤去指导后，agent 调用 `setHeadlights(mode=\"on\")` 打开车灯。车门保持解锁，任务核验通过。"
+      }
+    }
+  },
+  "records": {
+    "defaultSource": "before/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "after/attempt-0/execution.json",
+        "label": "after/attempt-0/execution.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "after/attempt-0/local_gate.json",
+        "label": "局部核验",
+        "url": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/local_gate.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "after/attempt-0/score.json",
+        "label": "任务核验",
+        "url": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "after/attempt-0/trajectory.json",
+        "label": "指导后 agent · 轨迹",
+        "url": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "before/execution.json",
+        "label": "before/execution.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/before/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/score.json",
+        "label": "before/score.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/before/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/trajectory.json",
+        "label": "无指导 agent · 轨迹",
+        "url": "data/case-library/training/tool-list-numbering/raw/before/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "reference/attempt-0/execution.json",
+        "label": "reference/attempt-0/execution.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/reference/attempt-0/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/attempt-0/score.json",
+        "label": "reference/attempt-0/score.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/reference/attempt-0/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/attempt-0/trajectory.json",
+        "label": "reference/attempt-0/trajectory.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/reference/attempt-0/trajectory.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/attempt-1/execution.json",
+        "label": "reference/attempt-1/execution.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/reference/attempt-1/execution.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/attempt-1/score.json",
+        "label": "reference/attempt-1/score.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/reference/attempt-1/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/attempt-1/trajectory.json",
+        "label": "Teacher · 参考轨迹",
+        "url": "data/case-library/training/tool-list-numbering/raw/reference/attempt-1/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "steering/attempt-0/analysis.json",
+        "label": "steering/attempt-0/analysis.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/steering/attempt-0/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "steering/attempt-0/raw_steering_prompt.txt",
+        "label": "Teacher · 指导",
+        "url": "data/case-library/training/tool-list-numbering/raw/steering/attempt-0/raw_steering_prompt.txt",
+        "primary": true,
+        "format": "guidance"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/training/tool-list-numbering/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/training/tool-list-numbering/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/training/tool-list-numbering/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

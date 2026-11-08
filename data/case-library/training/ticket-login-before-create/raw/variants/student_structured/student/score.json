@@ -1,0 +1,16 @@
+{
+  "valid": true,
+  "passed": true,
+  "finish": "final_response",
+  "official_state": {
+    "valid": true
+  },
+  "official_response": {
+    "valid": true
+  },
+  "semantic_errors": [],
+  "goal_turn": 5,
+  "scope": "User turn 5; earlier turns must have passed unchanged original checkers",
+  "guidance_injected_only_first_request": true,
+  "teacher": false
+}

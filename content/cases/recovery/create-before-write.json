@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "id": "create-before-write",
+  "kind": "recovery",
+  "title": "写入报错后，先创建文件再重试",
+  "summary": "用户要求新建 `WebDevProjects` 文件夹，并在其中创建三个文件、分别写入指定文本。文件工具将 `touch`（创建文件）与 `echo`（写入内容）分为两个操作。",
+  "template": "sequence",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I need you to set up a fresh folder named 'WebDevProjects' wherever you're currently working."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Enter the folder and populate the 'WebDevProjects' folder with 3 files:, 'styles.css',  'index.html', and 'script.js' with content 'Hello World!','Hi World!', 'Halo World!' in each."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "What's the second file name by system order? Don't list out hidden files."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Can you display the content of the first file by system order?"
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "sequenceTitle": "SteerDistill",
+    "compact": true,
+    "steps": [
+      {
+        "title": "直接写入，返回文件不存在",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "echo",
+            "args": "content=\"Hello World!\", file_name=\"styles.css\"",
+            "result": "error: echo: cannot write to 'styles.css': No such file",
+            "highlights": {
+              "result": [
+                {
+                  "start": 43,
+                  "end": 55,
+                  "text": "No such file"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+              "message": 10,
+              "returnMessage": 11,
+              "callField": "tool_calls[0].function.arguments",
+              "returnField": "content[0].text → data[0].text"
+            }
+          }
+        ]
+      },
+      {
+        "title": "补上创建步骤，再用相同参数写入",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "touch",
+            "args": "file_name=\"styles.css\"",
+            "result": "None",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 5,
+                  "text": "touch"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+              "message": 12,
+              "returnMessage": 13,
+              "callField": "tool_calls[0].function.arguments",
+              "returnField": "content[0].text → data[0].text"
+            },
+            "returnTone": "neutral"
+          },
+          {
+            "type": "action",
+            "name": "echo",
+            "args": "content=\"Hello World!\", file_name=\"styles.css\"",
+            "result": "None",
+            "highlights": {},
+            "source": {
+              "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+              "message": 14,
+              "returnMessage": 15,
+              "callField": "tool_calls[0].function.arguments",
+              "returnField": "content[0].text → data[0].text"
+            },
+            "returnTone": "neutral"
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "So the solution would be to first create the file with touch, then write content with echo. Let me adjust the approach accordingly.",
+          "highlights": [
+            {
+              "start": 28,
+              "end": 90,
+              "text": "first create the file with touch, then write content with echo"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+            "message": 12,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "后续读取，确认内容已写入",
+        "summary": "其余两个文件也先 `touch` 再 `echo`。后续用户要求读取系统顺序中的第一个文件时，agent 读取 `styles.css`。",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "cat",
+            "args": "file_name=\"styles.css\"",
+            "result": "file_content: \"Hello World!\"",
+            "highlights": {
+              "result": [
+                {
+                  "start": 15,
+                  "end": 27,
+                  "text": "Hello World!"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+              "message": 30,
+              "returnMessage": 31,
+              "callField": "tool_calls[0].function.arguments",
+              "returnField": "content[0].text → data[0].text"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "trajectory",
+    "defaultMessage": 10,
+    "sources": [
+      {
+        "id": "trajectory",
+        "label": "SteerDistill · 完整轨迹",
+        "url": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "category_score",
+        "label": "类别评分原始记录",
+        "url": "data/case-library/recovery/create-before-write/raw/category_score.jsonl",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "recovery_excerpt",
+        "label": "恢复片段原始记录",
+        "url": "data/case-library/recovery/create-before-write/raw/recovery_excerpt.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "recovery_suffix",
+        "label": "恢复后续原始记录",
+        "url": "data/case-library/recovery/create-before-write/raw/recovery_suffix.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "evidence",
+        "label": "归档证据元数据",
+        "url": "data/case-library/recovery/create-before-write/raw/evidence.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/recovery/create-before-write/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/recovery/create-before-write/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0,
+    1,
+    3
+  ]
+}

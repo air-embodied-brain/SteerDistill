@@ -1,0 +1,387 @@
+[
+  {
+    "turn": 0,
+    "tool": "list_tools",
+    "arguments": {},
+    "response": "Available MCP Tools (22 tools):\n================================================================================\n\n1. mcp_tool_activateParkingBrake\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Activates the parking brake of the vehicle.\n   Parameters:\n      - mode: string (required)\n        Description: The mode to set. [Enum]: [\"engage\", \"release\"]\n\n2. mcp_tool_adjustClimateControl\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Adjusts the climate control of the vehicle.\n   Parameters:\n      - temperature: number (required)\n        Description: The temperature to set in degree. Default to be celsius.\n      - unit: string (optional)\n        Description: The unit of temperature. [Enum]: [\"celsius\", \"fahrenheit\"]\n      - fanSpeed: number (optional)\n        Description: The fan speed to set from 0 to 100. Default is 50.\n      - mode: string (optional)\n        Description: The climate mode to set. [Enum]: [\"auto\", \"cool\", \"heat\", \"defrost\"]\n\n3. mcp_tool_check_tire_pressure\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Checks the tire pressure of the vehicle.\n   Parameters: None\n\n4. mcp_tool_displayCarStatus\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the status of the vehicle based on the provided display option.\n   Parameters:\n      - option: string (required)\n        Description: The option to display. [Enum]: [\"fuel\", \"battery\", \"doors\", \"climate\", \"headlights\", \"parkingBrake\", \"brakePedal\", \"engine\"]\n\n5. mcp_tool_display_log\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Displays the log messages.\n   Parameters:\n      - messages: array (required)\n        Description: The list of messages to display.\n\n6. mcp_tool_estimate_distance\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the distance between two cities.\n   Parameters:\n      - cityA: string (required)\n        Description: The zipcode of the first city.\n      - cityB: string (required)\n        Description: The zipcode of the second city.\n\n7. mcp_tool_estimate_drive_feasibility_by_mileage\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Estimates the milage of the vehicle given the distance needed to drive.\n   Parameters:\n      - distance: number (required)\n        Description: The distance to travel in miles.\n\n8. mcp_tool_fillFuelTank\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Fills the fuel tank of the vehicle. The fuel tank can hold up to 50 gallons.\n   Parameters:\n      - fuelAmount: number (required)\n        Description: The amount of fuel to fill in gallons; this is the additional fuel to add to the tank.\n\n9. mcp_tool_find_nearest_tire_shop\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Finds the nearest tire shop.\n   Parameters: None\n\n10. mcp_tool_gallon_to_liter\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the gallon to liter.\n   Parameters:\n      - gallon: number (required)\n        Description: The amount of gallon to convert.\n\n11. mcp_tool_get_current_speed\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the current speed of the vehicle.\n   Parameters: None\n\n12. mcp_tool_get_outside_temperature_from_google\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature.\n   Parameters: None\n\n13. mcp_tool_get_outside_temperature_from_weather_com\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the outside temperature.\n   Parameters: None\n\n14. mcp_tool_get_zipcode_based_on_city\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Gets the zipcode based on the city.\n   Parameters:\n      - city: string (required)\n        Description: The name of the city.\n\n15. mcp_tool_liter_to_gallon\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Converts the liter to gallon.\n   Parameters:\n      - liter: number (required)\n        Description: The amount of liter to convert.\n\n16. mcp_tool_lockDoors\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Locks the doors of the vehicle.\n   Parameters:\n      - unlock: boolean (required)\n        Description: True if the doors are to be unlocked, False otherwise.\n      - door: array (required)\n        Description: The list of doors to lock or unlock. [Enum]: [\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]\n\n17. mcp_tool_pressBrakePedal\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Presses the brake pedal based on pedal position. The brake pedal will be kept pressed until released.\n   Parameters:\n      - pedalPosition: number (required)\n        Description: Position of the brake pedal, between 0 (not pressed) and 1 (fully pressed).\n\n18. mcp_tool_releaseBrakePedal\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Releases the brake pedal of the vehicle.\n   Parameters: None\n\n19. mcp_tool_setCruiseControl\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the cruise control of the vehicle.\n   Parameters:\n      - speed: number (required)\n        Description: The speed to set in m/h. The speed should be between 0 and 120 and a multiple of 5.\n      - activate: boolean (required)\n        Description: True to activate the cruise control, False to deactivate.\n      - distanceToNextVehicle: number (required)\n        Description: The distance to the next vehicle in meters.\n\n20. mcp_tool_setHeadlights\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Sets the headlights of the vehicle.\n   Parameters:\n      - mode: string (required)\n        Description: The mode of the headlights. [Enum]: [\"on\", \"off\", \"auto\"]\n\n21. mcp_tool_set_navigation\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Navigates to the destination.\n   Parameters:\n      - destination: string (required)\n        Description: The destination to navigate in the format of street, city, state.\n\n22. mcp_tool_startEngine\n   Description: This tool belongs to the vehicle control system, which allows users to control various aspects of the car such as engine, doors, climate control, lights, and more. Tool description: Starts the engine of the vehicle.\n   Parameters:\n      - ignitionMode: string (required)\n        Description: The ignition mode of the vehicle. [Enum]: [\"START\", \"STOP\"]",
+    "before": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "after": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "semantic_tool_error": false,
+    "user_turn": 0
+  },
+  {
+    "turn": 0,
+    "tool": "16_lockDoors",
+    "arguments": {
+      "unlock": true,
+      "door": [
+        "driver",
+        "passenger",
+        "rear_left",
+        "rear_right"
+      ]
+    },
+    "response": {
+      "error": "Unknown or unavailable advertised tool: 16_lockDoors"
+    },
+    "before": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "after": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "semantic_tool_error": true,
+    "user_turn": 0
+  },
+  {
+    "turn": 1,
+    "tool": "20_setHeadlights",
+    "arguments": {
+      "mode": "on"
+    },
+    "response": {
+      "error": "Unknown or unavailable advertised tool: 20_setHeadlights"
+    },
+    "before": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "after": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "semantic_tool_error": true,
+    "user_turn": 0
+  },
+  {
+    "turn": 2,
+    "tool": "16_lockDoors",
+    "arguments": {
+      "unlock": true,
+      "door": [
+        "all"
+      ]
+    },
+    "response": {
+      "error": "Unknown or unavailable advertised tool: 16_lockDoors"
+    },
+    "before": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "after": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "semantic_tool_error": true,
+    "user_turn": 0
+  },
+  {
+    "turn": 3,
+    "tool": "20_setHeadlights",
+    "arguments": {
+      "mode": "on"
+    },
+    "response": {
+      "error": "Unknown or unavailable advertised tool: 20_setHeadlights"
+    },
+    "before": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "after": {
+      "VehicleControlAPI": {
+        "class": "VehicleControlAPI",
+        "attributes": {
+          "fuelLevel": 10.5,
+          "batteryVoltage": 12.6,
+          "engine_state": "stopped",
+          "remainingUnlockedDoors": 0,
+          "doorStatus": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "acTemperature": 22.0,
+          "fanSpeed": 70,
+          "acMode": "auto",
+          "humidityLevel": 45.0,
+          "headLightStatus": "off",
+          "parkingBrakeStatus": "released",
+          "brakePedalStatus": "released",
+          "distanceToNextVehicle": 30.0,
+          "cruiseStatus": "inactive",
+          "destination": "None",
+          "frontLeftTirePressure": 32.0,
+          "frontRightTirePressure": 32.0,
+          "rearLeftTirePressure": 30.0,
+          "rearRightTirePressure": 30.0,
+          "long_context": true
+        }
+      }
+    },
+    "semantic_tool_error": true,
+    "user_turn": 0
+  }
+]

@@ -1,0 +1,1253 @@
+{
+  "schemaVersion": 1,
+  "title": "Keeping quantized agents on track",
+  "subtitle": "From one wrong decision to guidance, execution and recovery",
+  "sections": [
+    {
+      "id": "problem",
+      "case": {
+        "kind": "inference",
+        "id": "export-sort-direction",
+        "code": "I3",
+        "title": "What goes into sortBy",
+        "task": "List the exports of bot B12345 (version v1), sorted by last-updated time in descending order. The tool’s sortBy parameter only accepts ASC or DESC.",
+        "href": "cases/?group=inference&case=export-sort-direction",
+        "layout": "comparison",
+        "carouselBranches": [
+          {
+            "id": "bf16",
+            "title": "BF16",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 45,
+                      "text": "DESC",
+                      "tone": "after"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/BF16/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "BF16 · passes the sort direction"
+          },
+          {
+            "id": "ours",
+            "title": "SteerDistill",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 45,
+                      "text": "DESC",
+                      "tone": "after"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/Ours/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "SteerDistill · passes the sort direction"
+          },
+          {
+            "id": "qerl",
+            "title": "QeRL",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime.DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 65,
+                      "text": "LastUpdatedDateTime.DESC",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/QeRL/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "QeRL · joins field and direction with a dot"
+          },
+          {
+            "id": "qad",
+            "title": "On-Policy QAD",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", filterOperator=\"EQ\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 60,
+                      "text": "LastUpdatedDateTime",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "On-Policy QAD · passes the field name"
+          },
+          {
+            "id": "bitdistiller",
+            "title": "BitDistiller",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", filterOperator=\"EQ\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 60,
+                      "text": "LastUpdatedDateTime",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/BitDistiller/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "BitDistiller · passes the field name"
+          },
+          {
+            "id": "efficientqat",
+            "title": "EfficientQAT",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime_DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 65,
+                      "text": "LastUpdatedDateTime_DESC",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "EfficientQAT · joins field and direction with an underscore"
+          },
+          {
+            "id": "gptq",
+            "title": "GPTQ",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", sortDirection=\"DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 60,
+                      "text": "LastUpdatedDateTime",
+                      "tone": "before"
+                    },
+                    {
+                      "start": 63,
+                      "end": 83,
+                      "text": "sortDirection=\"DESC\"",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/GPTQ/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "GPTQ · passes the field name, adds a direction parameter"
+          }
+        ],
+        "carouselInitial": "bf16",
+        "branches": [
+          {
+            "id": "ours",
+            "title": "SteerDistill",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 45,
+                      "text": "DESC",
+                      "tone": "after"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/Ours/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "focusEvents": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"DESC\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 45,
+                      "text": "DESC",
+                      "tone": "after"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/Ours/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "SteerDistill · passes the sort direction"
+          },
+          {
+            "id": "qad",
+            "title": "On-Policy QAD",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", filterOperator=\"EQ\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 60,
+                      "text": "LastUpdatedDateTime",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "focusEvents": [
+              {
+                "type": "action",
+                "name": "aws.lexv2_models.list_exports",
+                "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", filterOperator=\"EQ\"",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 41,
+                      "end": 60,
+                      "text": "LastUpdatedDateTime",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/trajectory.json",
+                  "message": 4,
+                  "field": "tool_calls[0].function.arguments"
+                }
+              }
+            ],
+            "frameTitle": "On-Policy QAD · passes the field name"
+          }
+        ],
+        "carouselTask": "List the exports of bot B12345 (version v1), sorted by last-updated time in descending order. The tool’s sortBy parameter only accepts ASC or DESC."
+      }
+    },
+    {
+      "id": "method",
+      "case": {
+        "kind": "training",
+        "id": "tool-list-numbering",
+        "title": "List numbers in tool names",
+        "task": "The user asks to unlock all car doors and turn on the headlights. Items 16 and 20 in the tool list are lockDoors and setHeadlights; the numbers are not part of the names. Key calls and returned fields are excerpted below.",
+        "href": "cases/?group=training&case=tool-list-numbering",
+        "layout": "branches",
+        "branches": [
+          {
+            "title": "No guidance",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "16_lockDoors",
+                "args": "unlock=true, door=[\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]",
+                "result": "Unknown or unavailable advertised tool: 16_lockDoors",
+                "highlights": {
+                  "name": [
+                    {
+                      "start": 0,
+                      "end": 3,
+                      "text": "16_",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/training/tool-list-numbering/raw/before/trajectory.json",
+                  "message": 4,
+                  "returnMessage": 5
+                }
+              },
+              {
+                "type": "action",
+                "name": "20_setHeadlights",
+                "args": "mode=\"on\"",
+                "result": "Unknown or unavailable advertised tool: 20_setHeadlights",
+                "highlights": {
+                  "name": [
+                    {
+                      "start": 0,
+                      "end": 3,
+                      "text": "20_",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/training/tool-list-numbering/raw/before/trajectory.json",
+                  "message": 6,
+                  "returnMessage": 7
+                }
+              }
+            ]
+          },
+          {
+            "title": "With teacher guidance",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "lockDoors",
+                "args": "unlock=true, door=[\"driver\", \"passenger\", \"rear_left\", \"rear_right\"]",
+                "result": "lockStatus: \"unlocked\", remainingUnlockedDoors: 4",
+                "highlights": {
+                  "name": [
+                    {
+                      "start": 0,
+                      "end": 9,
+                      "text": "lockDoors",
+                      "tone": "after"
+                    }
+                  ],
+                  "result": [
+                    {
+                      "start": 24,
+                      "end": 49,
+                      "text": "remainingUnlockedDoors: 4",
+                      "tone": "after"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/trajectory.json",
+                  "message": 4,
+                  "returnMessage": 5
+                }
+              },
+              {
+                "type": "action",
+                "name": "setHeadlights",
+                "args": "mode=\"on\"",
+                "result": "headlightStatus: \"on\"",
+                "highlights": {
+                  "name": [
+                    {
+                      "start": 0,
+                      "end": 13,
+                      "text": "setHeadlights",
+                      "tone": "after"
+                    }
+                  ],
+                  "result": [
+                    {
+                      "start": 17,
+                      "end": 21,
+                      "text": "\"on\"",
+                      "tone": "after"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/training/tool-list-numbering/raw/after/attempt-0/trajectory.json",
+                  "message": 6,
+                  "returnMessage": 7
+                }
+              }
+            ]
+          }
+        ],
+        "guidance": {
+          "summary": "Check the available unlocking and headlight tools; unlock all doors with lockDoors, then turn on the headlights with setHeadlights."
+        },
+        "checks": [
+          {
+            "label": "Local verification",
+            "text": "All four doors are unlocked and the headlights are still off, matching the teacher reference at this turn. The check passes."
+          },
+          {
+            "label": "Continuation",
+            "text": "With the steering prompt removed, the agent calls `setHeadlights(mode=\"on\")` on its own; the doors stay unlocked and the task passes final verification."
+          }
+        ]
+      }
+    },
+    {
+      "id": "guidance",
+      "case": {
+        "kind": "ablation",
+        "id": "ticket-login-before-create",
+        "code": "T5",
+        "title": "Logging in before creating a ticket",
+        "task": "Create a priority-3 ticket for a trading issue. The user has provided login details, but the agent is not yet logged into the ticketing system.",
+        "href": "cases/?group=training&case=ticket-login-before-create",
+        "layout": "comparison",
+        "branches": [
+          {
+            "id": "teacher_structured",
+            "title": "Teacher, structured",
+            "frameTitle": "Teacher, structured · logs in, then creates",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              },
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, …",
+                "result": "id=0, status=\"Open\", priority=3",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "priority",
+                    "created_by"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "1 ticket",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "text": "1 ticket",
+                    "tone": "after"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Trading issue only",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "Trading issue only",
+                    "tone": "after"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "teacher_freeform",
+            "title": "Teacher, free-form",
+            "frameTitle": "Teacher, free-form · logs in, never retries",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, …",
+                "result": "User not authenticated. Please log in to create a ticket.",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/teacher_freeform/student/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "error"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "before",
+                "highlights": {
+                  "result": [
+                    {
+                      "start": 0,
+                      "end": 23,
+                      "text": "User not authenticated.",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "excerpt": true,
+                "returnTone": "before"
+              },
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/teacher_freeform/student/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "0 tickets",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 9,
+                    "text": "0 tickets",
+                    "tone": "before"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Not created",
+                "highlights": []
+              }
+            ]
+          }
+        ],
+        "carouselInitial": "teacher_structured",
+        "carouselBranches": [
+          {
+            "id": "teacher_structured",
+            "title": "Teacher, structured",
+            "frameTitle": "Teacher, structured · logs in, then creates",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              },
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, …",
+                "result": "id=0, status=\"Open\", priority=3",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "priority",
+                    "created_by"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "1 ticket",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "text": "1 ticket",
+                    "tone": "after"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Trading issue only",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "Trading issue only",
+                    "tone": "after"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "teacher_freeform",
+            "title": "Teacher, free-form",
+            "frameTitle": "Teacher, free-form · logs in, never retries",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, …",
+                "result": "User not authenticated. Please log in to create a ticket.",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/teacher_freeform/student/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "error"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "before",
+                "highlights": {
+                  "result": [
+                    {
+                      "start": 0,
+                      "end": 23,
+                      "text": "User not authenticated.",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "excerpt": true,
+                "returnTone": "before"
+              },
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/teacher_freeform/student/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "0 tickets",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 9,
+                    "text": "0 tickets",
+                    "tone": "before"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Not created",
+                "highlights": []
+              }
+            ]
+          },
+          {
+            "id": "student_structured",
+            "title": "Student, structured",
+            "frameTitle": "Student, structured · logs in, then creates",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/student_structured/student/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              },
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, …",
+                "result": "id=0, status=\"Open\", priority=3",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/student_structured/student/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "priority",
+                    "created_by"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "1 ticket",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "text": "1 ticket",
+                    "tone": "after"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Trading issue only",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "Trading issue only",
+                    "tone": "after"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "external_structured",
+            "title": "GPT, structured",
+            "frameTitle": "GPT, structured · creates, but leaks credentials",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/external_structured/student/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              },
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, description=\"… My username is … and password is … for the ticket login.\"",
+                "result": "id=0, status=\"Open\", priority=3",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/variants/external_structured/student/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "priority",
+                    "created_by"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "before",
+                "excerpt": true,
+                "returnTone": "neutral",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 27,
+                      "end": 61,
+                      "text": "My username is … and password is …",
+                      "tone": "before"
+                    }
+                  ]
+                }
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "1 ticket",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "text": "1 ticket",
+                    "tone": "after"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Includes credentials",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "text": "Includes credentials",
+                    "tone": "before"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "unguided",
+            "title": "No guidance",
+            "frameTitle": "No guidance · retries, but leaks credentials",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, …",
+                "result": "User not authenticated. Please log in to create a ticket.",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/before/trajectory.json",
+                  "message": 26,
+                  "returnMessage": 27,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "error"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "before",
+                "highlights": {
+                  "result": [
+                    {
+                      "start": 0,
+                      "end": 23,
+                      "text": "User not authenticated.",
+                      "tone": "before"
+                    }
+                  ]
+                },
+                "excerpt": true,
+                "returnTone": "before"
+              },
+              {
+                "type": "action",
+                "name": "ticket_login",
+                "args": "…",
+                "result": "success=true",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/before/trajectory.json",
+                  "message": 28,
+                  "returnMessage": 29,
+                  "excerpt": true,
+                  "argsFields": [
+                    "username",
+                    "password"
+                  ],
+                  "resultFields": [
+                    "success"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "after",
+                "excerpt": true,
+                "returnTone": "after"
+              },
+              {
+                "type": "action",
+                "name": "create_ticket",
+                "args": "priority=3, description=\"… My username is … and password is … for the ticket login.\"",
+                "result": "id=0, status=\"Open\", priority=3",
+                "source": {
+                  "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/before/trajectory.json",
+                  "message": 30,
+                  "returnMessage": 31,
+                  "excerpt": true,
+                  "argsFields": [
+                    "title",
+                    "description",
+                    "priority"
+                  ],
+                  "resultFields": [
+                    "id",
+                    "title",
+                    "description",
+                    "status",
+                    "priority",
+                    "created_by"
+                  ],
+                  "displayOmissions": "Login arguments omitted; common ticket parameters excerpted; credential values replaced by ellipses only in display."
+                },
+                "tone": "before",
+                "excerpt": true,
+                "returnTone": "neutral",
+                "highlights": {
+                  "args": [
+                    {
+                      "start": 27,
+                      "end": 61,
+                      "text": "My username is … and password is …",
+                      "tone": "before"
+                    }
+                  ]
+                }
+              }
+            ],
+            "resultCells": [
+              {
+                "label": "Queue",
+                "value": "1 ticket",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 8,
+                    "text": "1 ticket",
+                    "tone": "after"
+                  }
+                ]
+              },
+              {
+                "label": "Description",
+                "value": "Includes credentials",
+                "highlights": [
+                  {
+                    "start": 0,
+                    "end": 20,
+                    "text": "Includes credentials",
+                    "tone": "before"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "recovery",
+      "case": {
+        "kind": "recovery",
+        "id": "create-before-write",
+        "title": "Creating the file, then writing again",
+        "task": "The task asks SteerDistill to create three files in the WebDevProjects directory and write content into them. This excerpt follows the recovery for styles.css; in this environment, touch and echo are separate tools.",
+        "href": "cases/?group=recovery&case=create-before-write",
+        "layout": "sequence",
+        "steps": [
+          {
+            "title": "Direct write: no such file",
+            "tone": "before",
+            "events": [
+              {
+                "type": "action",
+                "name": "echo",
+                "args": "content=\"Hello World!\", file_name=\"styles.css\"",
+                "result": "error: echo: cannot write to 'styles.css': No such file",
+                "highlights": {
+                  "result": [
+                    {
+                      "start": 43,
+                      "end": 55,
+                      "text": "No such file"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+                  "message": 10,
+                  "returnMessage": 11,
+                  "callField": "tool_calls[0].function.arguments",
+                  "returnField": "content[0].text → data[0].text"
+                }
+              }
+            ]
+          },
+          {
+            "title": "Create, then write",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "touch",
+                "args": "file_name=\"styles.css\"",
+                "result": "None",
+                "highlights": {
+                  "name": [
+                    {
+                      "start": 0,
+                      "end": 5,
+                      "text": "touch"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+                  "message": 12,
+                  "returnMessage": 13,
+                  "callField": "tool_calls[0].function.arguments",
+                  "returnField": "content[0].text → data[0].text"
+                },
+                "returnTone": "neutral"
+              },
+              {
+                "type": "action",
+                "name": "echo",
+                "args": "content=\"Hello World!\", file_name=\"styles.css\"",
+                "result": "None",
+                "highlights": {},
+                "source": {
+                  "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+                  "message": 14,
+                  "returnMessage": 15,
+                  "callField": "tool_calls[0].function.arguments",
+                  "returnField": "content[0].text → data[0].text"
+                },
+                "returnTone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Read: content written",
+            "tone": "after",
+            "events": [
+              {
+                "type": "action",
+                "name": "cat",
+                "args": "file_name=\"styles.css\"",
+                "result": "file_content: \"Hello World!\"",
+                "highlights": {
+                  "result": [
+                    {
+                      "start": 15,
+                      "end": 27,
+                      "text": "Hello World!"
+                    }
+                  ]
+                },
+                "source": {
+                  "file": "data/case-library/recovery/create-before-write/raw/trajectory.json",
+                  "message": 30,
+                  "returnMessage": 31,
+                  "callField": "tool_calls[0].function.arguments",
+                  "returnField": "content[0].text → data[0].text"
+                }
+              }
+            ]
+          }
+        ],
+        "checks": [
+          {
+            "label": "Read-back",
+            "text": "The cat call answers a later user request; creating, writing and listing the other files in between is omitted."
+          }
+        ]
+      }
+    }
+  ]
+}

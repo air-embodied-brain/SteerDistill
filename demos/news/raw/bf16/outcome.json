@@ -1,0 +1,22 @@
+{
+  "observation": null,
+  "reward": 1.0,
+  "done": true,
+  "info": {
+    "success": true,
+    "reward": 1.0,
+    "task_id": 4,
+    "params": {},
+    "submitted_params": null,
+    "message": null,
+    "score": null,
+    "normalized_action": {
+      "action": "finish",
+      "status": "finished"
+    },
+    "executed_action": {
+      "action": "finish",
+      "status": "finished"
+    }
+  }
+}

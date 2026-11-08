@@ -1,0 +1,917 @@
+{
+  "schemaVersion": 1,
+  "id": "three-factorials",
+  "kind": "inference",
+  "title": "计算三个阶乘，逐项完成工具调用",
+  "summary": "用户要计算 5!、7! 和 9!。环境要求通过工具完成计算；可用的 `math.factorial` 每次接收一个 `number` 参数。",
+  "template": "comparison",
+  "originalTask": {
+    "id": "parallel_60",
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "What is the results of the factorial of 5, the factorial of 7, and the factorial of 9?"
+        }
+      ]
+    ],
+    "function": [
+      {
+        "name": "math.factorial",
+        "description": "Calculate the factorial of a given number.",
+        "parameters": {
+          "type": "dict",
+          "properties": {
+            "number": {
+              "type": "integer",
+              "description": "The number for which factorial needs to be calculated."
+            }
+          },
+          "required": [
+            "number"
+          ]
+        }
+      }
+    ]
+  },
+  "presentation": {
+    "methods": [
+      {
+        "id": "bf16",
+        "name": "BF16",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "list_tools",
+              "args": "",
+              "result": "math.factorial（节选）",
+              "returnTone": "neutral",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BF16/trajectory.json",
+                "message": 2,
+                "field": "tool_calls[0].function",
+                "returnMessage": 3,
+                "returnField": "content[0].text"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=5",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BF16/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=7",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BF16/trajectory.json",
+                "message": 6,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=9",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BF16/trajectory.json",
+                "message": 8,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "So I'll call the tool with number=5. Then repeat the same for 7 and 9.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/BF16/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "为 5、7、9 各生成一次正确调用。"
+        ],
+        "record": {
+          "sourceId": "bf16-trajectory",
+          "message": 2
+        },
+        "description": "查询可用工具后，分别为 5、7、9 调用阶乘工具。"
+      },
+      {
+        "id": "ours",
+        "name": "SteerDistill",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "list_tools",
+              "args": "",
+              "result": "math.factorial（节选）",
+              "returnTone": "neutral",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/Ours/trajectory.json",
+                "message": 2,
+                "field": "tool_calls[0].function",
+                "returnMessage": 3,
+                "returnField": "content[0].text"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=5",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/Ours/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=7",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/Ours/trajectory.json",
+                "message": 6,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=9",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/Ours/trajectory.json",
+                "message": 8,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "So I need to call this tool three times, once for each number: 5, 7, and 9.",
+            "highlights": [
+              {
+                "start": 41,
+                "end": 74,
+                "text": "once for each number: 5, 7, and 9",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/Ours/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "为 5、7、9 各生成一次正确调用。"
+        ],
+        "record": {
+          "sourceId": "ours-trajectory",
+          "message": 2
+        },
+        "description": "查询可用工具后，分别为 5、7、9 调用阶乘工具。"
+      },
+      {
+        "id": "qerl",
+        "name": "QeRL",
+        "turns": [
+          [
+            {
+              "type": "reply",
+              "text": "(Note: No applicable MCP tool was found for direct computation.)",
+              "excerpt": true,
+              "highlights": {
+                "text": [
+                  {
+                    "start": 7,
+                    "end": 39,
+                    "text": "No applicable MCP tool was found",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/QeRL/trajectory.json",
+                "message": 2,
+                "field": "content[0].text"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "Since the tools provided don't include a calculator or factorial function, I can't use them. Therefore, I should inform the user that there's no suitable tool available and provide the answers directly based on my knowledge.",
+            "highlights": [
+              {
+                "start": 6,
+                "end": 73,
+                "text": "the tools provided don't include a calculator or factorial function",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/QeRL/trajectory.json",
+              "message": 2,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "直接给出数值答案，没有生成阶乘调用。"
+        ],
+        "record": {
+          "sourceId": "qerl-trajectory",
+          "message": 2
+        },
+        "description": "直接给出正确数值，未查询或调用计算工具。"
+      },
+      {
+        "id": "qad",
+        "name": "On-Policy QAD",
+        "turns": [
+          [
+            {
+              "type": "reply",
+              "text": "The requested computation involves calculating factorials, but there are no available MCP tools provided that can perform mathematical operations like factorial calculation. Please provide access to a suitable tool or clarify if manual computation is acceptable.",
+              "highlights": {
+                "text": [
+                  {
+                    "start": 73,
+                    "end": 104,
+                    "text": "no available MCP tools provided",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/On-Policy QAD/trajectory.json",
+                "message": 2,
+                "field": "content[0].text"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Since the user said to call list_tools first, maybe the available tools don't include a math function. Therefore, I can't compute the factorials using the provided tools.",
+            "highlights": [
+              {
+                "start": 46,
+                "end": 101,
+                "text": "maybe the available tools don't include a math function",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/On-Policy QAD/trajectory.json",
+              "message": 2,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "没有查询工具，也没有生成阶乘调用。"
+        ],
+        "record": {
+          "sourceId": "qad-trajectory",
+          "message": 2
+        },
+        "description": "没有查询工具，就断言没有可用的计算工具。"
+      },
+      {
+        "id": "bitdistiller",
+        "name": "BitDistiller",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "list_tools",
+              "args": "",
+              "result": "math.factorial（节选）",
+              "returnTone": "neutral",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BitDistiller/trajectory.json",
+                "message": 2,
+                "field": "tool_calls[0].function",
+                "returnMessage": 3,
+                "returnField": "content[0].text"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=5",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BitDistiller/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=7",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BitDistiller/trajectory.json",
+                "message": 6,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "reply",
+              "label": "未完成的调用 · 节选",
+              "text": "{\"name\": \"call_tool\", \"arguments\": {\"tool346804546546546546546546546546546546546546546546546546546546546546",
+              "excerpt": true,
+              "highlights": {
+                "text": [
+                  {
+                    "start": 37,
+                    "end": 107,
+                    "text": "tool346804546546546546546546546546546546546546546546546546546546546546",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/BitDistiller/trajectory.json",
+                "message": 8,
+                "field": "content[0].text"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "Since this tool can calculate factorials, I need to call it three times with each respective number.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/BitDistiller/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "只生成 5、7 的调用，缺少 9 的调用。"
+        ],
+        "record": {
+          "sourceId": "bitdistiller-trajectory",
+          "message": 2
+        },
+        "description": "前两次调用正确，第三次输出变成重复数字。"
+      },
+      {
+        "id": "efficientqat",
+        "name": "EfficientQAT",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "list_tools",
+              "args": "",
+              "result": "math.factorial（节选）",
+              "returnTone": "neutral",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/EfficientQAT/trajectory.json",
+                "message": 2,
+                "field": "tool_calls[0].function",
+                "returnMessage": 3,
+                "returnField": "content[0].text"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=5",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/EfficientQAT/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=7",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/EfficientQAT/trajectory.json",
+                "message": 6,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "reply",
+              "label": "未完成的调用 · 节选",
+              "text": "{\"name\": \"call_tool\", \"arguments\": {\"tool634085555445555546450755455555555555555555555555555555555555555555",
+              "excerpt": true,
+              "highlights": {
+                "text": [
+                  {
+                    "start": 37,
+                    "end": 107,
+                    "text": "tool634085555445555546450755455555555555555555555555555555555555555555",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/EfficientQAT/trajectory.json",
+                "message": 8,
+                "field": "content[0].text"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "Since this tool can handle factorial calculations, I can use it three times with each respective number.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/EfficientQAT/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "只生成 5、7 的调用，缺少 9 的调用。"
+        ],
+        "record": {
+          "sourceId": "efficientqat-trajectory",
+          "message": 2
+        },
+        "description": "前两次调用正确，第三次输出变成重复数字。"
+      },
+      {
+        "id": "gptq",
+        "name": "GPTQ",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "list_tools",
+              "args": "",
+              "result": "math.factorial（节选）",
+              "returnTone": "neutral",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/GPTQ/trajectory.json",
+                "message": 2,
+                "field": "tool_calls[0].function",
+                "returnMessage": 3,
+                "returnField": "content[0].text"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=5",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/GPTQ/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "math.factorial",
+              "args": "number=7",
+              "highlights": {},
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/GPTQ/trajectory.json",
+                "message": 6,
+                "field": "tool_calls[0].function.arguments"
+              }
+            },
+            {
+              "type": "action",
+              "name": "m-core-math-factorial",
+              "args": "number=9",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 21,
+                    "text": "m-core-math-factorial",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/three-factorials/raw/GPTQ/trajectory.json",
+                "message": 8,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "The user still needs the factorial for 9. Let me make sure to call the tool one last time with number=9.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/three-factorials/raw/GPTQ/trajectory.json",
+              "message": 8,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "outcomes": [
+          "5、7 的调用正确；9 的工具名不在可用列表中。"
+        ],
+        "record": {
+          "sourceId": "gptq-trajectory",
+          "message": 2
+        },
+        "description": "前两次调用正确，第三次改写了工具名。"
+      }
+    ],
+    "turns": [
+      {
+        "label": "工具发现与调用"
+      }
+    ],
+    "defaultPair": [
+      "bf16",
+      "ours"
+    ]
+  },
+  "records": {
+    "defaultSource": "ours-trajectory",
+    "defaultMessage": 2,
+    "sources": [
+      {
+        "id": "bf16-actions",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-cot-and-actions",
+        "label": "BF16/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/BF16/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "bf16-done",
+        "label": "BF16/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-result",
+        "label": "BF16/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-score",
+        "label": "BF16/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-trajectory",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-actions",
+        "label": "BitDistiller/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/BitDistiller/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-cot-and-actions",
+        "label": "BitDistiller/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/BitDistiller/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "bitdistiller-done",
+        "label": "BitDistiller/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/BitDistiller/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-result",
+        "label": "BitDistiller/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/BitDistiller/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-score",
+        "label": "BitDistiller/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/BitDistiller/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-trajectory",
+        "label": "BitDistiller · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/BitDistiller/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-actions",
+        "label": "EfficientQAT/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/EfficientQAT/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-cot-and-actions",
+        "label": "EfficientQAT/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/EfficientQAT/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "efficientqat-done",
+        "label": "EfficientQAT/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/EfficientQAT/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-result",
+        "label": "EfficientQAT/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/EfficientQAT/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-score",
+        "label": "EfficientQAT/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/EfficientQAT/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-trajectory",
+        "label": "EfficientQAT · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/EfficientQAT/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-actions",
+        "label": "GPTQ/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/GPTQ/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-cot-and-actions",
+        "label": "GPTQ/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/GPTQ/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "gptq-done",
+        "label": "GPTQ/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/GPTQ/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-result",
+        "label": "GPTQ/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/GPTQ/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-score",
+        "label": "GPTQ/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/GPTQ/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-trajectory",
+        "label": "GPTQ · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/GPTQ/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "qad-actions",
+        "label": "On-Policy QAD/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/On-Policy QAD/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-cot-and-actions",
+        "label": "On-Policy QAD/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/On-Policy QAD/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "qad-done",
+        "label": "On-Policy QAD/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/On-Policy QAD/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-result",
+        "label": "On-Policy QAD/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/On-Policy QAD/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-score",
+        "label": "On-Policy QAD/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/On-Policy QAD/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-trajectory",
+        "label": "On-Policy QAD · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/On-Policy QAD/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "ours-actions",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-cot-and-actions",
+        "label": "Ours/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/Ours/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "ours-done",
+        "label": "Ours/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-result",
+        "label": "Ours/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-score",
+        "label": "Ours/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/Ours/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-trajectory",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-actions",
+        "label": "QeRL/actions.json",
+        "url": "data/case-library/inference/three-factorials/raw/QeRL/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-cot-and-actions",
+        "label": "QeRL/cot_and_actions.md",
+        "url": "data/case-library/inference/three-factorials/raw/QeRL/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "qerl-done",
+        "label": "QeRL/done.json",
+        "url": "data/case-library/inference/three-factorials/raw/QeRL/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-result",
+        "label": "QeRL/result.json",
+        "url": "data/case-library/inference/three-factorials/raw/QeRL/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-score",
+        "label": "QeRL/score.json",
+        "url": "data/case-library/inference/three-factorials/raw/QeRL/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-trajectory",
+        "label": "QeRL · 轨迹",
+        "url": "data/case-library/inference/three-factorials/raw/QeRL/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "ground-truth",
+        "label": "ground_truth.json",
+        "url": "data/case-library/inference/three-factorials/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task",
+        "label": "task.json",
+        "url": "data/case-library/inference/three-factorials/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/inference/three-factorials/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/inference/three-factorials/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "id": "message-session-retry",
+  "kind": "recovery",
+  "title": "消息发送接连报错，修正参数并登录重试",
+  "summary": "用户完成车辆检查后，希望以 USR001 的身份向 USR002 发送「I am on my way to your place.」。发送接口只接收收件人与正文，发件人由消息应用的登录会话确定。",
+  "template": "sequence",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I've noticed that some of my car doors are slightly ajar while others seem to be securely locked. Would you be able to verify and make sure all doors are properly locked for safety?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "I'm all set to start my drive. Would you initiate the engine's ignition in START mode?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Before setting off, I'm keen to ensure my tire pressures are as they should be. Could you provide an update on the current tire pressure status? If it's below 40, point me to nearest tire shop."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "I'd appreciate it if you could send a quick message 'I am on my way to your place.' to my cousin (user id USR002), updating them my status. If you need, my user id is USR001."
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "sequenceTitle": "SteerDistill",
+    "compact": true,
+    "steps": [
+      {
+        "title": "多传发件人参数，调用被拒绝",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "send_message",
+            "args": "receiver_id=\"USR002\", message=\"I am on my way to your place.\", sender_id=\"USR001\"",
+            "result": "Error during execution: MessageAPI.send_message() got an unexpected keyword argument 'sender_id'",
+            "source": {
+              "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+              "message": 24,
+              "returnMessage": 25
+            },
+            "highlights": {
+              "args": [
+                {
+                  "start": 63,
+                  "end": 81,
+                  "text": "sender_id=\"USR001\""
+                }
+              ],
+              "result": [
+                {
+                  "start": 57,
+                  "end": 96,
+                  "text": "unexpected keyword argument 'sender_id'"
+                }
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "There's no mention of needing authentication beyond the user ID, so assuming that's handled elsewhere.",
+          "highlights": [
+            {
+              "start": 68,
+              "end": 101,
+              "text": "assuming that's handled elsewhere",
+              "tone": "before"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+            "message": 24,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "移除多余参数，返回未登录",
+        "tone": "",
+        "events": [
+          {
+            "type": "action",
+            "name": "send_message",
+            "args": "receiver_id=\"USR002\", message=\"I am on my way to your place.\"",
+            "result": "error: \"No user is currently logged in.\"",
+            "source": {
+              "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+              "message": 26,
+              "returnMessage": 27
+            },
+            "highlights": {
+              "result": [
+                {
+                  "start": 8,
+                  "end": 39,
+                  "text": "No user is currently logged in.",
+                  "tone": "before"
+                }
+              ]
+            },
+            "returnTone": "before"
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Therefore, the correct approach is to remove the sender_id from the arguments and just use receiver_id and message.",
+          "highlights": [
+            {
+              "start": 38,
+              "end": 58,
+              "text": "remove the sender_id",
+              "tone": "after"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+            "message": 26,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "以发件人身份登录，重新发送成功",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "message_login",
+            "args": "user_id=\"USR001\"",
+            "result": "login_status: true\nmessage: \"User 'USR001' logged in successfully.\"",
+            "source": {
+              "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+              "message": 28,
+              "returnMessage": 29
+            },
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 13,
+                  "text": "message_login"
+                }
+              ],
+              "result": [
+                {
+                  "start": 0,
+                  "end": 18,
+                  "text": "login_status: true"
+                }
+              ]
+            }
+          },
+          {
+            "type": "action",
+            "name": "send_message",
+            "args": "receiver_id=\"USR002\", message=\"I am on my way to your place.\"",
+            "result": "sent_status: true\nmessage: \"Message sent to 'USR002' successfully.\"",
+            "source": {
+              "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+              "message": 30,
+              "returnMessage": 31
+            },
+            "highlights": {
+              "result": [
+                {
+                  "start": 0,
+                  "end": 17,
+                  "text": "sent_status: true"
+                }
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "The user mentioned their user ID is USR001. So perhaps we need to log them in first using that tool. Once authenticated, then they can send the message.",
+          "highlights": [
+            {
+              "start": 66,
+              "end": 83,
+              "text": "log them in first",
+              "tone": "after"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+            "message": 28,
+            "field": "content[0].text/<think>"
+          }
+        }
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "trajectory.json",
+    "defaultMessage": 24,
+    "sources": [
+      {
+        "id": "trajectory.json",
+        "label": "SteerDistill · 完整轨迹",
+        "url": "data/case-library/recovery/message-session-retry/raw/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "category_score.jsonl",
+        "label": "类别评分与失败清单",
+        "url": "data/case-library/recovery/message-session-retry/raw/category_score.jsonl",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "recovery_excerpt.json",
+        "label": "引擎恢复节选 · 原始打包文件",
+        "url": "data/case-library/recovery/message-session-retry/raw/recovery_excerpt.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "recovery_suffix.json",
+        "label": "从引擎恢复开始的后续轨迹",
+        "url": "data/case-library/recovery/message-session-retry/raw/recovery_suffix.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "evidence.json",
+        "label": "来源与核验依据",
+        "url": "data/case-library/recovery/message-session-retry/raw/evidence.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/recovery/message-session-retry/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/recovery/message-session-retry/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    3
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "package": "SteerDistill-FourTasks-FullTrajectories-And-Media.zip",
+  "source": "/redacted/demo-readable-20261103/",
+  "sha256": "382f85303f19b430b71d21bf4bbde099cf9bad6a5b335c225389aefe5a2e7bd4",
+  "selection": "BF16 and SteerDistill retain the original selected runs. QAD uses the selected failed repeat-2 trajectory from the step-7 Brownie-initialized package; runs are not a simultaneous trial.",
+  "timing": "Same perf_counter boundaries: first observation after reset and warmup through evaluator completion or 30-action cap; includes screenshot acquisition, generation, browser actions and waits. Excludes model loading, reset, warmup and recording export.",
+  "limitations": [
+    "Identical full browser state is not certified; tasks and reset protocol match.",
+    "Selected timing advantage does not establish an advantage averaged over repeats or retries.",
+    "Prompts and task descriptions are unchanged; no teacher guidance.",
+    "Each run uses one A100; QAD is from a later evaluation, not the same physical-device session as the retained runs.",
+    "Prompt hash, temperature 0, seed 0, 256-token limit, CUDA Graphs and disabled prefix caching match across these records."
+  ],
+  "records": {
+    "bf16": {
+      "turns": "raw/bf16/turns.jsonl",
+      "metrics": "raw/bf16/metrics.json",
+      "outcome": "raw/bf16/outcome.json",
+      "model-provenance": "raw/bf16/model-provenance.json"
+    },
+    "ours": {
+      "turns": "raw/ours/turns.jsonl",
+      "metrics": "raw/ours/metrics.json",
+      "outcome": "raw/ours/outcome.json",
+      "model-provenance": "raw/ours/model-provenance.json"
+    },
+    "qad": {
+      "turns": "raw/qad/turns.jsonl",
+      "metrics": "raw/qad/metrics.json",
+      "outcome": "raw/qad/outcome.json",
+      "model-provenance": "raw/qad/model-provenance.json",
+      "package": "QAD-Step7-Three-Failed-Demos-Raw-20261107.zip",
+      "packageSha256": "522baa0149f916c2dccfb442e41a32677c181d4d714104bed1ba88f37a4aeb67",
+      "packageDirectory": "GoogleNews-4"
+    }
+  },
+  "precisionEvidence": "../wps/precision-source.json",
+  "task": "googlenews-4"
+}

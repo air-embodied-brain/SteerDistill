@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "id": "java-node-interface",
+  "kind": "inference",
+  "title": "调用 Java 工具，保留工具名与参数名的大小写",
+  "summary": "用户要在 Elasticsearch 中将节点 ID 追加到 `logBuilder`，输入事件为 `logEvent`，并假定节点 ID 可用。工具定义要求调用 `NodeIdConverter.format`，参数为 `event` 和 `toAppendTo`。",
+  "template": "comparison",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "Help me append the node ID to the StringBuilder `logBuilder` from a LogEvent `logEvent` in Elasticsearch, assuming the node ID is available?"
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "methods": [
+      {
+        "id": "bf16",
+        "name": "BF16",
+        "description": "保留工具名 `NodeIdConverter` 和参数名 `toAppendTo` 的大小写。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "NodeIdConverter.format",
+              "args": "event=\"logEvent\", toAppendTo=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "NodeIdConverter"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 18,
+                    "end": 28,
+                    "text": "toAppendTo"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/BF16/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "The event parameter should be the logEvent variable, and toAppendTo should be logBuilder.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/BF16/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "bf16-trajectory",
+          "message": 4
+        }
+      },
+      {
+        "id": "ours",
+        "name": "SteerDistill",
+        "description": "保留工具名 `NodeIdConverter` 和参数名 `toAppendTo` 的大小写。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "NodeIdConverter.format",
+              "args": "event=\"logEvent\", toAppendTo=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "NodeIdConverter"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 18,
+                    "end": 28,
+                    "text": "toAppendTo"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/Ours/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "Use this tool, passing the logEvent as the 'event' parameter and logBuilder as 'toAppendTo'.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/Ours/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "ours-trajectory",
+          "message": 4
+        }
+      },
+      {
+        "id": "qerl",
+        "name": "QeRL",
+        "description": "把工具名中的 `NodeIdConverter` 改成了 `Nodeidconverter`。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "Nodeidconverter.format",
+              "args": "event=\"logEvent\", toAppendTo=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "Nodeidconverter"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/QeRL/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "The available tool is mcp_tool_NodeIdConverter.format. Its description says it appends the node ID to a StringBuilder if available. The parameters needed are 'event' and 'toAppendTo', both strings.",
+            "highlights": [
+              {
+                "start": 31,
+                "end": 46,
+                "text": "NodeIdConverter",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/QeRL/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "qerl-trajectory",
+          "message": 4
+        }
+      },
+      {
+        "id": "qad",
+        "name": "On-Policy QAD",
+        "description": "把 `NodeIdConverter` 写成 `Nodeidconverter`，把 `toAppendTo` 写成 `toappendto`。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "Nodeidconverter.format",
+              "args": "event=\"logEvent\", toappendto=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "Nodeidconverter"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 18,
+                    "end": 28,
+                    "text": "toappendto"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "There's the mcp_tool_NodeIdConverter.format tool. Its description says it appends the node ID to a StringBuilder if available. The parameters require the event (the LogEvent) and toAppendTo (the StringBuilder).",
+            "highlights": [
+              {
+                "start": 21,
+                "end": 36,
+                "text": "NodeIdConverter",
+                "tone": "after"
+              },
+              {
+                "start": 179,
+                "end": 189,
+                "text": "toAppendTo",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "qad-trajectory",
+          "message": 4
+        }
+      },
+      {
+        "id": "bitdistiller",
+        "name": "BitDistiller",
+        "description": "把工具名中的 `NodeIdConverter` 改成了 `Nodeidconverter`。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "Nodeidconverter.format",
+              "args": "event=\"logEvent\", toAppendTo=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "Nodeidconverter"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/BitDistiller/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "There's the mcp_tool_NodeIdConverter.format tool. Its description says it appends the node ID to a StringBuilder if available. The parameters are event and toAppendTo, both strings.",
+            "highlights": [
+              {
+                "start": 21,
+                "end": 36,
+                "text": "NodeIdConverter",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/BitDistiller/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "bitdistiller-trajectory",
+          "message": 4
+        }
+      },
+      {
+        "id": "efficientqat",
+        "name": "EfficientQAT",
+        "description": "把工具名中的 `NodeIdConverter` 改成了 `Nodeidconverter`。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "Nodeidconverter.format",
+              "args": "event=\"logEvent\", toAppendTo=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "Nodeidconverter"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/EfficientQAT/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "The available tool is mcp_tool_NodeIdConverter.format. The description says it appends the node ID to a StringBuilder if available. The parameters needed are the event and toAppendTo.",
+            "highlights": [
+              {
+                "start": 31,
+                "end": 46,
+                "text": "NodeIdConverter",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/EfficientQAT/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "efficientqat-trajectory",
+          "message": 4
+        }
+      },
+      {
+        "id": "gptq",
+        "name": "GPTQ",
+        "description": "把工具名中的 `NodeIdConverter` 改成了 `Nodeidconverter`。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "Nodeidconverter.format",
+              "args": "event=\"logEvent\", toAppendTo=\"logBuilder\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 15,
+                    "text": "Nodeidconverter"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/java-node-interface/raw/GPTQ/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "The tools available include the mcp_tool_NodeIdConverter.format function. The description says it appends the node ID to a StringBuilder if available. The parameters needed are the event (LogEvent) and toAppendTo (StringBuilder).",
+            "highlights": [
+              {
+                "start": 41,
+                "end": 56,
+                "text": "NodeIdConverter",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/java-node-interface/raw/GPTQ/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "gptq-trajectory",
+          "message": 4
+        }
+      }
+    ],
+    "defaultPair": [
+      "bf16",
+      "ours"
+    ],
+    "turns": [
+      {
+        "label": "生成的调用"
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "ours-trajectory",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "bf16-actions",
+        "label": "BF16 / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-cot-and-actions",
+        "label": "BF16 / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/BF16/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "bf16-done",
+        "label": "BF16 / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-result",
+        "label": "BF16 / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-score",
+        "label": "BF16 / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bf16-trajectory",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-actions",
+        "label": "BitDistiller / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BitDistiller/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-cot-and-actions",
+        "label": "BitDistiller / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/BitDistiller/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "bitdistiller-done",
+        "label": "BitDistiller / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BitDistiller/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-result",
+        "label": "BitDistiller / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BitDistiller/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-score",
+        "label": "BitDistiller / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/BitDistiller/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "bitdistiller-trajectory",
+        "label": "BitDistiller · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/BitDistiller/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-actions",
+        "label": "EfficientQAT / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/EfficientQAT/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-cot-and-actions",
+        "label": "EfficientQAT / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/EfficientQAT/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "efficientqat-done",
+        "label": "EfficientQAT / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/EfficientQAT/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-result",
+        "label": "EfficientQAT / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/EfficientQAT/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-score",
+        "label": "EfficientQAT / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/EfficientQAT/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "efficientqat-trajectory",
+        "label": "EfficientQAT · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/EfficientQAT/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-actions",
+        "label": "GPTQ / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/GPTQ/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-cot-and-actions",
+        "label": "GPTQ / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/GPTQ/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "gptq-done",
+        "label": "GPTQ / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/GPTQ/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-result",
+        "label": "GPTQ / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/GPTQ/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-score",
+        "label": "GPTQ / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/GPTQ/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "gptq-trajectory",
+        "label": "GPTQ · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/GPTQ/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "qad-actions",
+        "label": "On-Policy QAD / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-cot-and-actions",
+        "label": "On-Policy QAD / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "qad-done",
+        "label": "On-Policy QAD / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-result",
+        "label": "On-Policy QAD / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-score",
+        "label": "On-Policy QAD / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qad-trajectory",
+        "label": "On-Policy QAD · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/On-Policy QAD/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "ours-actions",
+        "label": "SteerDistill / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-cot-and-actions",
+        "label": "SteerDistill / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/Ours/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "ours-done",
+        "label": "SteerDistill / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-result",
+        "label": "SteerDistill / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-score",
+        "label": "SteerDistill / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/Ours/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ours-trajectory",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-actions",
+        "label": "QeRL / actions.json",
+        "url": "data/case-library/inference/java-node-interface/raw/QeRL/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-cot-and-actions",
+        "label": "QeRL / cot_and_actions.md",
+        "url": "data/case-library/inference/java-node-interface/raw/QeRL/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "qerl-done",
+        "label": "QeRL / done.json",
+        "url": "data/case-library/inference/java-node-interface/raw/QeRL/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-result",
+        "label": "QeRL / result.json",
+        "url": "data/case-library/inference/java-node-interface/raw/QeRL/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-score",
+        "label": "QeRL / score.json",
+        "url": "data/case-library/inference/java-node-interface/raw/QeRL/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "qerl-trajectory",
+        "label": "QeRL · 轨迹",
+        "url": "data/case-library/inference/java-node-interface/raw/QeRL/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "ground-truth",
+        "label": "ground_truth.json",
+        "url": "data/case-library/inference/java-node-interface/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task",
+        "label": "task.json",
+        "url": "data/case-library/inference/java-node-interface/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/inference/java-node-interface/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/inference/java-node-interface/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

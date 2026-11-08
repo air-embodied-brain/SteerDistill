@@ -1,0 +1,4 @@
+{
+  "id": "banking_6:2",
+  "task": "Activate a new virtual debit card linked to my checking account ending in '4456' with a monthly spending_limit of 2000.00 USD, set the card_status to 'active', and configure card_controls to lock international transactions outside 'US' and 'CA'."
+}

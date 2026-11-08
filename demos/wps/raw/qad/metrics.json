@@ -1,0 +1,16 @@
+{
+  "label": "brownie-qad-step7",
+  "repeat": 2,
+  "env_id": "wps",
+  "task_id": "9",
+  "description": "Find the doc file in WPS that contains an 'Apple MACBook' image description.",
+  "success": false,
+  "steps": 30,
+  "episode_seconds": 33.38499714899808,
+  "inference_seconds": 13.360397581709549,
+  "output_tokens": 1551,
+  "initial_image_sha256": "92ed6f339fd8e3c288a44403e08938b79221329b6f09a59ea6c95a79b19e2e95",
+  "directory": "/redacted/brownie-qad-demo-failures-20261106/results/repeat-2/wps-9",
+  "status": "completed",
+  "qualified_failure": true
+}

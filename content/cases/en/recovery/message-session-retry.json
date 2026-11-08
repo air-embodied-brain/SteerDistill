@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Log in to send",
+  "translations": {
+    "/title": "Fix the message arguments, then log in and resend",
+    "/summary": "After checking the vehicle, the user wants to send “I am on my way to your place.” from USR001 to USR002. The send interface accepts only the recipient and message body; the sender is determined by the messaging app’s login session.",
+    "/presentation/steps/0/title": "The extra sender argument causes the call to fail",
+    "/presentation/steps/0/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/1/title": "Removing the argument reveals that no user is logged in",
+    "/presentation/steps/1/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/2/title": "Log in as the sender and resend successfully",
+    "/presentation/steps/2/reasoning/title": "Agent reasoning · Excerpt",
+    "/records/sources/0/label": "SteerDistill · Full trajectory",
+    "/records/sources/1/label": "Category scores and failures",
+    "/records/sources/2/label": "Engine recovery excerpt · Original package file",
+    "/records/sources/3/label": "Trajectory from engine recovery onward",
+    "/records/sources/4/label": "Sources and verification evidence",
+    "/records/sources/5/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user turns and task configuration remain verbatim."
+    },
+    {
+      "path": "/presentation/steps/0/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    }
+  ],
+  "sourceSha256": "474361802db01688c68d598d58d3c731a9ff64d39711ffcfca44c7723bb7a52f"
+}

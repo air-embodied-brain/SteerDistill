@@ -1,0 +1,39 @@
+html{overflow-y:scroll;scrollbar-gutter:stable}
+body.case-site{font:15px/1.65 var(--sans)}
+.case-site *{box-sizing:border-box}
+body.case-site .case-content{width:min(1080px,calc(100% - 290px));max-width:none;margin-left:max(250px,calc((100% - 1080px)/2));margin-right:40px}
+body.case-site .case-content{padding:28px 0 35px;min-width:0;min-height:calc(100vh - 64px);border:0;background:none}
+body.case-site .case-shell-wrap{width:100%;max-width:none;margin:0;padding:0;display:block}
+body.case-site .case-shell-wrap>.case-library-grid{display:block}
+body.case-site .case-catalog{position:fixed;top:91px;left:max(18px,calc(50% - 780px));width:206px;max-height:calc(100vh - 112px);padding:0 12px 0 0;overflow:auto;z-index:150;font:14px/1.55 var(--sans);background:none;box-shadow:none;border:0}
+body.case-site #library-case-index{margin-top:0}
+body.case-site .training-story-head,body.case-site .intro{max-width:none;margin:0 0 20px}
+
+
+.case-site .original-task{margin:14px 0 20px}
+.case-site .original-task>summary{font:14px/1.6 var(--sans)}
+.case-site .original-task .original-turns{padding:14px;border:1px solid var(--hair);background:var(--paper)}
+.case-site .original-turn+.original-turn{margin-top:18px}
+.case-site .original-turn h3{font:400 13px/1.5 var(--sans);color:var(--muted);margin:0 0 6px}
+.case-site .original-turn p{font:15px/1.65 var(--sans);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.case-site .case-content>.training-story{width:100%;max-width:none}
+.case-site .case-content .training-story-head{border:0}
+/* Semantic typography shared by training, comparison and sequence compositions. */
+.case-site .case-content .case-title{font:500 30px/1.4 var(--display);letter-spacing:normal;margin:0 0 12px;color:var(--ink)}
+.case-site .case-content .case-reader-title{font:500 26px/1.4 var(--display);letter-spacing:normal;margin:0 0 12px;color:var(--ink)}
+.case-site .case-content .case-branch-title{font:500 20px/1.45 var(--display);letter-spacing:normal;margin:0;color:var(--ink)}
+.case-site .case-content .case-section-title{font:500 21px/1.45 var(--display);letter-spacing:normal;margin:0 0 12px;color:var(--ink)}
+.case-site .case-content .case-summary{font:400 15px/1.65 var(--sans);max-width:none;margin:0 0 12px;color:var(--soft)}
+.case-site .case-content .case-footer{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap;border-top:1px solid var(--hair);padding:18px 0 0;margin:24px 0 30px;font:400 14px/1.65 var(--sans)}
+.case-site .case-content .case-footer a{color:var(--blue);text-underline-offset:4px}
+@media(max-width:1199px){
+ body.case-site .case-content{width:min(1080px,calc(100% - 64px));margin-left:auto;margin-right:auto}
+ body.case-site .case-catalog{display:none;left:18px;top:76px;width:285px;max-height:calc(100vh - 94px);padding:20px;background:var(--paper);border:1px solid var(--hair);box-shadow:0 8px 35px #0002}
+ body.case-site:is(.menu-open,.case-menu-open) .case-catalog{display:block}
+}
+@media(max-width:800px){
+ body.case-site .case-content{width:calc(100% - 40px)}
+ body.case-site .case-content{padding-top:22px}
+ .case-site .case-content .case-title{font-size:26px}
+ .case-site .case-content .case-reader-title{font-size:24px}
+}

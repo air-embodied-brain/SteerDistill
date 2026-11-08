@@ -1,0 +1,54 @@
+/* Shared catalogue internals; shell owns only its position and drawer measure. */
+body.case-site .case-sidebar .sidebar-title{font:500 20px/1.4 Libre,'Songti SC',Georgia,serif;margin:0 0 16px;color:var(--ink)}
+body.case-site .case-sidebar .sidebar-tree{display:block;margin:0;padding:0;border:0}
+body.case-site .case-sidebar .sidebar-group{margin:0 0 10px;padding:0;border:0}
+body.case-site .case-sidebar .sidebar-group-label{display:list-item;list-style:disclosure-closed inside;cursor:pointer;padding:5px 0;margin:0;border:0;font:400 15px/1.55 var(--sans);color:var(--ink);overflow-wrap:anywhere}
+body.case-site .case-sidebar .sidebar-group[open]>.sidebar-group-label{list-style-type:disclosure-open}
+body.case-site .case-sidebar .sidebar-group-label::marker{font-size:11px;color:var(--soft)}
+body.case-site .case-sidebar .sidebar-items{list-style:none;margin:6px 0 4px 7px;padding:0;border:0;border-left:1px solid var(--hair)}
+body.case-site .case-sidebar .sidebar-items>li{list-style:none;margin:0;padding:0;border:0}
+body.case-site .case-sidebar .sidebar-item{display:block;box-sizing:border-box;width:100%;padding:6px 5px 6px 12px;margin:0;border:0;border-radius:0;background:none;text-align:left;text-decoration:none;white-space:normal;overflow-wrap:anywhere;font:400 14px/1.55 var(--sans);color:var(--soft);cursor:pointer}
+body.case-site .case-sidebar .sidebar-item[aria-current]{color:var(--blue);font-weight:600}
+body.case-site .case-sidebar .sidebar-item:hover{color:var(--blue)}
+body.case-site .case-sidebar :is(.sidebar-item,.sidebar-group-label):focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(max-width:1199px){body.case-site .case-sidebar{max-width:calc(100vw - 36px)}}
+
+/* Short case indices stay intact; record source/message labels retain wrapping. */
+body.case-site .case-sidebar .sidebar-case-item{white-space:nowrap;overflow-wrap:normal}
+
+/* Optional non-collapsing reading groups inside a case category. */
+body.case-site .case-sidebar .sidebar-sections{margin:4px 0 0;padding:0}
+body.case-site .case-sidebar .sidebar-section{margin:0 0 8px;padding:0;border:0}
+body.case-site .case-sidebar .sidebar-section-label{font:400 14px/1.55 var(--sans);color:var(--muted);margin:0 0 2px 20px;padding:0}
+body.case-site .case-sidebar .sidebar-section>.sidebar-items{margin-top:0;margin-bottom:0}
+
+/* The accepted rail is the case default; alternatives remain URL-only studies. */
+body.case-site .case-sidebar[data-sidebar-style] .sidebar-case-name{white-space:nowrap}
+/* A: one uninterrupted rail per top-level category, including its reading groups. */
+body.case-site .case-sidebar[data-sidebar-style=rail] .sidebar-sections{border-left:1px solid var(--hair);margin:6px 0 4px 7px;padding:1px 0}
+body.case-site .case-sidebar[data-sidebar-style=rail] .sidebar-section{margin:0 0 10px}
+body.case-site .case-sidebar[data-sidebar-style=rail] .sidebar-section:last-child{margin-bottom:0}
+body.case-site .case-sidebar[data-sidebar-style=rail] .sidebar-section-label{font:400 13px/1.6 var(--display);color:var(--muted);background:var(--deep);margin:2px 0 5px;padding:3px 8px 3px 12px}
+body.case-site .case-sidebar[data-sidebar-style=rail] .sidebar-section>.sidebar-items{border:0;margin:0}
+body.case-site .case-sidebar[data-sidebar-style=rail] .sidebar-case-item[aria-current]{box-shadow:-2px 0 var(--blue)}
+/* B: a text-only contents page. Indentation and breathing room carry the hierarchy. */
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-group{margin-bottom:14px}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-items{border:0;margin:4px 0 0 8px}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-sections{margin:6px 0 0 8px}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-section{margin:0 0 13px}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-section-label{margin:0 0 3px 5px;color:var(--ink)}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-section>.sidebar-items{margin:0 0 0 8px}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-item{padding:5px 3px 5px 5px}
+body.case-site .case-sidebar[data-sidebar-style=type] .sidebar-item[aria-current] .sidebar-case-name{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+/* C: a compact printed index, with aligned numbers and short horizontal rules. */
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-group{margin-bottom:9px}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-items{border:0;margin:3px 0 0 13px}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-sections{margin:5px 0 0 13px}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-section{margin:0 0 9px}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-section-label{display:flex;align-items:center;gap:10px;margin:0 0 4px;color:var(--muted)}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-section-label::after{content:'';width:28px;border-top:1px solid var(--hair)}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-section>.sidebar-items{margin:0}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-case-item{display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:4px;padding:4px 0;line-height:1.55}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-code-separator{display:none}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-code{font-variant-numeric:tabular-nums;color:var(--muted)}
+body.case-site .case-sidebar[data-sidebar-style=compact] .sidebar-case-item[aria-current] .sidebar-code{color:var(--blue)}

@@ -1,0 +1,52 @@
+{
+  "observation": null,
+  "reward": 1.0,
+  "done": true,
+  "info": {
+    "success": true,
+    "reward": 1.0,
+    "task_id": 7,
+    "params": {
+      "group": "Project Alpha 🚀",
+      "question": "Next meeting?",
+      "options": [
+        "Monday",
+        "Tuesday"
+      ]
+    },
+    "submitted_params": {
+      "group": "Project Alpha 🚀",
+      "question": "Next meeting?",
+      "options": [
+        "Monday",
+        "Tuesday"
+      ]
+    },
+    "message": null,
+    "score": 100,
+    "normalized_action": {
+      "action": "finish",
+      "status": "finished",
+      "params": {
+        "group": "Project Alpha 🚀",
+        "question": "Next meeting?",
+        "options": [
+          "Monday",
+          "Tuesday"
+        ]
+      }
+    },
+    "executed_action": {
+      "action": "finish",
+      "status": "finished",
+      "params": {
+        "group": "Project Alpha 🚀",
+        "question": "Next meeting?",
+        "options": [
+          "Monday",
+          "Tuesday"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "valid": true,
+  "passed": true,
+  "finish": "final_response",
+  "official_state": {
+    "valid": true
+  },
+  "official_response": {
+    "valid": true
+  },
+  "goal_turn": 0,
+  "key_reasoning": true,
+  "semantic_errors": [
+    {
+      "turn": 0,
+      "tool": "16",
+      "arguments": {
+        "unlock": true,
+        "door": [
+          "driver",
+          "passenger",
+          "rear_left",
+          "rear_right"
+        ]
+      },
+      "response": {
+        "error": "Unknown or unavailable advertised tool: 16"
+      },
+      "before": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "after": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "semantic_tool_error": true,
+      "user_turn": 0
+    }
+  ]
+}

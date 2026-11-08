@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "checked_before_continuation": true,
+  "execution_valid": true,
+  "criterion": "Successful tool execution and reference state equality; no action-string or response-string gate",
+  "actual_state": {
+    "VehicleControlAPI": {
+      "class": "VehicleControlAPI",
+      "attributes": {
+        "fuelLevel": 10.5,
+        "batteryVoltage": 12.6,
+        "engine_state": "stopped",
+        "remainingUnlockedDoors": 4,
+        "doorStatus": {
+          "driver": "unlocked",
+          "passenger": "unlocked",
+          "rear_left": "unlocked",
+          "rear_right": "unlocked"
+        },
+        "acTemperature": 22.0,
+        "fanSpeed": 70,
+        "acMode": "auto",
+        "humidityLevel": 45.0,
+        "headLightStatus": "off",
+        "parkingBrakeStatus": "released",
+        "brakePedalStatus": "released",
+        "distanceToNextVehicle": 30.0,
+        "cruiseStatus": "inactive",
+        "destination": "None",
+        "frontLeftTirePressure": 32.0,
+        "frontRightTirePressure": 32.0,
+        "rearLeftTirePressure": 30.0,
+        "rearRightTirePressure": 30.0,
+        "long_context": true
+      }
+    }
+  },
+  "target_state": {
+    "VehicleControlAPI": {
+      "class": "VehicleControlAPI",
+      "attributes": {
+        "fuelLevel": 10.5,
+        "batteryVoltage": 12.6,
+        "engine_state": "stopped",
+        "remainingUnlockedDoors": 4,
+        "doorStatus": {
+          "driver": "unlocked",
+          "passenger": "unlocked",
+          "rear_left": "unlocked",
+          "rear_right": "unlocked"
+        },
+        "acTemperature": 22.0,
+        "fanSpeed": 70,
+        "acMode": "auto",
+        "humidityLevel": 45.0,
+        "headLightStatus": "off",
+        "parkingBrakeStatus": "released",
+        "brakePedalStatus": "released",
+        "distanceToNextVehicle": 30.0,
+        "cruiseStatus": "inactive",
+        "destination": "None",
+        "frontLeftTirePressure": 32.0,
+        "frontRightTirePressure": 32.0,
+        "rearLeftTirePressure": 30.0,
+        "rearRightTirePressure": 30.0,
+        "long_context": true
+      }
+    }
+  }
+}

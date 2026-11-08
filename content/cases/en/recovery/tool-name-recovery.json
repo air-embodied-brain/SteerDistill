@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Tool-name repair",
+  "translations": {
+    "/title": "Correct the fuel-query tool name, then fill the tank",
+    "/summary": "The user wants a full tank before a road trip. The vehicle tools can report the current fuel level. The tank holds 50 gallons, and `fuelAmount` is the amount to add.",
+    "/presentation/reference/title": "BF16 · Query the fuel level, then top up",
+    "/presentation/steps/0/title": "The query fails because the tool name does not match",
+    "/presentation/steps/0/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/1/title": "Correct the tool name and retrieve the fuel level",
+    "/presentation/steps/1/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/2/title": "Add the remaining 35 gallons to fill the tank",
+    "/presentation/steps/2/reasoning/title": "Agent reasoning · Excerpt",
+    "/records/sources/6/label": "BF16 · Trajectory",
+    "/records/sources/13/label": "SteerDistill · Trajectory",
+    "/records/sources/17/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user turns and task configuration remain verbatim."
+    },
+    {
+      "path": "/presentation/steps/0/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/reference/events",
+      "reason": "BF16 reference calls and tool returns remain verbatim."
+    }
+  ],
+  "sourceSha256": "a95bf9136532353137dc29deae297f420dd4ec7149ddd4b317e077a1a3d499d2"
+}

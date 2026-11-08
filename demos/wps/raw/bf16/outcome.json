@@ -1,0 +1,32 @@
+{
+  "observation": null,
+  "reward": 1.0,
+  "done": true,
+  "info": {
+    "success": true,
+    "reward": 1.0,
+    "task_id": 9,
+    "params": {
+      "foundFileName": "产品发布会讲稿.docx"
+    },
+    "submitted_params": {
+      "foundFileName": "产品发布会讲稿.docx"
+    },
+    "message": null,
+    "score": 100,
+    "normalized_action": {
+      "action": "finish",
+      "status": "finished",
+      "params": {
+        "foundFileName": "产品发布会讲稿.docx"
+      }
+    },
+    "executed_action": {
+      "action": "finish",
+      "status": "finished",
+      "params": {
+        "foundFileName": "产品发布会讲稿.docx"
+      }
+    }
+  }
+}

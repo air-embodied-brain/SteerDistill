@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "execution_valid": true,
+  "scope": "Reference first response: valid tool execution and saved pre/post state, with task completion established by the recorded reference continuation.",
+  "criterion": "Accept a valid first operation on a completed reference trajectory; use its resulting state as the student local target.",
+  "compiled_from_saved_records": true,
+  "compiled_at_utc": "20261106T035235Z",
+  "reference_first_step_check_timing": "After the reference rollout completed, before teacher steering and the guided student rollout.",
+  "task_completion_is_continuation_level": true,
+  "checks": {
+    "first_operation_executed_without_semantic_or_infrastructure_error": true,
+    "recorded_first_step_accepted": true,
+    "same_anchor_state_as_student": true,
+    "event_state_chain_consistent": true,
+    "reference_post_state_is_guided_branch_target": true,
+    "guided_local_state_matches_reference": true,
+    "reference_continuation_completed_task": true
+  },
+  "before_state": {
+    "GorillaFileSystem": {
+      "class": "GorillaFileSystem",
+      "attributes": {
+        "long_context": false,
+        "root": {
+          "class": "Directory",
+          "attributes": {
+            "name": "temp",
+            "contents": {
+              "dev_summary.txt": {
+                "class": "File",
+                "attributes": {
+                  "name": "dev_summary.txt",
+                  "content": "This is a summary of the development process. No server error occurred during the initial phase. However, a server error was detected in the final testing phase. The team is working on resolving the server error. The server error is expected to be fixed by next week. Additional testing will be conducted to ensure no further server errors. The project is on track for completion. The final report will be submitted by the end of the month. The server error has been a major focus. The team is confident in resolving the server error soon."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "actual_state": {
+    "GorillaFileSystem": {
+      "class": "GorillaFileSystem",
+      "attributes": {
+        "long_context": false,
+        "root": {
+          "class": "Directory",
+          "attributes": {
+            "name": "temp",
+            "contents": {
+              "1.txt": {
+                "class": "File",
+                "attributes": {
+                  "name": "1.txt",
+                  "content": ""
+                }
+              },
+              "dev_summary.txt": {
+                "class": "File",
+                "attributes": {
+                  "name": "dev_summary.txt",
+                  "content": "This is a summary of the development process. No server error occurred during the initial phase. However, a server error was detected in the final testing phase. The team is working on resolving the server error. The server error is expected to be fixed by next week. Additional testing will be conducted to ensure no further server errors. The project is on track for completion. The final report will be submitted by the end of the month. The server error has been a major focus. The team is confident in resolving the server error soon."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sources": {
+    "execution": "reference/turn-000/execution.json",
+    "anchor": "reference/restore.json",
+    "completion": "reference/score.json",
+    "first_step_acceptance": "reference/turn-000/execution.json",
+    "guided_local_gate": "after/local_gate.json"
+  },
+  "source_sha256": {
+    "reference/turn-000/execution.json": "3aa29a8f8f34229b71dcacfb8108fdb43a41181b50b2f5f03b9b39c0d57237fd",
+    "reference/restore.json": "15b15674bfca085a6ffdee6f2737003f28719e2d012f97f87cefc46e2edfcbff",
+    "reference/score.json": "a0bcd625d5c10451f3de1a6941ae643e7d1db9e6000ee7ac471fa18dec5c4d3f",
+    "after/local_gate.json": "561bcf1772d3afaa32ad8c8711771e849e62793fb645b2dc37ffaf8766ee470f"
+  }
+}

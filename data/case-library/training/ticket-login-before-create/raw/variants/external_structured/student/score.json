@@ -1,0 +1,93 @@
+{
+  "valid": true,
+  "passed": false,
+  "finish": "final_response",
+  "official_state": {
+    "valid": false,
+    "error_message": "Model instance for TicketAPI does not match the state with ground truth instance.",
+    "error_type": "multi_turn:instance_state_mismatch",
+    "details": {
+      "differences": {
+        "ticket_queue": {
+          "model": [
+            {
+              "id": 0,
+              "title": "Urgent: Transaction Issue",
+              "description": "There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary. My username is user123 and password is 12345 for the ticket login.",
+              "status": "Open",
+              "priority": 3,
+              "created_by": "user123"
+            }
+          ],
+          "ground_truth": [
+            {
+              "id": 0,
+              "title": "Urgent: Transaction Issue",
+              "description": "There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary.",
+              "status": "Open",
+              "priority": 3,
+              "created_by": "user123"
+            }
+          ]
+        }
+      },
+      "model_instance_state": {
+        "ticket_queue": [
+          {
+            "id": 0,
+            "title": "Urgent: Transaction Issue",
+            "description": "There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary. My username is user123 and password is 12345 for the ticket login.",
+            "status": "Open",
+            "priority": 3,
+            "created_by": "user123"
+          }
+        ],
+        "ticket_counter": 1,
+        "current_user": "user123"
+      },
+      "ground_truth_instance_state": {
+        "ticket_queue": [
+          {
+            "id": 0,
+            "title": "Urgent: Transaction Issue",
+            "description": "There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary.",
+            "status": "Open",
+            "priority": 3,
+            "created_by": "user123"
+          }
+        ],
+        "ticket_counter": 1,
+        "current_user": "user123"
+      }
+    }
+  },
+  "official_response": {
+    "valid": false,
+    "error_message": "Model response execution results so far does not contain all the ground truth response execution results for turn 5.",
+    "error_type": "multi_turn:execution_response_mismatch",
+    "details": {
+      "missing_items": [
+        "{'id': 0, 'title': 'Urgent: Transaction Issue', 'description': 'There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary.', 'status': 'Open', 'priority': 3, 'created_by': 'user123'}"
+      ],
+      "model_response (including all previous turns)": [
+        "{'watchlist': ['NVDA', 'AAPL']}",
+        "{'price': 227.16, 'percent_change': 0.17, 'volume': 2.552, 'MA(5)': 227.11, 'MA(20)': 227.09}",
+        "{'order_id': 12446, 'order_type': 'Buy', 'status': 'Pending', 'price': 227.16, 'amount': 100}",
+        "{'id': 12446, 'order_type': 'Buy', 'symbol': 'AAPL', 'price': 227.16, 'amount': 100, 'status': 'Open'}",
+        "{'order_id': 12446, 'status': 'Cancelled'}",
+        "{'account_id': 12345, 'balance': 40000.0, 'binding_card': 1974202140965533}",
+        "{'success': True}",
+        "{'id': 0, 'title': 'Urgent: Transaction Issue', 'description': 'There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary. My username is user123 and password is 12345 for the ticket login.', 'status': 'Open', 'priority': 3, 'created_by': 'user123'}"
+      ],
+      "ground_truth_response (only the current turn)": [
+        "{'success': True}",
+        "{'id': 0, 'title': 'Urgent: Transaction Issue', 'description': 'There is an issue with a recent transaction involving a canceled buy order for 100 shares of AAPL and I am requesting confirmation of the cancellation along with an account summary.', 'status': 'Open', 'priority': 3, 'created_by': 'user123'}"
+      ]
+    }
+  },
+  "semantic_errors": [],
+  "goal_turn": 5,
+  "scope": "User turn 5; earlier turns must have passed unchanged original checkers",
+  "guidance_injected_only_first_request": true,
+  "teacher": false
+}

@@ -1,0 +1,7 @@
+{
+
+"precondition": "User must be authenticated to the ticketing system.",
+"decision_rule": "If the user is not authenticated, call mcp_tool_ticket_login with provided credentials before creating the ticket.",
+"expected_transition": "Call mcp_tool_ticket_login with username='user123' and password='12345'",
+"recovery_check": "Verify authentication success via TicketAPI.current_user after login"
+}

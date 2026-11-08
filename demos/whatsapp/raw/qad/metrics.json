@@ -1,0 +1,15 @@
+{
+  "label": "brownie-qad-step7",
+  "repeat": 2,
+  "env_id": "WhatsApp",
+  "task_id": "7",
+  "description": "Create a poll in the 'Project Alpha 🚀' group with the question 'Next meeting?' and options 'Monday' and 'Tuesday'.",
+  "success": false,
+  "steps": 30,
+  "episode_seconds": 29.43624542991165,
+  "inference_seconds": 13.78393628320191,
+  "output_tokens": 1582,
+  "initial_image_sha256": "ceb4e9fc93060aa0d4b26540dd282deca023f4ccd435a35324740c6301106b54",
+  "directory": "/redacted/brownie-qad-benchmark4-20261106/results/repeat-2/WhatsApp-7",
+  "status": "completed"
+}

@@ -1,0 +1,1554 @@
+{
+  "id": "wps-9",
+  "title": "Find the right document",
+  "task": "Find the document containing an “Apple MACBook” image description in WPS.",
+  "caption": "The same document, with less time spent on inference.",
+  "notes": [
+    "The SteerDistill initial screen includes a welcome toast; the search field is available in both runs."
+  ],
+  "width": 390,
+  "height": 844,
+  "runs": [
+    {
+      "id": "bf16",
+      "label": "BF16",
+      "precision": "BF16",
+      "language": "zh-CN",
+      "success": true,
+      "total": 7.046209061983973,
+      "inference": 3.4312802500789985,
+      "execution": 2.2785921500762925,
+      "final": "raw/bf16/final.png",
+      "steps": [
+        {
+          "index": 0,
+          "title": "Focus the search field",
+          "start": 0,
+          "inferStart": 1.0996184889809228,
+          "actStart": 1.7672716120141558,
+          "end": 2.186368771013804,
+          "image": "raw/bf16/000.png",
+          "thought": "我需要先激活顶部的搜索文档输入框，这样才能输入关键词搜索包含Apple MACBook图片描述的doc文件，接下来点击这个搜索框。",
+          "action": "device.click(359, 38)",
+          "thoughtHighlights": [
+            {
+              "start": 3,
+              "end": 16,
+              "text": "先激活顶部的搜索文档输入框",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "359, 38",
+            "tone": "after",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "after"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 140,
+            "y": 32
+          }
+        },
+        {
+          "index": 1,
+          "title": "Search for Apple MACBook",
+          "start": 2.186368771013804,
+          "inferStart": 2.234377201006282,
+          "actStart": 2.8351490669883788,
+          "end": 3.2629341509891674,
+          "image": "raw/bf16/001.png",
+          "thought": "搜索框已经激活，现在需要输入关键词“Apple MACBook”来搜索相关文档，这样就能找到包含该图片描述的doc文件。",
+          "action": "device.type(\"Apple MACBook\")",
+          "thoughtHighlights": [
+            {
+              "start": 0,
+              "end": 7,
+              "text": "搜索框已经激活",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.type",
+            "args": "\"Apple MACBook\"",
+            "tone": "after",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "input_text",
+            "text": "Apple MACBook"
+          }
+        },
+        {
+          "index": 2,
+          "title": "Open the matching document",
+          "start": 3.2629341509891674,
+          "inferStart": 3.3010675399564207,
+          "actStart": 4.040402173995972,
+          "end": 4.468019524007104,
+          "image": "raw/bf16/002.png",
+          "thought": "搜索结果已经显示出包含“Apple MACBook”相关内容的doc文件，现在点击这个“产品发布会讲稿.docx”文件，进入查看确认是否包含目标图片描述。",
+          "action": "device.click(320, 130)",
+          "thoughtHighlights": [
+            {
+              "start": 37,
+              "end": 59,
+              "text": "现在点击这个“产品发布会讲稿.docx”文件",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "320, 130",
+            "tone": "after",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 124,
+            "y": 110
+          }
+        },
+        {
+          "index": 3,
+          "title": "Wait for the document",
+          "start": 4.468019524007104,
+          "inferStart": 4.55279837892158,
+          "actStart": 5.147542961931322,
+          "end": 6.148601255961694,
+          "image": "raw/bf16/003.png",
+          "thought": "当前文档页面处于加载状态，需要等待页面完全加载完成，才能确认是否包含Apple MACBook的图片描述，所以执行等待操作。",
+          "action": "device.wait()",
+          "thoughtHighlights": [],
+          "actionEvent": {
+            "name": "device.wait",
+            "args": "",
+            "tone": "neutral",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "wait"
+          }
+        },
+        {
+          "index": 4,
+          "title": "Return the file name",
+          "start": 6.148601255961694,
+          "inferStart": 6.21438965894049,
+          "actStart": 7.043165702954866,
+          "end": 7.046199965989217,
+          "image": "raw/bf16/004.png",
+          "thought": "现在看到文档里有Apple的logo和笔记本电脑的图片，说明这个doc文件确实包含Apple MACBook的图片描述，任务完成，返回对应文件名。",
+          "action": "device.end_task('finished', {\"foundFileName\": \"产品发布会讲稿.docx\"})",
+          "thoughtHighlights": [
+            {
+              "start": 8,
+              "end": 27,
+              "text": "Apple的logo和笔记本电脑的图片",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.end_task",
+            "args": "'finished', {\"foundFileName\": \"产品发布会讲稿.docx\"}",
+            "tone": "after",
+            "highlights": {
+              "call": [
+                {
+                  "start": 47,
+                  "end": 59,
+                  "text": "产品发布会讲稿.docx",
+                  "tone": "after"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "finish",
+            "status": "finished",
+            "params": {
+              "foundFileName": "产品发布会讲稿.docx"
+            }
+          }
+        }
+      ],
+      "repetition": null
+    },
+    {
+      "id": "ours",
+      "label": "SteerDistill",
+      "precision": "W4A16",
+      "language": "zh-CN",
+      "success": true,
+      "total": 5.8493179839570075,
+      "inference": 2.245917252905201,
+      "execution": 2.2804430869873613,
+      "final": "raw/ours/final.png",
+      "steps": [
+        {
+          "index": 0,
+          "title": "Focus the search field",
+          "start": 0,
+          "inferStart": 1.0992270520655438,
+          "actStart": 1.552778304030653,
+          "end": 1.973658039001748,
+          "image": "raw/ours/000.png",
+          "thought": "我需要先搜索文档来找到包含Apple MACBook图片描述的文档，首先点击顶部的搜索文档输入框，准备输入搜索关键词。",
+          "action": "device.click(350, 35)",
+          "thoughtHighlights": [
+            {
+              "start": 34,
+              "end": 48,
+              "text": "首先点击顶部的搜索文档输入框",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "350, 35",
+            "tone": "after",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "after"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 136,
+            "y": 30
+          }
+        },
+        {
+          "index": 1,
+          "title": "Search for Apple MACBook",
+          "start": 1.973658039001748,
+          "inferStart": 2.0186186599894427,
+          "actStart": 2.4526762159657665,
+          "end": 2.880382022995036,
+          "image": "raw/ours/001.png",
+          "thought": "现在搜索框已经激活，我需要输入\"Apple MACBook\"来搜索相关的文档，这样就能找到包含该图片描述的文档了。",
+          "action": "device.type(\"Apple MACBook\")",
+          "thoughtHighlights": [
+            {
+              "start": 0,
+              "end": 9,
+              "text": "现在搜索框已经激活",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.type",
+            "args": "\"Apple MACBook\"",
+            "tone": "after",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "input_text",
+            "text": "Apple MACBook"
+          }
+        },
+        {
+          "index": 2,
+          "title": "Open the matching document",
+          "start": 2.880382022995036,
+          "inferStart": 2.914668023993727,
+          "actStart": 3.3495066599571146,
+          "end": 3.7771077269571833,
+          "image": "raw/ours/002.png",
+          "thought": "搜索结果中找到了名为\"产品发布会讲稿.docx\"的文档，它应该包含Apple MACBook的图片描述，现在点击这个文档进入查看。",
+          "action": "device.click(350, 130)",
+          "thoughtHighlights": [
+            {
+              "start": 52,
+              "end": 64,
+              "text": "现在点击这个文档进入查看",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "350, 130",
+            "tone": "after",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 136,
+            "y": 110
+          }
+        },
+        {
+          "index": 3,
+          "title": "Wait for the document",
+          "start": 3.7771077269571833,
+          "inferStart": 3.850226262002252,
+          "actStart": 4.256567606993485,
+          "end": 5.257628656981979,
+          "image": "raw/ours/003.png",
+          "thought": "当前文档页面正在加载中，需要等待页面完全加载完成，才能查看其中是否包含Apple MACBook的图片描述，所以执行等待操作。",
+          "action": "device.wait()",
+          "thoughtHighlights": [],
+          "actionEvent": {
+            "name": "device.wait",
+            "args": "",
+            "tone": "neutral",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "wait"
+          }
+        },
+        {
+          "index": 4,
+          "title": "Return the file name",
+          "start": 5.257628656981979,
+          "inferStart": 5.328986237989739,
+          "actStart": 5.846114701998886,
+          "end": 5.8493101299973205,
+          "image": "raw/ours/004.png",
+          "thought": "现在看到文档里有Apple的笔记本图片，下方还有相关描述文字，说明这就是目标文档，现在可以提交任务，文件名为产品发布会讲稿.docx。",
+          "action": "device.end_task('finished', {\"foundFileName\": \"产品发布会讲稿.docx\"})",
+          "thoughtHighlights": [
+            {
+              "start": 8,
+              "end": 19,
+              "text": "Apple的笔记本图片",
+              "tone": "after"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.end_task",
+            "args": "'finished', {\"foundFileName\": \"产品发布会讲稿.docx\"}",
+            "tone": "after",
+            "highlights": {
+              "call": [
+                {
+                  "start": 47,
+                  "end": 59,
+                  "text": "产品发布会讲稿.docx",
+                  "tone": "after"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "finish",
+            "status": "finished",
+            "params": {
+              "foundFileName": "产品发布会讲稿.docx"
+            }
+          }
+        }
+      ],
+      "repetition": null
+    },
+    {
+      "id": "qad",
+      "label": "On-Policy QAD",
+      "precision": "W4A16",
+      "language": "zh-CN",
+      "success": false,
+      "total": 33.38499714899808,
+      "inference": 13.360397581709549,
+      "execution": 12.090566230239347,
+      "final": "raw/qad/final.png",
+      "steps": [
+        {
+          "index": 0,
+          "title": "Try local-file authorization",
+          "start": 0,
+          "inferStart": 1.0828306740149856,
+          "actStart": 1.529618927044794,
+          "end": 1.9341558460146189,
+          "image": "raw/qad/000.png",
+          "thought": "首先需要授权查看本地文档才能搜索目标文件，所以先点击页面中的蓝色“授权查看”按钮完成授权。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 0,
+              "end": 20,
+              "text": "首先需要授权查看本地文档才能搜索目标文件",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": []
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 1,
+          "title": "Retry authorization instead of searching",
+          "start": 1.9341558460146189,
+          "inferStart": 2.1667975719319656,
+          "actStart": 2.5796485759783536,
+          "end": 2.9825320430099964,
+          "image": "raw/qad/001.png",
+          "thought": "现在需要先点击“授权查看”按钮完成授权，才能查看本地文档并搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 4,
+              "end": 19,
+              "text": "先点击“授权查看”按钮完成授权",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 2,
+          "title": "Repeat the same authorization tap",
+          "start": 2.9825320430099964,
+          "inferStart": 3.247490378213115,
+          "actStart": 3.7164190381299704,
+          "end": 4.1194194190902635,
+          "image": "raw/qad/002.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 3,
+          "title": "Repeat the same authorization tap",
+          "start": 4.1194194190902635,
+          "inferStart": 4.331325013074093,
+          "actStart": 4.771587094059214,
+          "end": 5.1742514370707795,
+          "image": "raw/qad/003.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 4,
+          "title": "Repeat the same authorization tap",
+          "start": 5.1742514370707795,
+          "inferStart": 5.413549910066649,
+          "actStart": 5.8582529469858855,
+          "end": 6.26120406598784,
+          "image": "raw/qad/004.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 5,
+          "title": "Repeat the same authorization tap",
+          "start": 6.26120406598784,
+          "inferStart": 6.4966905660694465,
+          "actStart": 6.9437225660076365,
+          "end": 7.346588473999873,
+          "image": "raw/qad/005.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 6,
+          "title": "Repeat the same authorization tap",
+          "start": 7.346588473999873,
+          "inferStart": 7.580477665062062,
+          "actStart": 8.026552872965112,
+          "end": 8.43000321299769,
+          "image": "raw/qad/006.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 7,
+          "title": "Repeat the same authorization tap",
+          "start": 8.43000321299769,
+          "inferStart": 8.666845569037832,
+          "actStart": 9.109336405061185,
+          "end": 9.512189049040899,
+          "image": "raw/qad/007.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 8,
+          "title": "Repeat the same authorization tap",
+          "start": 9.512189049040899,
+          "inferStart": 9.749777755117975,
+          "actStart": 10.190631996141747,
+          "end": 10.59359938907437,
+          "image": "raw/qad/008.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 9,
+          "title": "Repeat the same authorization tap",
+          "start": 10.59359938907437,
+          "inferStart": 10.833263139007613,
+          "actStart": 11.275443951017223,
+          "end": 11.678354127099738,
+          "image": "raw/qad/009.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 10,
+          "title": "Repeat the same authorization tap",
+          "start": 11.678354127099738,
+          "inferStart": 11.916188844130374,
+          "actStart": 12.364880196168087,
+          "end": 12.767860038089566,
+          "image": "raw/qad/010.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 11,
+          "title": "Repeat the same authorization tap",
+          "start": 12.767860038089566,
+          "inferStart": 13.005333984969184,
+          "actStart": 13.451694727991708,
+          "end": 13.854252567049116,
+          "image": "raw/qad/011.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 12,
+          "title": "Repeat the same authorization tap",
+          "start": 13.854252567049116,
+          "inferStart": 14.088884567958303,
+          "actStart": 14.53326609695796,
+          "end": 14.936162180034444,
+          "image": "raw/qad/012.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 13,
+          "title": "Repeat the same authorization tap",
+          "start": 14.936162180034444,
+          "inferStart": 15.17297787615098,
+          "actStart": 15.61929443210829,
+          "end": 16.022254893090576,
+          "image": "raw/qad/013.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 14,
+          "title": "Repeat the same authorization tap",
+          "start": 16.022254893090576,
+          "inferStart": 16.255972734070383,
+          "actStart": 16.70631947903894,
+          "end": 17.10926436202135,
+          "image": "raw/qad/014.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 15,
+          "title": "Repeat the same authorization tap",
+          "start": 17.10926436202135,
+          "inferStart": 17.353411388932727,
+          "actStart": 17.806307128979824,
+          "end": 18.209380291984417,
+          "image": "raw/qad/015.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 16,
+          "title": "Repeat the same authorization tap",
+          "start": 18.209380291984417,
+          "inferStart": 18.43601254199166,
+          "actStart": 18.882600652985275,
+          "end": 19.28551708604209,
+          "image": "raw/qad/016.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 17,
+          "title": "Repeat the same authorization tap",
+          "start": 19.28551708604209,
+          "inferStart": 19.519229780999012,
+          "actStart": 19.969255466014147,
+          "end": 20.372500883997418,
+          "image": "raw/qad/017.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 18,
+          "title": "Repeat the same authorization tap",
+          "start": 20.372500883997418,
+          "inferStart": 20.602631162968464,
+          "actStart": 21.047028266009875,
+          "end": 21.449939407990314,
+          "image": "raw/qad/018.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 19,
+          "title": "Repeat the same authorization tap",
+          "start": 21.449939407990314,
+          "inferStart": 21.687658187001944,
+          "actStart": 22.13292633497622,
+          "end": 22.536093780072406,
+          "image": "raw/qad/019.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 20,
+          "title": "Repeat the same authorization tap",
+          "start": 22.536093780072406,
+          "inferStart": 22.772308846004307,
+          "actStart": 23.219330861000344,
+          "end": 23.622684468049556,
+          "image": "raw/qad/020.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 21,
+          "title": "Repeat the same authorization tap",
+          "start": 23.622684468049556,
+          "inferStart": 23.85207666910719,
+          "actStart": 24.296195367118344,
+          "end": 24.69908434408717,
+          "image": "raw/qad/021.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 22,
+          "title": "Repeat the same authorization tap",
+          "start": 24.69908434408717,
+          "inferStart": 24.9357825841289,
+          "actStart": 25.380368154030293,
+          "end": 25.78315673605539,
+          "image": "raw/qad/022.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 23,
+          "title": "Repeat the same authorization tap",
+          "start": 25.78315673605539,
+          "inferStart": 26.018844970036298,
+          "actStart": 26.463970002019778,
+          "end": 26.86710531404242,
+          "image": "raw/qad/023.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 24,
+          "title": "Repeat the same authorization tap",
+          "start": 26.86710531404242,
+          "inferStart": 27.102020942023955,
+          "actStart": 27.547014708048664,
+          "end": 27.94998774304986,
+          "image": "raw/qad/024.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 25,
+          "title": "Repeat the same authorization tap",
+          "start": 27.94998774304986,
+          "inferStart": 28.202171889017336,
+          "actStart": 28.646299742045812,
+          "end": 29.04924092104193,
+          "image": "raw/qad/025.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 26,
+          "title": "Repeat the same authorization tap",
+          "start": 29.04924092104193,
+          "inferStart": 29.285184077103622,
+          "actStart": 29.729042735067196,
+          "end": 30.13182064506691,
+          "image": "raw/qad/026.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 27,
+          "title": "Repeat the same authorization tap",
+          "start": 30.13182064506691,
+          "inferStart": 30.367768066120334,
+          "actStart": 30.81333465105854,
+          "end": 31.21630805300083,
+          "image": "raw/qad/027.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 28,
+          "title": "Repeat the same authorization tap",
+          "start": 31.21630805300083,
+          "inferStart": 31.452256505028345,
+          "actStart": 31.899054161040112,
+          "end": 32.30206455104053,
+          "image": "raw/qad/028.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        },
+        {
+          "index": 29,
+          "title": "Repeat the same authorization tap",
+          "start": 32.30206455104053,
+          "inferStart": 32.53521347499918,
+          "actStart": 32.98197737999726,
+          "end": 33.38496581709478,
+          "image": "raw/qad/029.png",
+          "thought": "现在需要点击蓝色的“授权查看”按钮，完成授权后才能查看本地文档，进而搜索包含Apple MACBook图片描述的doc文件。",
+          "action": "device.click(550, 290)",
+          "thoughtHighlights": [
+            {
+              "start": 2,
+              "end": 17,
+              "text": "需要点击蓝色的“授权查看”按钮",
+              "tone": "before"
+            }
+          ],
+          "actionEvent": {
+            "name": "device.click",
+            "args": "550, 290",
+            "tone": "before",
+            "highlights": {
+              "call": [
+                {
+                  "start": 0,
+                  "end": 12,
+                  "text": "device.click",
+                  "tone": "before"
+                }
+              ]
+            }
+          },
+          "executed": {
+            "action": "tap",
+            "x": 214,
+            "y": 244
+          }
+        }
+      ],
+      "repetition": {
+        "from": 2,
+        "label": "Repeated authorization taps",
+        "review": "Manually reviewed contiguous tail: no new task progress. The initial action and first repetition remain outside the fold."
+      }
+    }
+  ]
+}

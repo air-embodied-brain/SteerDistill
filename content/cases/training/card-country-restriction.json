@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "id": "card-country-restriction",
+  "kind": "training",
+  "title": "限制银行卡的使用范围，不能只填国家名单",
+  "summary": "用户希望新虚拟卡每月限额为 2000 美元，且只能在美国和加拿大使用。卡已激活，限额也已设置，现在需要配置国家限制。参数 `international_allowed=1` 表示允许所有国际交易；设为 `0`，才会按国家名单限制使用范围。",
+  "template": "training",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "Activate a new virtual debit card linked to my checking account ending in '4456' with a monthly spending_limit of 2000.00 USD, set the card_status to 'active', and configure card_controls to lock international transactions outside 'US' and 'CA'."
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "branches": [
+      {
+        "title": "无指导",
+        "summary": "填入了美国和加拿大，却把开关设为允许所有国际交易，国家限制没有生效。",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "update_card_controls",
+            "args": "card_id=5, international_allowed=1,\nallowed_countries=\"US,CA\"",
+            "result": "international_allowed: true,\nallowed_countries: \"US,CA\"",
+            "highlights": {
+              "args": [
+                {
+                  "start": 11,
+                  "end": 34,
+                  "text": "international_allowed=1",
+                  "tone": "before"
+                }
+              ],
+              "result": [
+                {
+                  "start": 0,
+                  "end": 27,
+                  "text": "international_allowed: true",
+                  "tone": "before"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/card-country-restriction/raw/before/trajectory.json",
+              "message": 10,
+              "returnMessage": 11
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "无指导 · 推理节选",
+          "text": "If I set `international_allowed` to `1`, it allows all.\nIf I set `international_allowed` to `0`, it enforces the list.\n…\nI'll set `international_allowed` to `1` and `allowed_countries` to \"US,CA\".",
+          "highlights": [
+            {
+              "start": 130,
+              "end": 195,
+              "text": "`international_allowed` to `1` and `allowed_countries` to \"US,CA\"",
+              "tone": "before"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/training/card-country-restriction/raw/before/trajectory.json",
+            "message": 10
+          }
+        },
+        "excerpt": true
+      },
+      {
+        "title": "Teacher 指导后",
+        "summary": "将开关设为 0，启用限制，只允许在美国和加拿大使用。",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "create_card_controls",
+            "args": "card_id=5, international_allowed=0,\nallowed_countries=\"US,CA\"",
+            "result": "international_allowed: false,\nallowed_countries: \"US,CA\"",
+            "highlights": {
+              "args": [
+                {
+                  "start": 11,
+                  "end": 34,
+                  "text": "international_allowed=0",
+                  "tone": "after"
+                }
+              ],
+              "result": [
+                {
+                  "start": 0,
+                  "end": 28,
+                  "text": "international_allowed: false",
+                  "tone": "after"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/training/card-country-restriction/raw/after/trajectory.json",
+              "message": 10,
+              "returnMessage": 11
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Teacher 指导后 · 推理节选",
+          "text": "The instructions say: \"To lock international transactions outside 'US' and 'CA', use 'mcp_server_create_card_controls' with 'international_allowed' set to 0 (to restrict) and 'allowed_countries' set to 'US,CA'.\"",
+          "highlights": [
+            {
+              "start": 124,
+              "end": 170,
+              "text": "'international_allowed' set to 0 (to restrict)",
+              "tone": "after"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/training/card-country-restriction/raw/after/trajectory.json",
+            "message": 10
+          }
+        },
+        "excerpt": true
+      }
+    ],
+    "guidance": {
+      "title": "启用国家限制",
+      "fields": {
+        "precondition": "The virtual card (ID: 5) has been created, its spending limit updated to 2000.00, and its status set to 'active'.",
+        "decision_rule": "To lock international transactions outside 'US' and 'CA', use 'mcp_server_create_card_controls' with 'international_allowed' set to 0 (to restrict) and 'allowed_countries' set to 'US,CA'.",
+        "expected_transition": "A card_controls record is created for card_id 5 with international_allowed=0 and allowed_countries='US,CA'.",
+        "recovery_check": "If the tool returns an error or the status is not updated, verify the card_id and ensure 'international_allowed' is 0 to correctly enforce the country whitelist."
+      },
+      "checks": {
+        "配置状态": "`international_allowed=0`，`allowed_countries=\"US,CA\"`。卡片保持激活，月限额仍为 2000 美元。",
+        "参考对照": "配置与 Teacher 参考操作后的状态一致。无指导分支也填了相同的国家名单，但 `international_allowed=1`，仍允许所有国际交易。"
+      }
+    }
+  },
+  "records": {
+    "defaultSource": "before/trajectory.json",
+    "defaultMessage": 10,
+    "sources": [
+      {
+        "id": "after/cot_and_actions.txt",
+        "label": "after/cot_and_actions.txt",
+        "url": "data/case-library/training/card-country-restriction/raw/after/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "after/local_gate.json",
+        "label": "after/local_gate.json",
+        "url": "data/case-library/training/card-country-restriction/raw/after/local_gate.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "after/result.json",
+        "label": "after/result.json",
+        "url": "data/case-library/training/card-country-restriction/raw/after/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "after/trajectory.json",
+        "label": "指导后 agent · 轨迹",
+        "url": "data/case-library/training/card-country-restriction/raw/after/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "before/cot_and_actions.txt",
+        "label": "before/cot_and_actions.txt",
+        "url": "data/case-library/training/card-country-restriction/raw/before/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "before/local_gate.json",
+        "label": "before/local_gate.json",
+        "url": "data/case-library/training/card-country-restriction/raw/before/local_gate.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/result.json",
+        "label": "before/result.json",
+        "url": "data/case-library/training/card-country-restriction/raw/before/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "before/trajectory.json",
+        "label": "无指导 agent · 轨迹",
+        "url": "data/case-library/training/card-country-restriction/raw/before/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "reference/cot_and_actions.txt",
+        "label": "reference/cot_and_actions.txt",
+        "url": "data/case-library/training/card-country-restriction/raw/reference/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "reference/local_gate.json",
+        "label": "reference/local_gate.json",
+        "url": "data/case-library/training/card-country-restriction/raw/reference/local_gate.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/result.json",
+        "label": "reference/result.json",
+        "url": "data/case-library/training/card-country-restriction/raw/reference/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "reference/trajectory.json",
+        "label": "Teacher · 参考轨迹",
+        "url": "data/case-library/training/card-country-restriction/raw/reference/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "reference_state_comparison.json",
+        "label": "配置状态 · 参考对照",
+        "url": "data/case-library/training/card-country-restriction/raw/reference_state_comparison.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "steering/analysis.json",
+        "label": "steering/analysis.json",
+        "url": "data/case-library/training/card-country-restriction/raw/steering/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "steering/attempt-0/analysis.json",
+        "label": "steering/attempt-0/analysis.json",
+        "url": "data/case-library/training/card-country-restriction/raw/steering/attempt-0/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "steering/attempt-0/raw_steering_prompt.txt",
+        "label": "steering/attempt-0/raw_steering_prompt.txt",
+        "url": "data/case-library/training/card-country-restriction/raw/steering/attempt-0/raw_steering_prompt.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "steering/raw_steering_prompt.txt",
+        "label": "Teacher · 指导",
+        "url": "data/case-library/training/card-country-restriction/raw/steering/raw_steering_prompt.txt",
+        "primary": true,
+        "format": "guidance"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/training/card-country-restriction/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/training/card-country-restriction/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/training/card-country-restriction/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

@@ -1,0 +1,68 @@
+<main id="content"><div class="home-main" id="top">
+<section class="press-hero"><div class="press-intro">
+  <header class="paper-identity" lang="en">
+    <h1 aria-label="SteerDistill: Quantizing LLM Agents via Closed-Loop Teacher Steering"><span class="paper-name">SteerDistill</span>
+      <span class="paper-full-title">Quantizing LLM Agents<br class="title-break"> via Closed-Loop Teacher Steering</span></h1>
+    <div class="paper-byline" aria-label="Authors"><span><a href="https://github.com/ustccuigm" target="_blank" rel="noopener noreferrer">Genming Cui</a><sup>*</sup></span><span><a href="https://xxxxyu.github.io/" target="_blank" rel="noopener noreferrer">Xiangyu Li</a><sup>*,‡</sup></span><span><a href="https://scholar.google.com/citations?user=5C9woXAAAAAJ" target="_blank" rel="noopener noreferrer">Zixu Hao</a></span><span><a href="https://xinding-bot.github.io/" target="_blank" rel="noopener noreferrer">Xin Ding</a></span><span><a href="https://yunxinliu.github.io/" target="_blank" rel="noopener noreferrer">Yunxin Liu</a></span><span><a href="https://tingcao952.github.io/" target="_blank" rel="noopener noreferrer">Ting Cao</a></span></div><p class="paper-author-notes"><span>* Equal contribution</span><span>‡ Project lead</span></p>
+    <p class="paper-affiliation">Institute for AI Industry Research (AIR), Tsinghua University</p>
+    <nav class="paper-resources" aria-label="Project resources">
+      <!-- TODO: Add the checkpoint download link. -->
+      <a href="https://arxiv.org/abs/2611.13410">Paper</a>
+      <a href="https://github.com/air-embodied-brain/SteerDistill">Code</a>
+      <a href="cases/">Cases</a>
+      <a href="article/#bibtex">BibTeX</a>
+      <a class="resource-read" href="article/">Read the article <span aria-hidden="true">→</span></a>
+    </nav>
+
+  </header>
+  <div class="paper-overview"><div class="paper-tldr"><p class="tldr-heading"><span>TL;DR</span><strong data-home-text>Learn to act where quantization fails.</strong></p><p data-home-tldr>Quantized agents can get stuck repeating mistakes. Our <a href="article/#method">closed-loop teacher steering</a> uses feedback from failed retries to refine guidance. We distill verified corrections so the agent can act without guidance.</p></div><figure class="concept-motion" data-concept-motion aria-label="Training method overview" aria-describedby="concept-caption">
+  <div class="concept-head"><button type="button" data-concept-play aria-pressed="true" aria-label="Pause method animation">Pause Ⅱ</button></div>
+  <svg lang="en" viewBox="0 0 410 168" role="img" aria-label="Locate a behavioral divergence. Retry one student response from the same pre-error state and verify it locally. Failed local verification returns execution feedback to the teacher, which refines guidance from G to G prime. Distill the locally verified correction to act without guidance.">
+    <g data-motion="locate-context"><text x="0" y="12">Behavioral divergence</text><path d="M0 26H348" class="concept-track"/></g>
+    <rect x="0" y="22" width="48" height="8" class="decision neutral" data-motion="decision-1"/>
+    <rect x="60" y="22" width="48" height="8" class="decision neutral" data-motion="decision-2"/>
+    <rect x="120" y="22" width="48" height="8" class="decision neutral" data-motion="decision-3"/>
+    <rect x="180" y="22" width="48" height="8" class="decision failed" data-motion="decision-4"/>
+    <path d="M240 21L250 31M250 21L240 31" class="concept-cross" data-motion="failure"/>
+
+    <text x="0" y="57" data-motion="guidance-label">Teacher guidance</text>
+    <text x="180" y="57" data-motion="retry-label">Student retry</text>
+    <text x="336" y="57" text-anchor="middle" data-motion="verify-label">Local verify</text>
+    <path d="M4 63H104Q108 63 108 67V78Q108 82 104 82H62L54 88V82H4Q0 82 0 78V67Q0 63 4 63Z" class="guidance-bubble" data-motion="guidance"/>
+    <text x="54" y="78" text-anchor="middle" class="guidance-symbol initial-guidance" data-motion="guidance-initial">G</text>
+    <text x="54" y="78" text-anchor="middle" class="guidance-symbol" data-motion="guidance-refined">G′</text>
+    <path d="M120 72H168" pathLength="1" class="concept-route" data-motion="to-agent"/>
+    <path d="M164 69L168 72L164 75" class="concept-route" data-motion="to-agent-tip"/>
+    <rect x="180" y="68" width="48" height="8" class="decision failed retry-failed" data-motion="retry-failed"/>
+    <rect x="180" y="68" width="48" height="8" class="decision" data-motion="retry-corrected"/>
+    <path d="M240 72H319" pathLength="1" class="concept-route" data-motion="to-verify"/>
+    <path d="M315 69L319 72L315 75" class="concept-route" data-motion="to-verify-tip"/>
+    <path d="M331 67L341 77M341 67L331 77" class="concept-cross verify-failed" data-motion="verify-failed"/>
+    <path d="M329 72L335 78L347 65" pathLength="1" class="concept-route" data-motion="verified"/>
+
+    <path d="M336 84V105Q336 112 329 112H61Q54 112 54 105V92" pathLength="1" class="concept-feedback" data-motion="feedback"/>
+    <path d="M51 96L54 92L57 96" class="concept-feedback" data-motion="feedback-tip"/>
+    <text x="195" y="103" text-anchor="middle" class="concept-feedback-label" data-motion="feedback-label">Execution feedback · refine guidance</text>
+    <path d="M359 72H388Q396 72 396 80V145Q396 153 388 153H366" pathLength="1" class="concept-route" data-motion="retain"/>
+    <path d="M370 150L366 153L370 156" class="concept-route" data-motion="retain-tip"/>
+    <text x="385" y="103" text-anchor="end" class="concept-distill-label" data-motion="distill-label">Distill</text>
+
+    <g data-motion="learn-context"><text x="0" y="140">Act without guidance</text><path d="M0 153H348" class="concept-track"/></g>
+    <rect x="0" y="149" width="48" height="8" class="decision" data-motion="learn-1"/>
+    <rect x="60" y="149" width="48" height="8" class="decision" data-motion="learn-2"/>
+    <rect x="120" y="149" width="48" height="8" class="decision" data-motion="learn-3"/>
+    <rect x="180" y="149" width="48" height="8" class="decision" data-motion="learn-4"/>
+    <rect x="240" y="149" width="48" height="8" class="decision" data-motion="learn-5"/>
+    <rect x="300" y="149" width="48" height="8" class="decision" data-motion="learn-6"/>
+  </svg>
+  <span id="concept-caption" hidden>Teacher guidance is refined from execution feedback. Only locally verified corrections proceed to distillation.</span>
+</figure></div>
+</div>
+<figure class="press-chart" data-press-chart="grouped"><div class="press-figure-head" id="benchmark-results"><strong><a class="section-link" href="#benchmark-results">Benchmark results</a></strong></div><div class="press-chart-tools"><div class="press-models" role="group" aria-label="Model and precision settings"><button data-press-model="Qwen3-8B" data-press-precision="W4A16" aria-pressed="true">Qwen3-8B<span>W4A16</span></button><button data-press-model="Qwen3-8B" data-press-precision="W4A8" aria-pressed="false">Qwen3-8B<span>W4A8</span></button><button data-press-model="Qwen3-8B" data-press-precision="W2A16" aria-pressed="false">Qwen3-8B<span>W2A16</span></button><button data-press-model="Qwen3.5-4B" data-press-precision="W4A16" aria-pressed="false">Qwen3.5-4B<span>W4A16</span></button><button data-press-model="Gemma 4 12B-it" data-press-precision="W4A16" aria-pressed="false">Gemma 4 12B-it<span>W4A16</span></button></div></div><div class="press-legend" aria-label="Methods"></div><div class="press-plot" aria-live="polite"></div><figcaption class="press-caption"><span data-press-summary></span><a data-home-text href="article/#results">Training & inference cost</a></figcaption></figure></section>
+<section class="task-demos" id="demo" aria-labelledby="demo-title">
+  <header class="demo-heading" id="steerdistill-in-action"><h2 id="demo-title"><a class="section-link" href="#steerdistill-in-action"><span data-home-text>SteerDistill in action</span></a></h2></header>
+  <div class="demo-gallery" data-demo-gallery="demos/catalog.json"><p data-home-text role="status">Loading the interactive replay…</p><noscript>Enable JavaScript to explore the recorded decisions and screen actions.</noscript></div>
+</section>
+</div>
+{{post}}
+</main>

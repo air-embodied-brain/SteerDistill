@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Tool list numbers",
+  "translations": {
+    "/title": "Unlocking car doors: list numbers are not tool names",
+    "/summary": "The user asks to unlock all car doors and turn on the headlights. In the tool list, item 16 is `lockDoors` and item 20 is `setHeadlights`. The numbers identify entries in the list; they are not part of the tool names.",
+    "/presentation/guidance/title": "Use the tool names as defined",
+    "/presentation/guidance/checks": {
+      "Local verification": "All four doors are unlocked; the headlights are still off. The environment state matches the teacher’s reference step and passes local verification.",
+      "Continuation": "With guidance removed, the agent calls `setHeadlights(mode=\"on\")`. The headlights turn on, the doors remain unlocked, and the task check passes."
+    },
+    "/presentation/branches/0/summary": "The agent includes the list numbers in the tool names. Both calls fail, and retrying does not resolve the errors.",
+    "/presentation/branches/1/summary": "The agent uses the correct tool name to unlock the doors, then turns on the headlights.",
+    "/presentation/branches/0/title": "Without guidance",
+    "/presentation/branches/0/reasoning/title": "Without guidance · Reasoning excerpt",
+    "/presentation/branches/1/title": "With teacher guidance",
+    "/presentation/branches/1/reasoning/title": "With teacher guidance · Reasoning excerpt",
+    "/records/sources/1/label": "Local verification",
+    "/records/sources/2/label": "Task verification",
+    "/records/sources/3/label": "Guided agent · Trajectory",
+    "/records/sources/6/label": "Unguided agent · Trajectory",
+    "/records/sources/12/label": "Teacher · Reference trajectory",
+    "/records/sources/14/label": "Teacher · Guidance",
+    "/records/sources/16/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Verbatim original task and environment data."
+    },
+    {
+      "path": "/presentation/guidance/fields",
+      "reason": "Actual teacher guidance, preserved in its original language and wording."
+    },
+    {
+      "path": "/presentation/branches/0/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    },
+    {
+      "path": "/presentation/branches/1/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    }
+  ],
+  "sourceSha256": "033027095175b75bb1786f46fa3d35737d5be0c924949298a1021ad2748a2a9f"
+}

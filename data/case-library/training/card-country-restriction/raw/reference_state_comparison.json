@@ -1,0 +1,93 @@
+{
+  "passed": true,
+  "verification_type": "Actual comparison of saved immediate post-action databases, using task-relevant fields; no new model inference.",
+  "source_files": {
+    "before": "before/local_state.db",
+    "reference": "reference/local_state.db",
+    "after": "after/local_state.db"
+  },
+  "source_sha256": {
+    "before": "84df0e66145736c383147e0fedc8679b3afbd5040aae735eda2de38bcde0e9b6",
+    "reference": "8800c9c550c936c172828c284f699aec80413022006c2a55ad4414bd3f7af3a8",
+    "after": "c58191b7253a2e5437fb462ded2216eb9e3ef6fbe3c7ad5d5257b2d55f9cf6db"
+  },
+  "projection_fields": [
+    "card_id",
+    "account_id",
+    "card_type",
+    "spending_limit",
+    "currency",
+    "card_status",
+    "international_allowed",
+    "allowed_countries"
+  ],
+  "ignored_fields": [
+    "created_at",
+    "updated_at",
+    "card_controls.id"
+  ],
+  "states": {
+    "before": [
+      {
+        "card_id": 5,
+        "account_id": 3,
+        "card_type": "virtual",
+        "spending_limit": 2000.0,
+        "currency": "USD",
+        "card_status": "active",
+        "international_allowed": 1,
+        "allowed_countries": [
+          "CA",
+          "US"
+        ]
+      }
+    ],
+    "reference": [
+      {
+        "card_id": 5,
+        "account_id": 3,
+        "card_type": "virtual",
+        "spending_limit": 2000.0,
+        "currency": "USD",
+        "card_status": "active",
+        "international_allowed": 0,
+        "allowed_countries": [
+          "CA",
+          "US"
+        ]
+      }
+    ],
+    "after": [
+      {
+        "card_id": 5,
+        "account_id": 3,
+        "card_type": "virtual",
+        "spending_limit": 2000.0,
+        "currency": "USD",
+        "card_status": "active",
+        "international_allowed": 0,
+        "allowed_countries": [
+          "CA",
+          "US"
+        ]
+      }
+    ]
+  },
+  "reference_vs_after_equal": true,
+  "reference_vs_before_equal": false,
+  "native_task_verification": {
+    "before": {
+      "result": "others"
+    },
+    "reference": {
+      "result": "complete"
+    },
+    "after": {
+      "result": "complete"
+    }
+  },
+  "negative_controls": {
+    "reject_international_allowed": true,
+    "reject_allowed_countries": true
+  }
+}

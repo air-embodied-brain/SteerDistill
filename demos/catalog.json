@@ -1,0 +1,63 @@
+{
+  "default": "wps",
+  "tasks": [
+    {
+      "id": "wps",
+      "rawTask": "wps-9",
+      "app": "WPS",
+      "label": "Find a document",
+      "title": "Find the right document",
+      "task": "Find the document containing an “Apple MACBook” image description in WPS.",
+      "caption": "The same document, with less time spent on inference.",
+      "notes": [
+        "The SteerDistill initial screen includes a welcome toast; the search field is available in both runs."
+      ],
+      "path": "wps/"
+    },
+    {
+      "id": "whatsapp",
+      "rawTask": "WhatsApp-7",
+      "app": "WhatsApp",
+      "label": "Create a poll",
+      "title": "Create a poll in the group chat",
+      "task": "In Project Alpha 🚀, create a poll asking “Next meeting?”, with Monday and Tuesday as the options.",
+      "caption": "Both complete the poll; the route to the Poll menu differs.",
+      "notes": [
+        "Verification proceeds automatically in this simulated environment. The replay shows the recorded taps without inventing a code-entry action."
+      ],
+      "path": "whatsapp/"
+    },
+    {
+      "id": "news",
+      "rawTask": "googlenews-4",
+      "app": "Google News",
+      "label": "Read three stories",
+      "title": "Read three different Sports stories",
+      "task": "Read at least three different articles in the Sports category.",
+      "caption": "Follow the Sports feed and related stories across three articles.",
+      "notes": [
+        "The environment records successful article visits. The BF16 final recap names two different stories; the original output is retained and those titles are highlighted."
+      ],
+      "path": "news/"
+    }
+  ],
+  "summary": [
+    [
+      {
+        "text": "We train and evaluate Qwen3-VL-8B agents in "
+      },
+      {
+        "text": "ScaleWoB",
+        "href": "https://scalewob.github.io/"
+      },
+      {
+        "text": ", initializing SteerDistill and On-Policy QAD W4A16 from the post-trained BF16 checkpoint."
+      }
+    ],
+    [
+      {
+        "text": "Training uses 8 × NVIDIA A100 GPUs; inference uses a single A100."
+      }
+    ]
+  ]
+}

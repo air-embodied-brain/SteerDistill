@@ -1,0 +1,32 @@
+{
+  "label": "ours",
+  "model": "/redacted/steerdistill-scalewob-runs/brownie-full-20261027/online/from-step-0006/awq-ff0cda28a8",
+  "teacher_guidance": false,
+  "artifact_role": "benchmark_evaluation",
+  "tasks": [
+    {
+      "env_id": "slack",
+      "task_id": "5",
+      "description": "Send the file \"Team_Offsite.jpg\" to design team in Acme Corp"
+    },
+    {
+      "env_id": "wps",
+      "task_id": "9",
+      "description": "Find the doc file in WPS that contains an 'Apple MACBook' image description."
+    }
+  ],
+  "prompt_sha256": "9b7cd0bbb2bf5eaf31a696cf606aad19eb03717128a6767397b40dd3643a74b5",
+  "max_steps": 30,
+  "max_tokens": 256,
+  "repeats": 3,
+  "seed": 0,
+  "temperature": 0,
+  "gpu": "1",
+  "timing": "perf_counter from first observation acquisition after reset/warmup through evaluator done; recordings saved afterward; model loading and reset excluded",
+  "baseline_limit": "Historical QAD uses Qwen3-VL base; ours and BF16 use brownie fine-tune. Not a matched-training ablation.",
+  "enforce_eager": false,
+  "max_num_seqs": 1,
+  "kv_cache_memory_bytes": 2147483648,
+  "enable_prefix_caching": false,
+  "experiment": "Same-device optimized episode evaluation; all repetitions retained"
+}

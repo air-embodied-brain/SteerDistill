@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "id": "create-and-write-matching-sentence",
+  "kind": "training",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "after/cot_and_actions.txt",
+      "bytes": 60335,
+      "sha256": "9ca0d2e9dfa7135544326e1f3fb4e72f609e77628c8022077710fccec61b6ae9"
+    },
+    {
+      "path": "after/execution.json",
+      "bytes": 33737,
+      "sha256": "8cf31018df67834df961d4b177eedfebc3e69d935aa5ec78bf4f07da150b906c"
+    },
+    {
+      "path": "after/local_gate.json",
+      "bytes": 2728,
+      "sha256": "561bcf1772d3afaa32ad8c8711771e849e62793fb645b2dc37ffaf8766ee470f"
+    },
+    {
+      "path": "after/score.json",
+      "bytes": 257,
+      "sha256": "11f53e16870eedbabae32c8306a6f8e5f8ceefa4ad13075e0eaae5199f4743ca"
+    },
+    {
+      "path": "after/trajectory.json",
+      "bytes": 63127,
+      "sha256": "aafcb9c4af60ce33db294e7804bfb15ece687528992f4814b960a505ada9281b"
+    },
+    {
+      "path": "before/cot_and_actions.txt",
+      "bytes": 55752,
+      "sha256": "2f245ce6645fb9935798fdbf2b7367162739e7b5f6e97368fc7929f34e348ddb"
+    },
+    {
+      "path": "before/execution.json",
+      "bytes": 36167,
+      "sha256": "3936027e787eadb2aeaf0a48603207edd7a6d563334efbd6cd8462481ac7f96d"
+    },
+    {
+      "path": "before/score.json",
+      "bytes": 6235,
+      "sha256": "7e4f395806fad7f10e31d61db21ce39a06484b4ff48b41aa10914389ddf2a418"
+    },
+    {
+      "path": "before/trajectory.json",
+      "bytes": 58572,
+      "sha256": "7aab0d0dbd03027204c6da78f3b63e8811627a648c60c0936f93f6f742d8b261"
+    },
+    {
+      "path": "reference/cot_and_actions.txt",
+      "bytes": 57574,
+      "sha256": "a9a3b98ef57d541e3763fd1e9cf616b6a4f35e51478a99ed38bd4c1b95addd31"
+    },
+    {
+      "path": "reference/execution.json",
+      "bytes": 33737,
+      "sha256": "8cf31018df67834df961d4b177eedfebc3e69d935aa5ec78bf4f07da150b906c"
+    },
+    {
+      "path": "reference/local_gate.json",
+      "bytes": 4025,
+      "sha256": "74d61ebcca8288ca8896fddd5c076422b9206e2655e4c3683583c7c93a2fa8e2"
+    },
+    {
+      "path": "reference/score.json",
+      "bytes": 229,
+      "sha256": "a0bcd625d5c10451f3de1a6941ae643e7d1db9e6000ee7ac471fa18dec5c4d3f"
+    },
+    {
+      "path": "reference/trajectory.json",
+      "bytes": 60317,
+      "sha256": "23170c465bf76ad0711f8cc16f1fb038a92f8914be3588d2364dacac125cde1a"
+    },
+    {
+      "path": "steering/analysis.json",
+      "bytes": 2652,
+      "sha256": "10169308f8ba3ead6ebd970447d11c88be85b4a2dc83b5539e52dfd9d4124c49"
+    },
+    {
+      "path": "steering/raw_steering_prompt.txt",
+      "bytes": 485,
+      "sha256": "bfbfe2a68cba45b286ca5b9c0055f0b1450fc6e935f145c2a60e45f466b03a55"
+    },
+    {
+      "path": "task.json",
+      "bytes": 20288,
+      "sha256": "1f09cf7c8a30f510f9526406f1b75859f4b218d4fd9c61388f982620a9fa123f"
+    }
+  ]
+}

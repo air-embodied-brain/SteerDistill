@@ -1,0 +1,7 @@
+{
+
+"precondition": "Ensure the user is authenticated before attempting to create a ticket.",
+"decision_rule": "Always use the ticket login tool first to authenticate the user prior to creating a support ticket.",
+"expected_transition": "After successful login, proceed to create the ticket with the detailed information provided by the user.",
+"recovery_check": "Verify that the ticket creation succeeds post-login and confirm the ticket details with the user."
+}

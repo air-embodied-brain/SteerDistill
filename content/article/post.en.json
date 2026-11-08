@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "sections": [
+    {
+      "id": "problem",
+      "title": "Where quantized agents go wrong",
+      "navTitle": "Where agents go wrong",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "problem-cost",
+          "html": "An agent rarely finishes a task in a single call. It reads the environment, acts, reads the result and acts again, so inference cost grows with every turn. Low-bit quantization is the most direct way to cut that cost, but it comes at a price. Quantize a post-trained Qwen3-8B to W4A16 with GPTQ, and its average score across five agentic benchmarks drops from 53.54 to 46.36.",
+          "note": {
+            "id": "precision",
+            "text": "W4A16 means 4-bit weights and 16-bit activations; BF16 is the full-precision reference. All methods start from the same task-post-trained BF16 checkpoint.",
+            "aside": "W4A16: 4-bit weights, 16-bit activations. BF16 is the full-precision reference."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "problem-pattern",
+          "html": "Where does that score go? Reading through failed rollouts, we kept running into the same pattern. <strong>Many failures are not a general collapse in capability.</strong> The agent picks the right tool and lays out a sensible plan, then overlooks a single task requirement or environmental condition at one step. Because every action is actually executed, such slips compound: a wrong argument returns the wrong result, and a skipped prerequisite leaves the next action with nothing to act on."
+        },
+        {
+          "type": "paragraph",
+          "id": "problem-parameter",
+          "html": "Here is about the smallest example we found. The user wants a bot’s exports listed by last-updated time, newest first. The tool’s <code>sortBy</code> parameter is described as the sort field, yet it only accepts <code>ASC</code> or <code>DESC</code>. Getting it right means reading the user’s intent and the interface’s constraint at the same time."
+        },
+        {
+          "type": "case",
+          "caseKey": "problem"
+        },
+        {
+          "type": "paragraph",
+          "id": "problem-meaning",
+          "html": "BF16 and SteerDistill both pass <code>DESC</code>. The other quantized models pass the field name instead, or glue field and direction into a single value. All of them chose the right tool and understood that the list should be descending. They went wrong only at the very end, when mapping that intent onto a value the interface accepts."
+        },
+        {
+          "type": "paragraph",
+          "id": "problem-unit",
+          "html": "We call this a <em>behavioral divergence</em>: starting from the same task and initial state, the quantized model’s action changes the environment differently from a successful full-precision rollout. The case collection has more of them: <a href=\"cases/?group=inference&amp;case=train-route-clarification\">asking for the origin and destination when they are missing</a>, <a href=\"cases/?group=inference&amp;case=files-written-before-reading\">actually writing content into files it has just created</a>, and <a href=\"cases/?group=inference&amp;case=watchlist-disambiguation\">confirming which stock the user means before deleting it</a>. In each case the error sits in one decision. That suggests a more targeted kind of training. <strong>Rather than retraining the whole task, find the step that went wrong and teach the model there.</strong>"
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "title": "Closed-loop teacher steering",
+      "navTitle": "Closed-loop steering",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "method-data",
+          "html": "To teach the model at that step, we first need an example of the step done right, and that is precisely what existing recovery methods struggle to provide. Offline QAT and QAD methods such as EfficientQAT and BitDistiller train on data collected independently of the quantized model, so they may never visit the contexts where it actually fails. On-policy methods such as On-Policy QAD and QeRL train on the model’s own rollouts and do reach those contexts, but once there, the model seldom samples the right action by itself."
+        },
+        {
+          "type": "paragraph",
+          "id": "method-diagnostic",
+          "html": "We measured this directly on BFCL V4 multi-turn tasks. At each divergent turn, we restored the history and environment state from just before the error and let the quantized model try again four times. Without guidance, only 9.6% of divergent turns produced a correct action in any attempt. With guidance from the full-precision model, that rose to 82.3%. <strong>More samples were not the bottleneck; what was missing was information that changes the decision.</strong>",
+          "note": {
+            "id": "diagnostic",
+            "text": "This is turn-level Pass@4, not task success. All four attempts start from the same history and environment state, and a turn counts if at least one attempt takes a correct action.",
+            "aside": "Turn-level Pass@4: four attempts from the same state; a turn counts if any attempt is correct."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "method-localize",
+          "html": "This is where SteerDistill comes in. As in standard QAD, the full-precision model is the teacher and the quantized model is the student. The difference is that the teacher intervenes directly at the turn where the student fails. For each failed student rollout, we look for a successful teacher rollout on the same task and initial state, align the two by environment transitions, and locate the first behavioral divergence. We align on state rather than on action text: two calls that are written differently but have the same effect count as equivalent, otherwise harmless differences would get “fixed” too. The ablation bears this out. Intervening at the first action mismatch instead lowers BFCL V4 from 46.84 to 45.01, and intervening at a random turn scores 43.52, below On-Policy QAD at 44.43.",
+          "note": {
+            "id": "reference",
+            "text": "Successful student rollouts, and failed ones without a successful teacher reference, are kept unchanged for distillation; we do not force a correction onto every failure. All ablations use Qwen3-8B under W4A16 and report BFCL V4 Overall.",
+            "aside": "Failures without a successful reference, and successful student rollouts, are distilled unchanged."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "method-example",
+          "html": "Once we have the turn, we roll the history and environment back to just before it. The teacher compares the student’s failed response with its own successful reference, identifies the requirement or condition the student overlooked, and writes it up as a steering prompt. The student then regenerates the turn with that prompt in context. In the example below, the agent has to unlock all the car doors and turn on the headlights. It knows the steps and the arguments, but it prepends the tool list’s item numbers, 16 and 20, to the tool names. The teacher tells it to check the available tools; the corrected calls still come from the student."
+        },
+        {
+          "type": "case",
+          "caseKey": "method"
+        },
+        {
+          "type": "paragraph",
+          "id": "method-boundary",
+          "html": "After the revised response executes, we check its effect: do the resulting environment state and returned information match the teacher reference at this turn? We call this <em>local verification</em>, and its timing matters. When the check passes, all four doors are unlocked but the headlights are still off. We then remove the steering prompt, and on the next turn the agent calls <code>setHeadlights</code> by itself and completes the task. Local verification only answers whether this turn was fixed; whether the task succeeds is up to the unguided rollout that follows."
+        },
+        {
+          "type": "method-diagram",
+          "title": "Trajectory revision"
+        },
+        {
+          "type": "paragraph",
+          "id": "method-loop",
+          "html": "Steering will not always land on the first try, so we close the loop. If verification fails, we hand the execution feedback back to the teacher, which refines its guidance, and the student retries from the same pre-error state. If it passes, we keep the correction together with its steering prompt and continue the rollout without guidance. If the task still fails later on, we realign with the reference and move to the next divergence, until the task succeeds, no further divergence can be found, or a turn exhausts its attempt budget."
+        },
+        {
+          "type": "paragraph",
+          "id": "method-takeover",
+          "html": "Why not let the teacher simply write the turn itself? Because what training ultimately has to change is the student’s own behavior. Intuitively, a correction that the student produces under guidance stays closer to its own output distribution, and is therefore easier to learn. The numbers agree. From the same restored state, unguided student retries score 44.46, teacher takeover scores 45.06, and teacher-steered student revision scores 46.84.",
+          "note": {
+            "id": "takeover",
+            "text": "All three variants start from the same restored state, and in each case the student continues the rollout after the intervention.",
+            "aside": "Same restored state for all three; the student continues the rollout afterwards."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "method-retention",
+          "html": "The last question is which corrections to keep. A long rollout that eventually fails can still contain turns that were fixed correctly, so we keep every locally verified correction, whether or not the task succeeds in the end. Removing local verification drops the score from 46.84 to 42.18. Adding a terminal-success filter on top of it gives 46.30, so discarding those corrections buys nothing. Local verification keeps the corrections clean, and it means that <strong>the training signal can be finer-grained than task success</strong>.",
+          "note": {
+            "id": "retention",
+            "text": "“Final success only” adds terminal-success filtering after local verification. The 0.54-point gap between 46.84 and 46.30 is not, on its own, a claim of statistical significance.",
+            "aside": "Local verification plus terminal filtering: 46.30; full method: 46.84. The 0.54-point gap alone is not a significance claim."
+          }
+        }
+      ]
+    },
+    {
+      "id": "learning",
+      "title": "Internalizing the corrections",
+      "navTitle": "Internalizing corrections",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "learning-goal",
+          "html": "So far, the student only makes these corrections when someone points the way. At deployment there is no teacher and no steering prompt, so we need one more step: training the student to make the same decisions without guidance."
+        },
+        {
+          "type": "paragraph",
+          "id": "learning-bridge",
+          "html": "We do this with context distillation. At the start of each training cycle, we freeze a snapshot of the current student and use it to collect rollouts and generate revisions. On a corrected turn, the snapshot sees the steering prompt and the learner does not; otherwise, both see exactly the same history and response prefix. Matching the learner to the snapshot’s token distribution therefore amounts to writing the effect of the guidance into the weights."
+        },
+        {
+          "type": "target-diagram",
+          "title": "Supervision on two kinds of turns"
+        },
+        {
+          "type": "paragraph",
+          "id": "learning-routing",
+          "html": "Every other turn, including continuations that needed no further correction, keeps per-token supervision from the frozen full-precision teacher, with no guidance on either side. Corrected turns teach the student how it would predict once the overlooked condition has been pointed out, while the remaining turns keep pulling it toward the teacher. We use forward KL on corrected turns and reverse KL elsewhere, and average the loss over all retained assistant tokens.",
+          "note": {
+            "id": "supervision",
+            "text": "Let c be the history and response prefix with steering prompts removed. Corrected turns: D_KL(p_snapshot(·|c,G) ‖ p_θ(·|c)); other turns: D_KL(p_θ(·|c) ‖ p_T(·|c)). The snapshot and the teacher are frozen; only the learner is updated.",
+            "aside": "Corrected turns: the guided frozen snapshot is the forward-KL target. Other turns: the teacher supervises with reverse KL. The learner never sees guidance."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "learning-choice",
+          "html": "The routing itself was chosen empirically. Holding the retained trajectories, targets and inputs fixed and changing only the KL direction, reverse KL everywhere scores 45.29, forward KL everywhere scores 44.58, and swapping the two scores 44.28. All three fall below the routed combination at 46.84."
+        },
+        {
+          "type": "paragraph",
+          "id": "learning-cycle",
+          "html": "After each cycle, the updated student runs the tasks again, and we build the next batch of corrections from wherever it still fails. The training data thus tracks the student’s ability: turns it has learned stop drawing interventions, while unresolved decisions resurface. At inference, only the trained quantized student runs, with no teacher and no steering prompts."
+        }
+      ]
+    },
+    {
+      "id": "guidance",
+      "title": "What makes guidance useful",
+      "navTitle": "What makes guidance useful",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "guidance-content",
+          "html": "Whether the student gets a turn right depends heavily on how the guidance is written. We ask the teacher to follow a fixed structure: what the student overlooked, when the guidance applies, and how to correct the action. In the task below, the agent is already logged into a trading system, but a separate ticketing system still requires authentication. Starting from the same execution state, we compare how the agent goes on to create the ticket under different guidance."
+        },
+        {
+          "type": "case",
+          "caseKey": "guidance"
+        },
+        {
+          "type": "paragraph",
+          "id": "guidance-observation",
+          "html": "With the teacher’s structured prompt, the agent recognizes that the ticketing system is not yet authenticated, logs in and then creates the ticket. The teacher’s free-form prompt, by contrast, reads like a receipt announcing that the ticket has already been created. The agent tries to create it, fails, logs in, never retries the creation, and reports success with an empty ticket queue."
+        },
+        {
+          "type": "paragraph",
+          "id": "guidance-study",
+          "html": "The failure comes down to one judgment about state: <strong>being able to create a ticket is not the same as the ticket existing.</strong> Once guidance presents an action that has not happened as a fact, the reasoning that follows builds on a false premise. This is also why verification has to look at actual calls and environment state. A summary that sounds complete is no substitute for checking the result."
+        },
+        {
+          "type": "paragraph",
+          "id": "guidance-comparators",
+          "html": "The other two branches are instructive too. The student’s own structured prompt also leads to success in this example. An external model’s structured prompt correctly identifies the login requirement, yet the agent follows it only in part and writes the login credentials into the ticket description. Whether guidance is correct and whether the agent faithfully follows it are separate questions. Across the full ablation, the structured format beats free-form by 2.06 points, and teacher-written prompts beat student-written ones by 5.10 points and GPT-5.6-Sol-written ones by 1.57.",
+          "note": {
+            "id": "guidance-ablation",
+            "text": "BFCL V4 Overall: Teacher/Structured 46.84, Teacher/Free-form 44.78, Student/Structured 41.74, GPT-5.6-Sol/Structured 45.27. A single case shows how one failure unfolds; it need not reproduce the aggregate ranking.",
+            "aside": "One case shows how a failure unfolds; the ablation decides the aggregate comparison."
+          }
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": "Recovering from errors at inference",
+      "navTitle": "Recovering at inference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "recovery-deploy",
+          "html": "During training, we can rewind to the state before an error. At deployment, the error has already happened, and the agent can only adjust based on what the environment tells it. SteerDistill does not train this ability directly, but in the trained model’s inference rollouts we see it use error messages to recover. In the unguided rollout below, it writes straight to <code>styles.css</code>, and the tool reports that the file does not exist."
+        },
+        {
+          "type": "case",
+          "caseKey": "recovery"
+        },
+        {
+          "type": "paragraph",
+          "id": "recovery-meaning",
+          "html": "It does not change the file name or the content. Instead, it rereads the tool descriptions, realizes that this interface separates creating a file from writing to it, calls <code>touch</code>, and then repeats the same <code>echo</code>. When the user later asks to read the file, <code>cat</code> returns the intended content. The recovery works because it supplies the missing prerequisite rather than blindly retrying the original call."
+        },
+        {
+          "type": "paragraph",
+          "id": "recovery-transfer",
+          "html": "A useful lens for reading recovery behavior is to ask whether the model forms an explanation of the error that its next action can test. In the <a href=\"cases/?group=recovery&amp;case=message-session-retry\">messaging example</a>, after fixing its arguments it still hits a missing session, so it logs in and resends. In the <a href=\"cases/?group=recovery&amp;case=fuel-capacity\">refueling example</a>, it checks the remaining fuel before working out how much to add. Reading a trajectory in terms of what the feedback revealed, what to check next and how the environment actually changed tells you far more than whether the final message claims success."
+        },
+        {
+          "type": "paragraph",
+          "id": "recovery-scope",
+          "html": "One caveat: this file example and the <a href=\"cases/?group=inference&amp;case=files-written-before-reading\">multi-method file-writing comparison</a> come from the same SteerDistill rollout. The comparison asks which files actually received their content, while here we zoom in on one recovery. They are not two independent trials."
+        }
+      ]
+    },
+    {
+      "id": "results",
+      "title": "Results and limitations",
+      "navTitle": "Results and limitations",
+      "blocks": [
+        {
+          "type": "experiment-chart",
+          "chart": "average"
+        },
+        {
+          "type": "paragraph",
+          "id": "results-main",
+          "html": "On full tasks, with Qwen3-8B under W4A16, SteerDistill outperforms every quantized baseline on all five benchmarks (BFCL V4, τ²-Bench, WebShop, ALFWorld and Search QA), with an average of 53.18. That is 2.18 points above the strongest baseline, QeRL, and only 0.36 points below BF16 at 53.54, recovering nearly all of the performance lost to quantization. On Qwen3.5-4B and Gemma 4 12B-it, it leads QeRL by 1.71 and 1.67 points, and all three models stay within one point of their BF16 references.",
+          "note": {
+            "id": "main-results",
+            "text": "The average is the unweighted mean of each benchmark’s reported metric: BFCL Overall, τ²-Bench Pass@1, WebShop and ALFWorld success rate, and Search QA EM. All methods are initialized from the same task-post-trained checkpoint; the comparisons hold within this experimental setup.",
+            "aside": "Unweighted mean of the five reported metrics; all methods start from the same post-trained checkpoint."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "results-limits",
+          "html": "The gap reopens at lower precision. Under W4A8, SteerDistill leads QeRL by 1.93 points. Under W2A16, it leads On-Policy QAD by 3.39 points, a wider margin, yet its 42.97 average remains far below BF16. There is a single exception across all settings: on Search QA under W2A16, BitDistiller’s 34.22 edges out SteerDistill’s 34.05. Correcting behavior recovers a large share of the lost capability, but the losses at 2 bits remain an open problem."
+        },
+        {
+          "type": "experiment-chart",
+          "chart": "efficiency"
+        },
+        {
+          "type": "paragraph",
+          "id": "cost-checkpoint",
+          "html": "Training is cheaper too. On τ²-Bench with Qwen3-8B under W4A16, SteerDistill’s checkpoint at 32 GPU hours already reaches 31.68% success. That is 2.91 points above On-Policy QAD after it converges at about 40 GPU hours, and 1.84 points above QeRL after 96 GPU hours, with 67% fewer GPU hours. The corrections target exactly the decisions the student gets wrong, which may be why it converges faster.",
+          "note": {
+            "id": "training-cost",
+            "text": "GPU hours are end-to-end wall-clock training time multiplied by the number of GPUs; all runs use 8 A100 80GB GPUs. Curves show the mean and standard deviation over four independent evaluations. This compares the reported checkpoints and does not imply a fixed speedup on every task.",
+            "aside": "8× A100 80GB; end-to-end wall-clock time × GPUs. Curves: mean and standard deviation over four evaluations."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "cost-behavior",
+          "html": "Nor is the higher success rate bought with longer outputs. On τ²-Bench, SteerDistill’s successful tasks average 4.0K output tokens, close to BF16’s 3.9K and below the 4.1K–5.2K of the quantized baselines. They also take fewer interaction steps and tool calls.",
+          "note": {
+            "id": "inference-cost",
+            "text": "Averaged over each method’s own successful tasks rather than paired on the same tasks; the measure is output tokens, not measured latency.",
+            "aside": "Each method’s own successful tasks; not a paired comparison."
+          }
+        },
+        {
+          "type": "paragraph",
+          "id": "closing-insight",
+          "html": "Stepping back, the core idea is to <strong>make error correction itself the source of training data</strong>. The student’s failures supply real contexts where things go wrong, the teacher points out what was overlooked, environment feedback decides which corrections are worth learning, and context distillation writes them into the weights. Each piece answers one question: where to teach, what to teach, how to know the lesson was right, and how to wean the student off the hint. Nothing in this recipe is specific to quantization, and whether it carries over to other forms of compression or to small-model distillation is worth finding out."
+        },
+        {
+          "type": "paragraph",
+          "id": "closing-boundary",
+          "html": "The approach does come with requirements: an environment that can be executed and rolled back, successful teacher references, and reliable local verification. Failures without a successful reference receive no correction, and local verification checks a single turn’s effect without guaranteeing that the task eventually succeeds. How to close this loop for open-ended tasks, where state is hard to restore and outcomes are hard to verify, is still an open question."
+        }
+      ]
+    }
+  ],
+  "resources": {
+    "id": "resources",
+    "title": "Further reading",
+    "links": [
+      {
+        "label": "Case studies",
+        "description": "Tasks, calls, reasoning and raw records",
+        "href": "cases/"
+      },
+      {
+        "label": "Experiment data",
+        "description": "Models, quantization settings and benchmark results",
+        "href": "experiments/data/benchmark_results.csv"
+      },
+      {
+        "label": "Code",
+        "description": "The SteerDistill implementation",
+        "href": "https://github.com/air-embodied-brain/SteerDistill"
+      }
+    ]
+  },
+  "post": {
+    "title": "Teaching Quantized Agents at the Point of Failure",
+    "author": {
+      "name": "Xiangyu Li",
+      "href": "https://xxxxyu.github.io/"
+    },
+    "date": "2026-11-08",
+    "intro": "Low-bit quantization makes LLM agents cheaper to run, but it also makes them overlook a task requirement or an environmental condition at a single step, and in a multi-turn task one wrong step is often enough to fail. SteerDistill finds that step during training, has a full-precision teacher steer the quantized student toward its own correction, checks the correction by executing it, and distills the verified behavior back into the student. At inference, the student runs alone. Across five agentic benchmarks and three models, it stays within one point of BF16 under W4A16.",
+    "titleLines": [
+      "Teaching Quantized Agents",
+      "at the Point of Failure"
+    ]
+  }
+}

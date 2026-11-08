@@ -1,0 +1,6 @@
+{
+  "precondition": "The virtual card (ID: 5) has been created, its spending limit updated to 2000.00, and its status set to 'active'.",
+  "decision_rule": "To lock international transactions outside 'US' and 'CA', use 'mcp_server_create_card_controls' with 'international_allowed' set to 0 (to restrict) and 'allowed_countries' set to 'US,CA'.",
+  "expected_transition": "A card_controls record is created for card_id 5 with international_allowed=0 and allowed_countries='US,CA'.",
+  "recovery_check": "If the tool returns an error or the status is not updated, verify the card_id and ensure 'international_allowed' is 0 to correctly enforce the country whitelist."
+}

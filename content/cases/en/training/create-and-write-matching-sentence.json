@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Matching sentence",
+  "translations": {
+    "/title": "Create a file and write the second matching sentence",
+    "/summary": "The user asks for a new file, `1.txt`, containing the second complete sentence in `dev_summary.txt` that includes `server error`. The first matching sentence says no error occurred in the initial phase; the second reports an error in final testing. In this environment, `echo` can only write to an existing file.",
+    "/presentation/guidance/title": "Create the file before writing the target sentence",
+    "/presentation/guidance/checks": {
+      "Local verification": "`touch` creates an empty `1.txt`. The resulting state matches the teacher’s reference step and passes local verification.",
+      "Continuation": "With guidance removed, the agent writes the second complete sentence containing `server error` from the source text. The task check passes."
+    },
+    "/presentation/branches/0/summary": "The first write fails because the file does not exist. The agent then creates it, but still writes a fragment from the wrong sentence.",
+    "/presentation/branches/1/summary": "The agent creates the file before writing. It also recounts the matches in its reasoning, corrects its initial choice, and writes the target sentence.",
+    "/presentation/branches/0/title": "Without guidance",
+    "/presentation/branches/0/reasoning/title": "Without guidance · Reasoning excerpt",
+    "/presentation/branches/1/title": "With teacher guidance",
+    "/presentation/branches/1/reasoning/title": "With teacher guidance · Reasoning excerpt",
+    "/records/sources/0/label": "Local verification · Empty file creation",
+    "/records/sources/1/label": "With guidance · Task check",
+    "/records/sources/2/label": "With teacher guidance · Full trajectory",
+    "/records/sources/3/label": "Without guidance · Task check",
+    "/records/sources/4/label": "Without guidance · Full trajectory",
+    "/records/sources/5/label": "Teacher · Reference trajectory",
+    "/records/sources/6/label": "Teacher · Guidance reasoning",
+    "/records/sources/7/label": "Teacher · Original guidance",
+    "/records/sources/8/label": "Full task and environment",
+    "/records/sources/17/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Verbatim original task and environment data."
+    },
+    {
+      "path": "/presentation/guidance/fields",
+      "reason": "Actual teacher guidance, preserved in its original language and wording."
+    },
+    {
+      "path": "/presentation/branches/0/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    },
+    {
+      "path": "/presentation/branches/1/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    }
+  ],
+  "sourceSha256": "fbc1c9dd7c7eca5b5a27adf493187b1b29f0de3c6c3c799bafccfdca366540b5"
+}

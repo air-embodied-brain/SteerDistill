@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Sort direction",
+  "translations": {
+    "/title": "Distinguish the sort field from the sort direction",
+    "/summary": "The user wants the exports for bot `B12345`, version `v1`, listed by last update time in descending order. The tool description calls `sortBy` a sort field, but its only allowed values are `ASC` and `DESC`.",
+    "/presentation/methods/1/description": "Sets `sortBy` to `DESC` for descending order.",
+    "/presentation/methods/3/description": "Puts a field name in `sortBy`, which expects a direction.",
+    "/presentation/methods/0/description": "Sets `sortBy` to `DESC` for descending order.",
+    "/presentation/methods/6/description": "Puts a field name in `sortBy` and adds a separate `sortDirection` parameter.",
+    "/presentation/methods/5/description": "Combines the field name and direction into one parameter value.",
+    "/presentation/methods/4/description": "Puts a field name in `sortBy`, which expects a direction.",
+    "/presentation/methods/2/description": "Joins the field name and direction with a dot.",
+    "/presentation/turns/0/label": "Setting the sort parameter",
+    "/records/sources/5/label": "BF16 · Trajectory",
+    "/records/sources/11/label": "BitDistiller · Trajectory",
+    "/records/sources/17/label": "EfficientQAT · Trajectory",
+    "/records/sources/23/label": "GPTQ · Trajectory",
+    "/records/sources/29/label": "On-Policy QAD · Trajectory",
+    "/records/sources/35/label": "SteerDistill · Trajectory",
+    "/records/sources/41/label": "QeRL · Trajectory",
+    "/records/sources/45/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user requests and environment data remain verbatim."
+    },
+    {
+      "path": "/presentation/methods/1/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    }
+  ],
+  "sourceSha256": "fca4f5c61ff09fee7bf2ee5b6d4b8b7cdaa6b562a9c6d01fc8febad76c5ecb6e"
+}

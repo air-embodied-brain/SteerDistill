@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Fuel amount",
+  "translations": {
+    "/title": "After an overfill error, check the fuel level before topping up",
+    "/summary": "The user wants a full tank before a road trip. The tool documentation gives a capacity of 50 gallons; `fuelAmount` is the amount to add, not the target level.",
+    "/presentation/steps/0/title": "Adding 50 gallons would exceed the tank capacity",
+    "/presentation/steps/0/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/1/title": "Check the current fuel level",
+    "/presentation/steps/1/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/2/title": "Add the remaining 35 gallons to fill the tank",
+    "/presentation/steps/2/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/reference/title": "BF16 · Check the fuel level first, then top up",
+    "/presentation/reference/reasoning/title": "Agent reasoning · Excerpt",
+    "/records/sources/5/label": "BF16 · Task verification",
+    "/records/sources/6/label": "BF16 · Trajectory",
+    "/records/sources/12/label": "SteerDistill · Task verification",
+    "/records/sources/13/label": "SteerDistill · Trajectory",
+    "/records/sources/17/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user turns and task configuration remain verbatim."
+    },
+    {
+      "path": "/presentation/steps/0/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/reference/events",
+      "reason": "BF16 reference calls and tool returns remain verbatim."
+    },
+    {
+      "path": "/presentation/reference/reasoning/text",
+      "reason": "Original BF16 reasoning and its annotations/source mapping remain unchanged."
+    },
+    {
+      "path": "/presentation/reference/reasoning/highlights",
+      "reason": "Original BF16 reasoning and its annotations/source mapping remain unchanged."
+    },
+    {
+      "path": "/presentation/reference/reasoning/source",
+      "reason": "Original BF16 reasoning and its annotations/source mapping remain unchanged."
+    }
+  ],
+  "sourceSha256": "7f50dc519a55cc482561d9bf60a20c103dde330d29aac558b934f866f78bb72a"
+}

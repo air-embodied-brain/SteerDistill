@@ -1,0 +1,44 @@
+/* Shared foundation. Page styles own composition, never palette or navigation. */
+:root{--paper:#fffefa;--sheet:var(--paper);--deep:#f3f1eb;--ink:#292825;--soft:#454440;--muted:#696760;--hair:#dedbd2;--blue:#315f78;--red:#a33a31;--serif:SourceSerif,'Songti SC',Georgia,serif;--display:Libre,'Songti SC',Georgia,serif;--sans:SourceSans,'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,'Cascadia Mono',Consolas,'Liberation Mono',monospace;--reading-page:1080px;--reading-gutter:clamp(20px,4vw,40px);--reading-width:min(var(--reading-page),calc(100% - 2 * var(--reading-gutter)));--header-height:64px;color-scheme:light}
+html[data-theme=dark]{--paper:#20221f;--deep:#292c28;--ink:#ebe8de;--soft:#d0cfc5;--muted:#a7aba1;--hair:#474c44;--blue:#98c3d5;--red:#e39888;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:88px;scrollbar-gutter:stable;overflow-y:scroll}body.site-page{margin:0;background:var(--paper);color:var(--ink);font:17px/1.75 var(--sans)}
+a{color:var(--blue);text-underline-offset:4px}a:hover{color:var(--ink)}button,select{font:inherit;color:inherit}button,summary{cursor:pointer}button,a,select,summary{touch-action:manipulation}button:focus-visible,a:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px}[hidden]{display:none!important}figure{margin:0}img{max-width:100%}p{margin:0 0 20px}h1,h2,h3{font-weight:400}code{overflow-wrap:anywhere}
+.site-header{position:sticky;top:0;z-index:200;background:var(--paper);border-bottom:1px solid var(--hair)}
+.site-header-inner{width:var(--reading-width);height:var(--header-height);margin:auto;display:flex;align-items:center;gap:28px}
+.site-brand{font:600 21px/1.3 Libre,Georgia,serif;color:var(--ink);text-decoration:none;margin-right:auto;white-space:nowrap}
+.site-nav{display:flex;align-items:center;gap:28px;font:15px/1.5 var(--sans)}.site-nav a{color:var(--muted);text-decoration:none;padding:20px 0}.site-nav a[aria-current]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--blue);text-underline-offset:9px}
+.site-theme{display:grid;place-items:center;width:32px;height:32px;border:0;background:none;padding:5px;border-radius:50%;flex-shrink:0}.site-theme:hover{background:var(--deep)}.site-theme svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.site-theme svg{display:none}html[data-theme-mode=system] .theme-auto,html[data-theme-mode=light] .theme-sun,html[data-theme-mode=dark] .theme-moon{display:block}
+.site-skip{position:fixed;left:20px;top:-100px;z-index:300;padding:8px 16px;background:var(--paper)}.site-skip:focus{top:10px}
+.site-menu{display:none;border:0;background:none;font:14px var(--sans);padding:0;color:var(--soft)}
+@media(max-width:1199px){.site-header[data-page=cases] .site-menu{display:block}}
+@media(max-width:600px){.site-header-inner{gap:18px}.site-brand{font-size:18px}.site-nav{gap:16px;font-size:14px}.site-menu{order:4;margin-left:auto}.site-header[data-page=cases] .site-header-inner{flex-wrap:wrap;height:auto;min-height:64px;padding-block:14px;gap:12px 18px}.site-header[data-page=cases] .site-menu{width:100%;text-align:left}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
+
+body.site-page.case-site{font-size:15px}
+@media(max-width:600px){body.case-site .case-catalog{top:115px;max-height:calc(100dvh - 135px)}}
+
+.site-language{padding:4px 0;border:0;background:none;color:var(--muted);font:14px/1.5 var(--sans);min-width:28px;cursor:pointer}.site-language:hover{color:var(--blue)}
+/* Keep the case header on two deliberate rows when English labels are longer. */
+@media(max-width:600px){
+ .site-header[data-page=cases] .site-header-inner{display:grid;grid-template-columns:minmax(0,1fr) 32px 28px;gap:10px 12px}
+ .site-header[data-page=cases] .site-brand{grid-area:1/1;margin-right:0}
+ .site-header[data-page=cases] .site-theme{grid-area:1/2}
+ .site-header[data-page=cases] .site-language{grid-area:1/3}
+ .site-header[data-page=cases] .site-nav{grid-area:2/1;gap:16px;white-space:nowrap}
+ .site-header[data-page=cases] .site-nav a{padding:0}
+ .site-header[data-page=cases] .site-menu{grid-area:2/2/3/4;width:auto;margin:0;justify-self:end;white-space:nowrap;font-size:13px}
+}
+@media(max-width:360px){.site-header[data-page=cases] .site-nav{font-size:13px;gap:12px}.site-header[data-page=cases] .site-menu{font-size:12px}}
+
+@media(max-width:600px){
+ .site-header:not([data-page=cases]) .site-header-inner{display:grid;grid-template-columns:minmax(0,1fr) 32px 28px;height:auto;min-height:64px;padding-block:12px;gap:10px 12px}
+ .site-header:not([data-page=cases]) .site-brand{grid-area:1/1;margin:0}
+ .site-header:not([data-page=cases]) .site-theme{grid-area:1/2}
+ .site-header:not([data-page=cases]) .site-language{grid-area:1/3}
+ .site-header:not([data-page=cases]) .site-nav{grid-area:2/1/3/4;white-space:nowrap}
+ .site-header:not([data-page=cases]) .site-nav a{padding:0}
+}
+
+/* Heading permalinks keep the reading typography; the hash appears on hover or focus. */
+.section-link{color:inherit;text-decoration:none}.section-link::after{content:'#';display:inline-block;margin-inline-start:.35em;font:.7em/1 var(--sans);color:var(--blue);opacity:0}.section-link:hover,.section-link:focus-visible{color:inherit}.section-link:hover::after,.section-link:focus-visible::after{opacity:1}
+@media(hover:none){.section-link::after{opacity:.6}}

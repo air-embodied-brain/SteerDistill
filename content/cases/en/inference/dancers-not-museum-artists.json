@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Tool suitability",
+  "translations": {
+    "/title": "Recognize that a museum tool cannot answer a question about dancers",
+    "/summary": "The user asks about famous dancers of the 19th century. The only available tool, `get_museum_artists`, finds artists whose works are held by a museum during a specified period. It requires `museum_name` and `period`.",
+    "/presentation/methods/1/description": "Explains that the tool cannot search for dancers and does not call it.",
+    "/presentation/methods/3/description": "Chooses the Metropolitan Museum of Art without asking, then acknowledges the mismatch after the query.",
+    "/presentation/methods/0/description": "Explains that the tool cannot search for dancers and does not call it.",
+    "/presentation/methods/6/description": "Chooses the Louvre and France without asking, then acknowledges the mismatch after the query.",
+    "/presentation/methods/4/description": "Chooses the Louvre without asking, then acknowledges the mismatch after the query.",
+    "/presentation/methods/5/description": "Calls the museum tool without the required `museum_name`.",
+    "/presentation/methods/2/description": "Chooses the Metropolitan Museum of Art and substitutes a museum query for the requested dancer search.",
+    "/presentation/turns/0/label": "Actions and replies after inspecting the tool",
+    "/records/sources/5/label": "BF16 · Trajectory",
+    "/records/sources/11/label": "BitDistiller · Trajectory",
+    "/records/sources/17/label": "EfficientQAT · Trajectory",
+    "/records/sources/23/label": "GPTQ · Trajectory",
+    "/records/sources/29/label": "On-Policy QAD · Trajectory",
+    "/records/sources/35/label": "SteerDistill · Trajectory",
+    "/records/sources/41/label": "QeRL · Trajectory",
+    "/records/sources/45/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user requests and environment data remain verbatim."
+    },
+    {
+      "path": "/presentation/methods/1/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/0/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/0/0/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    }
+  ],
+  "sourceSha256": "e6ae82fc2bb4b84af3c7985a803ae777f5307a4209e7d921535160fc1ea11917"
+}

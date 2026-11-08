@@ -1,0 +1,428 @@
+{
+  "valid": true,
+  "passed": false,
+  "finish": "final_response",
+  "official_state": {
+    "valid": false,
+    "error_message": "Model instance for VehicleControlAPI does not match the state with ground truth instance.",
+    "error_type": "multi_turn:instance_state_mismatch",
+    "details": {
+      "differences": {
+        "remainingUnlockedDoors": {
+          "model": 0,
+          "ground_truth": 4
+        },
+        "doorStatus": {
+          "model": {
+            "driver": "locked",
+            "passenger": "locked",
+            "rear_left": "locked",
+            "rear_right": "locked"
+          },
+          "ground_truth": {
+            "driver": "unlocked",
+            "passenger": "unlocked",
+            "rear_left": "unlocked",
+            "rear_right": "unlocked"
+          }
+        },
+        "headLightStatus": {
+          "model": "off",
+          "ground_truth": "on"
+        }
+      },
+      "model_instance_state": {
+        "fuelLevel": 10.5,
+        "batteryVoltage": 12.6,
+        "engine_state": "stopped",
+        "remainingUnlockedDoors": 0,
+        "doorStatus": {
+          "driver": "locked",
+          "passenger": "locked",
+          "rear_left": "locked",
+          "rear_right": "locked"
+        },
+        "acTemperature": 22.0,
+        "fanSpeed": 70,
+        "acMode": "auto",
+        "humidityLevel": 45.0,
+        "headLightStatus": "off",
+        "parkingBrakeStatus": "released",
+        "brakePedalStatus": "released",
+        "distanceToNextVehicle": 30.0,
+        "cruiseStatus": "inactive",
+        "destination": "None",
+        "frontLeftTirePressure": 32.0,
+        "frontRightTirePressure": 32.0,
+        "rearLeftTirePressure": 30.0,
+        "rearRightTirePressure": 30.0,
+        "long_context": true
+      },
+      "ground_truth_instance_state": {
+        "fuelLevel": 10.5,
+        "batteryVoltage": 12.6,
+        "engine_state": "stopped",
+        "remainingUnlockedDoors": 4,
+        "doorStatus": {
+          "driver": "unlocked",
+          "passenger": "unlocked",
+          "rear_left": "unlocked",
+          "rear_right": "unlocked"
+        },
+        "acTemperature": 22.0,
+        "fanSpeed": 70,
+        "acMode": "auto",
+        "humidityLevel": 45.0,
+        "headLightStatus": "on",
+        "parkingBrakeStatus": "released",
+        "brakePedalStatus": "released",
+        "distanceToNextVehicle": 30.0,
+        "cruiseStatus": "inactive",
+        "destination": "None",
+        "frontLeftTirePressure": 32.0,
+        "frontRightTirePressure": 32.0,
+        "rearLeftTirePressure": 30.0,
+        "rearRightTirePressure": 30.0,
+        "long_context": true
+      }
+    }
+  },
+  "official_response": {
+    "valid": false,
+    "error_message": "Model response execution results so far does not contain all the ground truth response execution results for turn 0.",
+    "error_type": "multi_turn:execution_response_mismatch",
+    "details": {
+      "missing_items": [
+        "{'lockStatus': 'unlocked', 'remainingUnlockedDoors': 4}",
+        "{'headlightStatus': 'on'}"
+      ],
+      "model_response (including all previous turns)": [
+        "{'error': 'Unknown or unavailable advertised tool: 16_lockDoors'}",
+        "{'error': 'Unknown or unavailable advertised tool: 20_setHeadlights'}",
+        "{'error': 'Unknown or unavailable advertised tool: 16_lockDoors'}",
+        "{'error': 'Unknown or unavailable advertised tool: 20_setHeadlights'}"
+      ],
+      "ground_truth_response (only the current turn)": [
+        "{'lockStatus': 'unlocked', 'remainingUnlockedDoors': 4}",
+        "{'headlightStatus': 'on'}"
+      ]
+    }
+  },
+  "goal_turn": 0,
+  "key_reasoning": true,
+  "semantic_errors": [
+    {
+      "turn": 0,
+      "tool": "16_lockDoors",
+      "arguments": {
+        "unlock": true,
+        "door": [
+          "driver",
+          "passenger",
+          "rear_left",
+          "rear_right"
+        ]
+      },
+      "response": {
+        "error": "Unknown or unavailable advertised tool: 16_lockDoors"
+      },
+      "before": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "after": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "semantic_tool_error": true,
+      "user_turn": 0
+    },
+    {
+      "turn": 1,
+      "tool": "20_setHeadlights",
+      "arguments": {
+        "mode": "on"
+      },
+      "response": {
+        "error": "Unknown or unavailable advertised tool: 20_setHeadlights"
+      },
+      "before": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "after": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "semantic_tool_error": true,
+      "user_turn": 0
+    },
+    {
+      "turn": 2,
+      "tool": "16_lockDoors",
+      "arguments": {
+        "unlock": true,
+        "door": [
+          "all"
+        ]
+      },
+      "response": {
+        "error": "Unknown or unavailable advertised tool: 16_lockDoors"
+      },
+      "before": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "after": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "semantic_tool_error": true,
+      "user_turn": 0
+    },
+    {
+      "turn": 3,
+      "tool": "20_setHeadlights",
+      "arguments": {
+        "mode": "on"
+      },
+      "response": {
+        "error": "Unknown or unavailable advertised tool: 20_setHeadlights"
+      },
+      "before": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "after": {
+        "VehicleControlAPI": {
+          "class": "VehicleControlAPI",
+          "attributes": {
+            "fuelLevel": 10.5,
+            "batteryVoltage": 12.6,
+            "engine_state": "stopped",
+            "remainingUnlockedDoors": 0,
+            "doorStatus": {
+              "driver": "locked",
+              "passenger": "locked",
+              "rear_left": "locked",
+              "rear_right": "locked"
+            },
+            "acTemperature": 22.0,
+            "fanSpeed": 70,
+            "acMode": "auto",
+            "humidityLevel": 45.0,
+            "headLightStatus": "off",
+            "parkingBrakeStatus": "released",
+            "brakePedalStatus": "released",
+            "distanceToNextVehicle": 30.0,
+            "cruiseStatus": "inactive",
+            "destination": "None",
+            "frontLeftTirePressure": 32.0,
+            "frontRightTirePressure": 32.0,
+            "rearLeftTirePressure": 30.0,
+            "rearRightTirePressure": 30.0,
+            "long_context": true
+          }
+        }
+      },
+      "semantic_tool_error": true,
+      "user_turn": 0
+    }
+  ]
+}

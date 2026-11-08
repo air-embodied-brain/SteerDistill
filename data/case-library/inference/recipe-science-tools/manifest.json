@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 2,
+  "id": "recipe-science-tools",
+  "kind": "inference",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "BF16/actions.json",
+      "bytes": 1067,
+      "sha256": "bded18bccae12e1d0713e160a636d25716cbf8c61e6cc42e06ea1d1b47f63fb3"
+    },
+    {
+      "path": "BF16/cot_and_actions.md",
+      "bytes": 10129,
+      "sha256": "c0c2512e1573f6ce7cfafcb9adf6f53b763ced1c7f94330d20744b911057e0a4"
+    },
+    {
+      "path": "BF16/done.json",
+      "bytes": 271,
+      "sha256": "6e74823eb0df7d5df13819a2f1e3705f71371f5b0a4d3e6caa3bdd8baa839bec"
+    },
+    {
+      "path": "BF16/result.json",
+      "bytes": 412,
+      "sha256": "aa36e80d83ea94e2a4768075f92924900de50300f4d9acce03b6d802327ed126"
+    },
+    {
+      "path": "BF16/score.json",
+      "bytes": 506,
+      "sha256": "82b2e7408c5772004c09067ab5d6de3e77ebbeb540d933c92b118ad2c5730eb5"
+    },
+    {
+      "path": "BF16/trajectory.json",
+      "bytes": 14191,
+      "sha256": "ddcf7d69dfcd985567b33a7a70c543c1fbad812edefd49fff32abc4388286d97"
+    },
+    {
+      "path": "BitDistiller/actions.json",
+      "bytes": 1206,
+      "sha256": "2b367ace4ec9c3f84a6242e2f66594eb830217b897f04a625d9192b5e396fe39"
+    },
+    {
+      "path": "BitDistiller/cot_and_actions.md",
+      "bytes": 8165,
+      "sha256": "d98e6f4d878f73997ed86469d480cc4cff8c2460d6a8815e42c970f22516ee41"
+    },
+    {
+      "path": "BitDistiller/done.json",
+      "bytes": 274,
+      "sha256": "d63595bfb6b187cf5a6c0a3af8b8944ae4e14d200d7667ccb438339691719cf8"
+    },
+    {
+      "path": "BitDistiller/result.json",
+      "bytes": 539,
+      "sha256": "5b5c15b0140460f3f3aa8175df81359526f7ad873a0b550bec1b9e9b0016811e"
+    },
+    {
+      "path": "BitDistiller/score.json",
+      "bytes": 8345,
+      "sha256": "bdc729fcd9a57673b0805b46a06ac57371f88d6647e61723b089679d7015c05a"
+    },
+    {
+      "path": "BitDistiller/trajectory.json",
+      "bytes": 12352,
+      "sha256": "7c541e8b02667b2a090ac8b9ae24d9ef06d43bd22843cbcc6aa94e37596e513a"
+    },
+    {
+      "path": "EfficientQAT/actions.json",
+      "bytes": 1243,
+      "sha256": "755b96bb377ba6520fe04c43bca3c947aefa717fde25731a0e0807ea74fda6b6"
+    },
+    {
+      "path": "EfficientQAT/cot_and_actions.md",
+      "bytes": 9830,
+      "sha256": "013501f6e422bdbda1e389baa985e030acc6ce7710d351e6655ef9e81979953a"
+    },
+    {
+      "path": "EfficientQAT/done.json",
+      "bytes": 270,
+      "sha256": "532617feb11f698f745c48fccecec6568119ce1803f3d6910691f6c7e7b46c02"
+    },
+    {
+      "path": "EfficientQAT/result.json",
+      "bytes": 385,
+      "sha256": "4ecca04ad75b45277935555b5880cd22968a2da39b0c86f58d7a65ba9f92e7df"
+    },
+    {
+      "path": "EfficientQAT/score.json",
+      "bytes": 4843,
+      "sha256": "1743c01fa69107e482cdaaa68d03d1ae9671379b823a10449c63f283d0746b0a"
+    },
+    {
+      "path": "EfficientQAT/trajectory.json",
+      "bytes": 14022,
+      "sha256": "ca50604eb643c0e0d0e0a1add4852ba5e9b6cbeee851feecd4fed22fe180ae5a"
+    },
+    {
+      "path": "GPTQ/actions.json",
+      "bytes": 1150,
+      "sha256": "c27d0bac7274f66bb10499e00132b3065b831c7a741e7315723285734d888395"
+    },
+    {
+      "path": "GPTQ/cot_and_actions.md",
+      "bytes": 10743,
+      "sha256": "c0fd4056c710b51212842b3e7ec0ace546343df8eff3ce9fa4a386edc8ea04b7"
+    },
+    {
+      "path": "GPTQ/done.json",
+      "bytes": 260,
+      "sha256": "9aa5e56b44d432664c5822aa88633e19b876159c5466d1ada365fb9e15ef24c6"
+    },
+    {
+      "path": "GPTQ/result.json",
+      "bytes": 474,
+      "sha256": "1bd21b5c3553452ec10f535bba2c704e413f67d11436cbd44ee0d954ede90a67"
+    },
+    {
+      "path": "GPTQ/score.json",
+      "bytes": 4452,
+      "sha256": "48343049be6f678ffacd37f5172eabb7e7564ec3d12cbc1721a12542430cc2c5"
+    },
+    {
+      "path": "GPTQ/trajectory.json",
+      "bytes": 14900,
+      "sha256": "aacfe2bacd1a9d4a0bca84d8d7b7dca14aeed458bf2d2a49cec618900969c77d"
+    },
+    {
+      "path": "On-Policy QAD/actions.json",
+      "bytes": 1033,
+      "sha256": "1823c7b11d7393a150f1f649f895d87380043c7ed80b8d8f794b4e51b4116845"
+    },
+    {
+      "path": "On-Policy QAD/cot_and_actions.md",
+      "bytes": 10225,
+      "sha256": "ebc757fb96e7a3ca3b73b5aa2c46072405d00a4d350ed2731c3e4087fa296dc2"
+    },
+    {
+      "path": "On-Policy QAD/done.json",
+      "bytes": 270,
+      "sha256": "869f9d2d65509f7b5d8ba03cd0a36ced9ea9b1b2bbc57d0cab48b7a3f72814e3"
+    },
+    {
+      "path": "On-Policy QAD/result.json",
+      "bytes": 388,
+      "sha256": "8dd36b2b6184e1ee78175f56aed744d55712918f7c06e76d339ac60ef2247320"
+    },
+    {
+      "path": "On-Policy QAD/score.json",
+      "bytes": 4383,
+      "sha256": "ca19debf112863c1161c6f4de6e817fedeac765286b9646256e601e571cd9bc5"
+    },
+    {
+      "path": "On-Policy QAD/trajectory.json",
+      "bytes": 14264,
+      "sha256": "5cd2f0a66bedc908bab040784743f8db5b5e4d7a190df02d7202d9b7c24c7e25"
+    },
+    {
+      "path": "Ours/actions.json",
+      "bytes": 1067,
+      "sha256": "7571da26d35d261674d41f33f9ac7fa2f38a7eed2ca58d05927ae1a67ba13850"
+    },
+    {
+      "path": "Ours/cot_and_actions.md",
+      "bytes": 11556,
+      "sha256": "958f8c8946a2ef1bc55771fc99b17d93d33487cd9ffed7bd228decb2b765a644"
+    },
+    {
+      "path": "Ours/done.json",
+      "bytes": 271,
+      "sha256": "74e1ac380ec70de38c658f8512100f8bedf8198d3554fe09ec1cf9f67d2b41f9"
+    },
+    {
+      "path": "Ours/result.json",
+      "bytes": 412,
+      "sha256": "e887441abfde704ee451f9b572c8a2038f2709b3717b04b8b26429d43628966a"
+    },
+    {
+      "path": "Ours/score.json",
+      "bytes": 522,
+      "sha256": "a1025c95a15ef0c0d45317cb5bc1f350ae09b1de06e11d639ca7d3293832f8c3"
+    },
+    {
+      "path": "Ours/trajectory.json",
+      "bytes": 15677,
+      "sha256": "21f85ee981b4f7d71c530357a2d73ced4adcc11e9bbcfe8cbcb2ff99b3ff082a"
+    },
+    {
+      "path": "QeRL/actions.json",
+      "bytes": 1069,
+      "sha256": "cc4eaf9de192a57ef0754dd1887f728609b608178dd04fe9742b2467c7cfb6d4"
+    },
+    {
+      "path": "QeRL/cot_and_actions.md",
+      "bytes": 8847,
+      "sha256": "af978fd825552deaae29d797e0a4a3aa147530431aa43fefb378b3b6d688b974"
+    },
+    {
+      "path": "QeRL/done.json",
+      "bytes": 271,
+      "sha256": "65d040de449d1ea23e61095cf292969d53f0f2db3e69c19f68374113cebd8978"
+    },
+    {
+      "path": "QeRL/result.json",
+      "bytes": 423,
+      "sha256": "3dece88a3eb4d374eee13975fa4dbf3b1a7ec704a0278247847a91623d5897e4"
+    },
+    {
+      "path": "QeRL/score.json",
+      "bytes": 6596,
+      "sha256": "a8a4829947f33cde4f2a03b68fcf9d424727c04e355032f7c8a68d981b280beb"
+    },
+    {
+      "path": "QeRL/trajectory.json",
+      "bytes": 12903,
+      "sha256": "4fb7fad626e3c62c0e3d29be6224040085a1dd071945cd57b794257046f7edb2"
+    },
+    {
+      "path": "ground_truth.json",
+      "bytes": 902,
+      "sha256": "8e002b40a90dfd59004fd4d00575636b967857250a911aba2ee2acbf87b95b3f"
+    },
+    {
+      "path": "task.json",
+      "bytes": 2028,
+      "sha256": "4e9ef6bfecbb7cceba054737c2fbe1b981c78dfd687e8a003e4d810e80bfabe1"
+    }
+  ]
+}

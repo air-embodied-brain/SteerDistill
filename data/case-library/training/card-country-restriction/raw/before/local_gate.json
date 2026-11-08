@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "native_state_verification": {
+    "result": "others"
+  },
+  "scope": "The task must be complete immediately after the single guided response.",
+  "checked_before_continuation": true,
+  "first_response_reasoning_present": true
+}

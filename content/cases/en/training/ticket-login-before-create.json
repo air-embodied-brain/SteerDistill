@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Ticket login",
+  "translations": {
+    "/title": "Log in to the ticketing system before creating a ticket",
+    "/summary": "The user wants a priority-3 support ticket for a cancelled AAPL order and has supplied a username and password. The trading account is already logged in, but the ticketing system requires a separate login.",
+    "/presentation/methods/0/description": "The agent logs in to the ticketing system, creates the ticket, and returns its details to the user.",
+    "/presentation/methods/0/resultLines/0": {
+      "text": "The ticketing session is authenticated.",
+      "highlights": [
+        {
+          "start": 22,
+          "end": 38,
+          "text": "is authenticated",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/0/resultLines/1": {
+      "text": "The ticket is created with status Open and priority 3.",
+      "highlights": [
+        {
+          "start": 0,
+          "end": 21,
+          "text": "The ticket is created",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/0/resultLines/2": {
+      "text": "The description covers the trading issue and omits the username and password.",
+      "highlights": [
+        {
+          "start": 45,
+          "end": 76,
+          "text": "omits the username and password",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/after/attempt-0/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/1/description": "The agent tries to create the ticket before logging in. After the error, it logs in but never retries creation, then tells the user the ticket is complete.",
+    "/presentation/methods/1/resultLines/0": {
+      "text": "The ticketing session is authenticated.",
+      "highlights": [
+        {
+          "start": 22,
+          "end": 38,
+          "text": "is authenticated",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/teacher_freeform/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/1/resultLines/1": {
+      "text": "The agent does not retry creation after logging in. The ticket queue remains empty.",
+      "highlights": [
+        {
+          "start": 52,
+          "end": 82,
+          "text": "The ticket queue remains empty",
+          "tone": "before"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/teacher_freeform/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/2/description": "The agent logs in before creating the ticket. The content and priority match the user’s request.",
+    "/presentation/methods/2/resultLines/0": {
+      "text": "The ticketing session is authenticated.",
+      "highlights": [
+        {
+          "start": 22,
+          "end": 38,
+          "text": "is authenticated",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/student_structured/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/2/resultLines/1": {
+      "text": "The ticket is created with status Open and priority 3.",
+      "highlights": [
+        {
+          "start": 0,
+          "end": 21,
+          "text": "The ticket is created",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/student_structured/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/2/resultLines/2": {
+      "text": "The description covers the trading issue and omits the username and password.",
+      "highlights": [
+        {
+          "start": 45,
+          "end": 76,
+          "text": "omits the username and password",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/student_structured/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/3/description": "The guidance explicitly requires login first and excludes credentials from the ticket. The agent logs in and creates the ticket, but still puts the username and password in its description.",
+    "/presentation/methods/3/resultLines/0": {
+      "text": "The ticketing session is authenticated.",
+      "highlights": [
+        {
+          "start": 22,
+          "end": 38,
+          "text": "is authenticated",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/external_structured/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/3/resultLines/1": {
+      "text": "The ticket is created with status Open and priority 3.",
+      "highlights": [
+        {
+          "start": 0,
+          "end": 21,
+          "text": "The ticket is created",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/external_structured/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/3/resultLines/2": {
+      "text": "The description also includes the login username and password.",
+      "highlights": [
+        {
+          "start": 21,
+          "end": 61,
+          "text": "includes the login username and password",
+          "tone": "before"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/variants/external_structured/student/execution.json",
+        "event": 8,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/4/description": "After the creation error, the agent logs in and retries successfully, but includes the username and password in the ticket description.",
+    "/presentation/methods/4/resultLines/0": {
+      "text": "The ticketing session is authenticated.",
+      "highlights": [
+        {
+          "start": 22,
+          "end": 38,
+          "text": "is authenticated",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/before/execution.json",
+        "event": 9,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/4/resultLines/1": {
+      "text": "The ticket is created with status Open and priority 3.",
+      "highlights": [
+        {
+          "start": 0,
+          "end": 21,
+          "text": "The ticket is created",
+          "tone": "after"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/before/execution.json",
+        "event": 9,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/4/resultLines/2": {
+      "text": "The description also includes the login username and password.",
+      "highlights": [
+        {
+          "start": 21,
+          "end": 61,
+          "text": "includes the login username and password",
+          "tone": "before"
+        }
+      ],
+      "source": {
+        "file": "data/case-library/training/ticket-login-before-create/raw/source-training-case/before/execution.json",
+        "event": 9,
+        "field": "after.TicketAPI.attributes",
+        "fields": [
+          "current_user",
+          "ticket_queue",
+          "ticket_counter"
+        ]
+      }
+    },
+    "/presentation/methods/0/name": "Structured teacher guidance",
+    "/presentation/methods/1/name": "Free-form teacher guidance",
+    "/presentation/methods/1/turns/0/2/label": "Agent reply · Excerpt",
+    "/presentation/methods/2/name": "Structured student guidance",
+    "/presentation/methods/3/name": "Structured GPT guidance",
+    "/presentation/methods/4/name": "Without guidance",
+    "/presentation/selectionLabels/0": "Left method",
+    "/presentation/selectionLabels/1": "Right method",
+    "/presentation/turns/0/label": "",
+    "/presentation/details/guidanceTitle": "Guidance",
+    "/presentation/details/resultTitle": "Execution results",
+    "/records/sources/0/label": "Structured teacher guidance · Local verification",
+    "/records/sources/1/label": "Structured teacher guidance · Task check",
+    "/records/sources/2/label": "Structured teacher guidance · Full trajectory",
+    "/records/sources/3/label": "Without guidance · Task check",
+    "/records/sources/4/label": "Without guidance · Full trajectory",
+    "/records/sources/5/label": "Structured teacher guidance · Original guidance",
+    "/records/sources/6/label": "Full task and tool definitions",
+    "/records/sources/7/label": "Structured GPT guidance · Original guidance",
+    "/records/sources/8/label": "Structured GPT guidance · Task check",
+    "/records/sources/9/label": "Structured GPT guidance · Full trajectory",
+    "/records/sources/10/label": "Structured student guidance · Original guidance",
+    "/records/sources/11/label": "Structured student guidance · Task check",
+    "/records/sources/12/label": "Structured student guidance · Full trajectory",
+    "/records/sources/13/label": "Free-form teacher guidance · Original guidance",
+    "/records/sources/14/label": "Free-form teacher guidance · Task check",
+    "/records/sources/15/label": "Free-form teacher guidance · Full trajectory",
+    "/records/sources/35/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Verbatim original task and environment data."
+    },
+    {
+      "path": "/presentation/methods/0/turns",
+      "reason": "Original tool calls, results and agent reply excerpts; only editorial reply labels are translated."
+    },
+    {
+      "path": "/presentation/methods/0/reasoning",
+      "reason": "Actual agent reasoning and existing highlights, unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/guidance",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/0/guidanceExcerpt",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/0/guidanceHighlights",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/0/guidanceAnalysis",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/1/turns",
+      "reason": "Original tool calls, results and agent reply excerpts; only editorial reply labels are translated."
+    },
+    {
+      "path": "/presentation/methods/1/reasoning",
+      "reason": "Actual agent reasoning and existing highlights, unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/guidance",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/1/guidanceExcerpt",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/1/guidanceHighlights",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/2/turns",
+      "reason": "Original tool calls, results and agent reply excerpts; only editorial reply labels are translated."
+    },
+    {
+      "path": "/presentation/methods/2/reasoning",
+      "reason": "Actual agent reasoning and existing highlights, unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/guidance",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/2/guidanceExcerpt",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/2/guidanceHighlights",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/3/turns",
+      "reason": "Original tool calls, results and agent reply excerpts; only editorial reply labels are translated."
+    },
+    {
+      "path": "/presentation/methods/3/reasoning",
+      "reason": "Actual agent reasoning and existing highlights, unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/guidance",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/3/guidanceExcerpt",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/3/guidanceHighlights",
+      "reason": "Actual supplied guidance or its generation analysis, preserved verbatim."
+    },
+    {
+      "path": "/presentation/methods/4/turns",
+      "reason": "Original tool calls, results and agent reply excerpts; only editorial reply labels are translated."
+    },
+    {
+      "path": "/presentation/methods/4/reasoning",
+      "reason": "Actual agent reasoning and existing highlights, unchanged."
+    }
+  ],
+  "sourceSha256": "4851c92b896c12328f8c894049d8dee4d919243b54a0a315e6f2539364e0df7c"
+}

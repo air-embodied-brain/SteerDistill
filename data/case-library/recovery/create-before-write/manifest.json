@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "id": "create-before-write",
+  "kind": "recovery",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "category_score.jsonl",
+      "bytes": 596475,
+      "sha256": "a639f5c0a99a682715212e77b0aafd4964dae4c489b30f25e994f40485e08ea4"
+    },
+    {
+      "path": "evidence.json",
+      "bytes": 737,
+      "sha256": "f1ad87fec17146526edd4a25f6d1058dda47a6898b7a4d1cf66ef1645a8d1fc0"
+    },
+    {
+      "path": "recovery_excerpt.json",
+      "bytes": 15486,
+      "sha256": "9dfb1c07eb4f287ff91d93953ffab662cba606d2bd9d2685f6466c44edef31a6"
+    },
+    {
+      "path": "recovery_suffix.json",
+      "bytes": 25443,
+      "sha256": "25f3420c0a9b17193d4c313392cbe8aad21f4b6227c00315455ba32e586b187a"
+    },
+    {
+      "path": "trajectory.json",
+      "bytes": 49146,
+      "sha256": "2c052373569d7cf4aefbbe44db8d5372ccc7c4ab69a0050df40d29c9d7283cf3"
+    }
+  ]
+}

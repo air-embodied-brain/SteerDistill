@@ -1,0 +1,20 @@
+[
+  {
+    "method": "ours",
+    "source": "/redacted/steerdistill-scalewob-runs/brownie-full-20261027/online/from-step-0006/awq-ff0cda28a8/config.json",
+    "dtype": "float16",
+    "text_dtype": "bfloat16",
+    "quant_method": "awq",
+    "bits": 4,
+    "group_size": 64
+  },
+  {
+    "method": "qad",
+    "source": "/redacted/steerdistill-scalewob-runs/brownie-qad-matched-20261106/from-step-0006/awq-b15b0eecd8/config.json",
+    "dtype": "float16",
+    "text_dtype": "bfloat16",
+    "quant_method": "awq",
+    "bits": 4,
+    "group_size": 64
+  }
+]

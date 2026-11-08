@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Brake pressure",
+  "translations": {
+    "/title": "Press the brake fully to start the engine",
+    "/summary": "The user asks to start the engine in `START` mode. The vehicle has been refueled, its doors locked, and its parking brake engaged. The brake-pedal tool takes `pedalPosition` from 0 to 1, where 1 means fully pressed.",
+    "/presentation/steps/0/title": "The first attempt fails because the brake pedal is not pressed",
+    "/presentation/steps/0/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/1/title": "Pressing halfway still does not meet the startup requirement",
+    "/presentation/steps/1/reasoning/0/title": "Before pressing the brake · reasoning excerpt",
+    "/presentation/steps/1/reasoning/1/title": "Before retrying startup · reasoning excerpt",
+    "/presentation/steps/2/title": "Press the brake fully, then start the engine successfully",
+    "/presentation/steps/2/reasoning/title": "Agent reasoning · Excerpt",
+    "/records/sources/0/label": "SteerDistill · Full trajectory",
+    "/records/sources/1/label": "Startup and retry excerpt",
+    "/records/sources/2/label": "Recovery and subsequent trajectory",
+    "/records/sources/3/label": "Category scores and failure records",
+    "/records/sources/4/label": "Source and verification index",
+    "/records/sources/5/label": "File inventory and checksums",
+    "/records/download/label": "Download full records",
+    "/presentation/steps/1/reasoning/0/context": "Before pressing the brake",
+    "/presentation/steps/1/reasoning/1/context": "Before retrying the engine"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user turns and task configuration remain verbatim."
+    },
+    {
+      "path": "/presentation/steps/0/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/0/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/0/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/0/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/0/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/1/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/1/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/1/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    }
+  ],
+  "sourceSha256": "c19c116e33faaeea791a00eab3703f8eb316f391fd8ade086e8e36edf032ae4f"
+}

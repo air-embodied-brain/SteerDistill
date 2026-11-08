@@ -1,0 +1,796 @@
+{
+  "bf16": {
+    "precision": "BF16",
+    "steps": [
+      {
+        "title": "Accept the welcome screen",
+        "actionTone": "neutral",
+        "review": "常规欢迎页，动作有效。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Focus the phone number field",
+        "actionTone": "neutral",
+        "review": "先聚焦手机号输入框。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter a test phone number",
+        "actionTone": "neutral",
+        "review": "测试环境登录输入，号码值不是能力差异。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Continue to verification",
+        "actionTone": "neutral",
+        "review": "提交手机号进入验证码页面。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Wait for verification",
+        "actionTone": "neutral",
+        "review": "等待自动验证，未手动输入验证码。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Focus the name field",
+        "actionTone": "after",
+        "review": "进入姓名输入框，避免空字段提交。",
+        "thoughtHighlights": [
+          {
+            "text": "先点击名字输入框",
+            "tone": "after",
+            "reason": "姓名必须真正输入到字段中，不能只认为已填写。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "after",
+            "reason": "聚焦姓名字段，QAD 分支缺失这一步。"
+          }
+        ]
+      },
+      {
+        "title": "Enter the profile name",
+        "actionTone": "after",
+        "review": "输入姓名后下一截图可见 Test User。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "\"Test User\"",
+            "tone": "after",
+            "reason": "下一截图中字段实际写入了姓名。"
+          }
+        ]
+      },
+      {
+        "title": "Complete profile setup",
+        "actionTone": "after",
+        "review": "提交已填写姓名，随后到达聊天列表。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Open Project Alpha",
+        "actionTone": "after",
+        "review": "进入任务指定群组。",
+        "thoughtHighlights": [
+          {
+            "text": "Project Alpha 🚀",
+            "tone": "after",
+            "reason": "选定任务要求的群，而不是创建新群。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Try the overflow menu",
+        "actionTone": "neutral",
+        "review": "打开三点菜单以找投票入口；下一页未提供 Poll。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Look inside More",
+        "actionTone": "neutral",
+        "review": "继续探索 More 子菜单，没有找到投票；不视为有效投票操作。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Switch to the attachment menu",
+        "actionTone": "after",
+        "review": "思考明确发现 More 没有投票，转向底部加号。",
+        "thoughtHighlights": [
+          {
+            "text": "左下角的加号按钮",
+            "tone": "after",
+            "reason": "实际投票入口在附件菜单。"
+          },
+          {
+            "text": "刚才的More菜单里没找到创建投票的选项",
+            "tone": "after",
+            "reason": "原思考记录了发现错误入口后主动换路。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Choose Poll",
+        "actionTone": "after",
+        "review": "附件菜单中的 Poll 为实际入口。",
+        "thoughtHighlights": [
+          {
+            "text": "Poll",
+            "tone": "after",
+            "reason": "进入投票编辑页。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Focus the poll question",
+        "actionTone": "neutral",
+        "review": "正常字段聚焦。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter the poll question",
+        "actionTone": "after",
+        "review": "写入任务要求的 Next meeting?。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "Next meeting?",
+            "tone": "after",
+            "reason": "投票字段与用户要求一致。"
+          }
+        ]
+      },
+      {
+        "title": "Focus the first option",
+        "actionTone": "neutral",
+        "review": "正常聚焦首项。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter Monday",
+        "actionTone": "after",
+        "review": "第一选项符合请求。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "Monday",
+            "tone": "after",
+            "reason": "投票字段与用户要求一致。"
+          }
+        ]
+      },
+      {
+        "title": "Focus the second option",
+        "actionTone": "neutral",
+        "review": "正常聚焦第二项。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter Tuesday",
+        "actionTone": "after",
+        "review": "第二选项符合请求。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "Tuesday",
+            "tone": "after",
+            "reason": "投票字段与用户要求一致。"
+          }
+        ]
+      },
+      {
+        "title": "Send the poll",
+        "actionTone": "after",
+        "review": "点击后最终页面出现实际投票。",
+        "thoughtHighlights": [
+          {
+            "text": "“Send Poll”",
+            "tone": "after",
+            "reason": "确认发出已填好的投票。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Finish after the poll appears",
+        "actionTone": "after",
+        "review": "环境核验群名、问题和两选项一致。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "'finished'",
+            "tone": "after",
+            "reason": "最终投票已出现在群聊中，随后提交完成。"
+          }
+        ]
+      }
+    ],
+    "language": "zh-CN"
+  },
+  "ours": {
+    "precision": "W4A16",
+    "steps": [
+      {
+        "title": "Accept the welcome screen",
+        "actionTone": "neutral",
+        "review": "欢迎页通过；原思考提到创建群组但任务无需新建群，不强调。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter a test phone number",
+        "actionTone": "neutral",
+        "review": "测试手机号输入，页面此时已有可用焦点。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Continue to verification",
+        "actionTone": "neutral",
+        "review": "进入验证界面。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Tap the verification field",
+        "actionTone": "neutral",
+        "review": "点击验证字段；实际验证码由页面自动填充，不声称执行了思考中拟输入的随机验证码。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Tap a verification slot",
+        "actionTone": "neutral",
+        "review": "记录为点击，后续自动进入资料页；没有实际输入 1，不高亮该意图。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Focus the name field",
+        "actionTone": "after",
+        "review": "先聚焦姓名，与 QAD 忽略此操作形成分歧。",
+        "thoughtHighlights": [
+          {
+            "text": "先点击名字输入框",
+            "tone": "after",
+            "reason": "姓名必须真正输入到字段中，不能只认为已填写。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "after",
+            "reason": "聚焦姓名字段，QAD 分支缺失这一步。"
+          }
+        ]
+      },
+      {
+        "title": "Enter the profile name",
+        "actionTone": "after",
+        "review": "输入 Test User；保留原思考的重复表述。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "\"Test User\"",
+            "tone": "after",
+            "reason": "下一截图中字段实际写入了姓名。"
+          }
+        ]
+      },
+      {
+        "title": "Complete profile setup",
+        "actionTone": "after",
+        "review": "有姓名的资料页成功提交。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Open Project Alpha",
+        "actionTone": "after",
+        "review": "进入指定群组。",
+        "thoughtHighlights": [
+          {
+            "text": "Project Alpha 🚀",
+            "tone": "after",
+            "reason": "选定任务要求的群，而不是创建新群。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Open the attachment menu",
+        "actionTone": "after",
+        "review": "直接通过加号进入附件菜单。",
+        "thoughtHighlights": [
+          {
+            "text": "左下角的加号按钮",
+            "tone": "after",
+            "reason": "实际投票入口在附件菜单。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Choose Poll",
+        "actionTone": "after",
+        "review": "选取 Poll 进入创建页。",
+        "thoughtHighlights": [
+          {
+            "text": "Poll",
+            "tone": "after",
+            "reason": "进入投票编辑页。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Focus the poll question",
+        "actionTone": "neutral",
+        "review": "正常字段聚焦。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter the poll question",
+        "actionTone": "after",
+        "review": "写入请求的问题文本。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "Next meeting?",
+            "tone": "after",
+            "reason": "投票字段与用户要求一致。"
+          }
+        ]
+      },
+      {
+        "title": "Focus the first option",
+        "actionTone": "neutral",
+        "review": "第一选项聚焦。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter Monday",
+        "actionTone": "after",
+        "review": "第一选项符合请求。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "Monday",
+            "tone": "after",
+            "reason": "投票字段与用户要求一致。"
+          }
+        ]
+      },
+      {
+        "title": "Focus the second option",
+        "actionTone": "neutral",
+        "review": "第二选项聚焦。",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter Tuesday",
+        "actionTone": "after",
+        "review": "第二选项符合请求。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "Tuesday",
+            "tone": "after",
+            "reason": "投票字段与用户要求一致。"
+          }
+        ]
+      },
+      {
+        "title": "Send the poll",
+        "actionTone": "after",
+        "review": "发送后屏幕出现问题与两选项。",
+        "thoughtHighlights": [
+          {
+            "text": "“Send Poll”",
+            "tone": "after",
+            "reason": "确认发出已填好的投票。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Finish after the poll appears",
+        "actionTone": "after",
+        "review": "提交与实际最终投票、环境检查一致。",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "'finished'",
+            "tone": "after",
+            "reason": "最终投票已出现在群聊中，随后提交完成。"
+          }
+        ]
+      }
+    ],
+    "language": "zh-CN"
+  },
+  "qad": {
+    "precision": "W4A16",
+    "language": "zh-CN",
+    "steps": [
+      {
+        "title": "Accept the welcome screen",
+        "review": "进入手机号页面。",
+        "actionTone": "neutral",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Focus the phone number field",
+        "review": "下一帧输入框获得焦点。",
+        "actionTone": "neutral",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter a test phone number",
+        "review": "下一帧显示手机号。",
+        "actionTone": "neutral",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Continue to verification",
+        "review": "下一帧进入验证码页。",
+        "actionTone": "neutral",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Tap the verification field",
+        "review": "环境自行推进验证码；本步是点击。",
+        "actionTone": "neutral",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Enter a verification code",
+        "review": "保留实际 type 调用；下一帧为 Profile Info，不把环境自动验证全归因于本步。",
+        "actionTone": "neutral",
+        "thoughtHighlights": [],
+        "actionHighlights": []
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 7 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 7 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 8 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 8 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 9 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 9 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 10 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 10 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 11 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 11 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 12 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 12 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 13 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 13 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 14 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 14 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 15 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 15 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 16 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 16 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 17 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 17 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 18 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 18 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 19 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 19 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 20 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 20 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 21 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 21 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 22 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 22 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 23 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 23 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 24 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 24 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 25 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 25 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 26 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 26 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 27 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 27 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 28 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 28 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 29 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 29 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      },
+      {
+        "title": "Type without focusing the name field",
+        "review": "第 30 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。 思考中的先点击是正确意图，不标红；只高亮没有落实该前置动作的 type 调用。",
+        "actionTone": "before",
+        "thoughtHighlights": [],
+        "actionHighlights": [
+          {
+            "text": "device.type",
+            "tone": "before",
+            "reason": "第 30 步：思考提出先点击，但实际只有 type；前后画面姓名框均为空。"
+          }
+        ]
+      }
+    ],
+    "repetition": {
+      "from": 8,
+      "label": "Repeated name entry",
+      "review": "Manually reviewed contiguous tail: no new task progress. The initial action and first repetition remain outside the fold."
+    }
+  }
+}

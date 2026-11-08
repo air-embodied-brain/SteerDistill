@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Working directory",
+  "translations": {
+    "/title": "Check the working directory before reading a file",
+    "/summary": "The user wants to read `workspace/project_analysis.txt`. The agent is in `/alex`, and `cat` can only read files in the current directory.",
+    "/presentation/guidance/title": "Add the missing directory change",
+    "/presentation/guidance/checks": {
+      "Working directory": "`/alex` → `/alex/workspace`",
+      "File content": "Returns `Initial analysis content.`, matching the target file."
+    },
+    "/presentation/branches/0/summary": "The agent assumes it is already in workspace and tries to read the file. After the error, it asks the user to confirm the location instead of changing directories.",
+    "/presentation/branches/1/summary": "The agent checks its location, enters workspace, and reads the file successfully.",
+    "/presentation/branches/0/title": "Without guidance",
+    "/presentation/branches/0/reasoning/title": "Without guidance · Reasoning excerpt",
+    "/presentation/branches/1/title": "With teacher guidance",
+    "/presentation/branches/1/reasoning/title": "With teacher guidance · Reasoning excerpt",
+    "/records/sources/5/label": "Guided agent · Trajectory",
+    "/records/sources/8/label": "Unguided agent · Trajectory",
+    "/records/sources/9/label": "Teacher · Guidance",
+    "/records/sources/11/label": "State verification",
+    "/records/sources/12/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Verbatim original task and environment data."
+    },
+    {
+      "path": "/presentation/guidance/fields",
+      "reason": "Actual teacher guidance, preserved in its original language and wording."
+    },
+    {
+      "path": "/presentation/branches/0/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    },
+    {
+      "path": "/presentation/branches/1/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    }
+  ],
+  "sourceSha256": "a25ecdbdde4b071471f1a35e46f9e34d7e1b7b5005d6cb20b1a8b5b18b9709bc"
+}

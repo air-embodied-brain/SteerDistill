@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "id": "export-sort-direction",
+  "kind": "inference",
+  "title": "查询导出列表，区分排序字段与方向",
+  "summary": "用户要查询 bot `B12345`、版本 `v1` 的导出列表，按最后更新时间降序排列。工具说明把 `sortBy` 称为排序字段，但允许值只有 `ASC` 和 `DESC`。",
+  "template": "comparison",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "Could you retrieve the list of exports for my bot with ID 'B12345' and for version 'v1'? I'm interested in seeing them in descending order by the last updated date."
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "methods": [
+      {
+        "id": "bf16",
+        "name": "BF16",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"DESC\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 45,
+                    "text": "DESC",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/BF16/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "The sortBy parameter can be used to sort by 'LastUpdatedDateTime' in ASC or DESC. The user wants descending, sosortBy should be 'DESC'.",
+            "highlights": [
+              {
+                "start": 109,
+                "end": 134,
+                "text": "sosortBy should be 'DESC'",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/BF16/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "BF16/trajectory.json",
+          "message": 4
+        },
+        "description": "在 `sortBy` 中填入降序值 `DESC`。"
+      },
+      {
+        "id": "ours",
+        "name": "SteerDistill",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"DESC\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 45,
+                    "text": "DESC",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/Ours/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "Wait, the parameters listed here have 'sortBy' with allowed values ASC/DESC. Hmm, maybe the actual field to sort by is 'LastUpdatedDateTime', and the sortBy parameter specifies the direction. So to sort descending, set sortBy to 'DESC'.",
+            "highlights": [
+              {
+                "start": 215,
+                "end": 235,
+                "text": "set sortBy to 'DESC'",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/Ours/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "Ours/trajectory.json",
+          "message": 4
+        },
+        "description": "在 `sortBy` 中填入降序值 `DESC`。"
+      },
+      {
+        "id": "qerl",
+        "name": "QeRL",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime.DESC\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 65,
+                    "text": "LastUpdatedDateTime.DESC",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/QeRL/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Wait, the allowed values for sortBy are ['ASC', 'DESC'], but the description says it's for sorting by 'LastUpdatedDateTime'. So maybe the actual parameter is 'LastUpdatedDateTime' and the direction is specified with ASC/DESC? Or does the sortBy field take the full path like 'LastUpdatedDateTime.DESC'?",
+            "highlights": [
+              {
+                "start": 275,
+                "end": 301,
+                "text": "'LastUpdatedDateTime.DESC'",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/QeRL/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "QeRL/trajectory.json",
+          "message": 4
+        },
+        "description": "把字段名与方向用点号连在一起。"
+      },
+      {
+        "id": "qad",
+        "name": "On-Policy QAD",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", filterOperator=\"EQ\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 60,
+                    "text": "LastUpdatedDateTime",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Given the confusion, but needing to proceed, I'll go with the most logical conclusion: the user wants to sort by the last updated date in descending order. Hence, the sortBy parameter should be set to 'LastUpdatedDateTime' and the direction is DESC.",
+            "highlights": [
+              {
+                "start": 167,
+                "end": 222,
+                "text": "sortBy parameter should be set to 'LastUpdatedDateTime'",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "On-Policy QAD/trajectory.json",
+          "message": 4
+        },
+        "description": "把方向参数 `sortBy` 填成字段名。"
+      },
+      {
+        "id": "bitdistiller",
+        "name": "BitDistiller",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", filterOperator=\"EQ\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 60,
+                    "text": "LastUpdatedDateTime",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/BitDistiller/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Therefore, the final decision is to call the tool with botId='B12345', botVersion='v1', sortBy='LastUpdatedDateTime', and sortDirection='DESC', but if the tool does not support sortDirection, then this might not be accurate. However, based on the given information, I'll construct the call accordingly.",
+            "highlights": [
+              {
+                "start": 88,
+                "end": 116,
+                "text": "sortBy='LastUpdatedDateTime'",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/BitDistiller/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "BitDistiller/trajectory.json",
+          "message": 4
+        },
+        "description": "把方向参数 `sortBy` 填成字段名。"
+      },
+      {
+        "id": "eqat",
+        "name": "EfficientQAT",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime_DESC\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 65,
+                    "text": "LastUpdatedDateTime_DESC",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Assuming that the 'sortBy' parameter can accept the field name plus the direction, even though the allowed values list shows ASC and DESC, maybe the user needs to input 'LastUpdatedDateTime_DESC' as the sortBy value. But I'm not certain.",
+            "highlights": [
+              {
+                "start": 169,
+                "end": 195,
+                "text": "'LastUpdatedDateTime_DESC'",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "EfficientQAT/trajectory.json",
+          "message": 4
+        },
+        "description": "把字段名与方向拼成一个参数值。"
+      },
+      {
+        "id": "gptq",
+        "name": "GPTQ",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "aws.lexv2_models.list_exports",
+              "args": "botId=\"B12345\", botVersion=\"v1\", sortBy=\"LastUpdatedDateTime\", sortDirection=\"DESC\"",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 41,
+                    "end": 60,
+                    "text": "LastUpdatedDateTime",
+                    "tone": "before"
+                  },
+                  {
+                    "start": 63,
+                    "end": 83,
+                    "text": "sortDirection=\"DESC\"",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/export-sort-direction/raw/GPTQ/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments"
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Alternatively, maybe the tool expects the field name as part of the sortBy parameter. But according to the given schema, the sortBy parameter's allowed values are just directions.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/export-sort-direction/raw/GPTQ/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "GPTQ/trajectory.json",
+          "message": 4
+        },
+        "description": "将字段名填入 `sortBy`，另加 `sortDirection`。"
+      }
+    ],
+    "defaultPair": [
+      "bf16",
+      "ours"
+    ],
+    "turns": [
+      {
+        "label": "设置排序参数"
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "Ours/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "BF16/actions.json",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/cot_and_actions.txt",
+        "label": "BF16/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/BF16/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BF16/done.json",
+        "label": "BF16/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/result.json",
+        "label": "BF16/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/actions.json",
+        "label": "BitDistiller/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BitDistiller/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/cot_and_actions.txt",
+        "label": "BitDistiller/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/BitDistiller/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BitDistiller/done.json",
+        "label": "BitDistiller/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BitDistiller/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/result.json",
+        "label": "BitDistiller/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BitDistiller/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/score.json",
+        "label": "BitDistiller/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/BitDistiller/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/trajectory.json",
+        "label": "BitDistiller · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/BitDistiller/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/actions.json",
+        "label": "EfficientQAT/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/cot_and_actions.txt",
+        "label": "EfficientQAT/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "EfficientQAT/done.json",
+        "label": "EfficientQAT/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/result.json",
+        "label": "EfficientQAT/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/score.json",
+        "label": "EfficientQAT/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/trajectory.json",
+        "label": "EfficientQAT · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/EfficientQAT/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/actions.json",
+        "label": "GPTQ/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/GPTQ/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/cot_and_actions.txt",
+        "label": "GPTQ/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/GPTQ/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "GPTQ/done.json",
+        "label": "GPTQ/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/GPTQ/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/result.json",
+        "label": "GPTQ/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/GPTQ/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/score.json",
+        "label": "GPTQ/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/GPTQ/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/trajectory.json",
+        "label": "GPTQ · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/GPTQ/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/actions.json",
+        "label": "On-Policy QAD/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/cot_and_actions.txt",
+        "label": "On-Policy QAD/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "On-Policy QAD/done.json",
+        "label": "On-Policy QAD/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/result.json",
+        "label": "On-Policy QAD/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/score.json",
+        "label": "On-Policy QAD/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/trajectory.json",
+        "label": "On-Policy QAD · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/On-Policy QAD/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/actions.json",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/cot_and_actions.txt",
+        "label": "Ours/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/Ours/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "Ours/done.json",
+        "label": "Ours/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/result.json",
+        "label": "Ours/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/score.json",
+        "label": "Ours/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/Ours/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/trajectory.json",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/actions.json",
+        "label": "QeRL/actions.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/QeRL/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/cot_and_actions.txt",
+        "label": "QeRL/cot_and_actions.txt",
+        "url": "data/case-library/inference/export-sort-direction/raw/QeRL/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "QeRL/done.json",
+        "label": "QeRL/done.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/QeRL/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/result.json",
+        "label": "QeRL/result.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/QeRL/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/score.json",
+        "label": "QeRL/score.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/QeRL/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/trajectory.json",
+        "label": "QeRL · 轨迹",
+        "url": "data/case-library/inference/export-sort-direction/raw/QeRL/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "analysis.json",
+        "label": "analysis.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ground_truth.json",
+        "label": "ground_truth.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/inference/export-sort-direction/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/inference/export-sort-direction/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/inference/export-sort-direction/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

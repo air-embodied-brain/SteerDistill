@@ -1,0 +1,9 @@
+.comparison-controls{margin:22px 0 20px}.method-selects{display:grid;grid-template-columns:1fr 1fr;gap:26px}.method-selects label{display:flex;align-items:center;gap:14px;min-width:0}.selection-label{font:13px/1.5 var(--sans);color:var(--muted);flex-shrink:0}.method-selects select{font:17px/1.5 var(--sans);color:var(--ink);border:0;border-bottom:1px solid var(--hair);background:var(--paper);padding:8px 32px 8px 8px;width:100%;border-radius:0}.method-selects select:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.comparison-body .branch-heads{margin-bottom:10px}.comparison-body .branch-heads .case-branch-title{margin-bottom:6px}.comparison-body .branch-heads p,.comparison-body .branch-heads .ev-prose{font-size:15px;margin:0;color:var(--soft)}.comparison-body .step{margin-top:24px}.comparison-body .step>.ev-prose{margin-bottom:12px;color:var(--soft)}
+.segment-outcome{margin:10px 0 0;font-size:15px;line-height:1.65}.outcome-before{color:var(--red)}.outcome-after{color:var(--blue)}
+@media(max-width:800px){.method-selects{gap:18px}.method-selects label{display:block}.method-selects select{font-size:15px;padding-left:0}.method-selects .selection-label{display:block;margin-bottom:4px}.comparison-controls{margin:18px 0}.evidence-reader .comparison-body .branch-heads{display:none}.comparison-body .ev-pair:has(.segment-outcome){gap:8px}}
+.evidence-reader .comparison-first-turn>.ev-prose{margin-bottom:12px}
+.evidence-reader .comparison-mobile-summary{display:none}
+@media(max-width:800px){.evidence-reader .comparison-mobile-summary{display:block;margin:0 0 10px;color:var(--soft)}}
+/* Give long method names a full line on phones instead of clipping the selection. */
+@media(max-width:520px){.method-selects{grid-template-columns:1fr;gap:8px}.method-selects label{display:flex}.method-selects .selection-label{margin-bottom:0}}

@@ -1,0 +1,14 @@
+{
+  "valid": true,
+  "passed": true,
+  "finish": "final_response",
+  "official_state": {
+    "valid": true
+  },
+  "official_response": {
+    "valid": true
+  },
+  "goal_turn": 5,
+  "key_reasoning": true,
+  "semantic_errors": []
+}

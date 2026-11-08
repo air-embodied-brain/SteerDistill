@@ -1,0 +1,854 @@
+{
+  "schemaVersion": 1,
+  "id": "dancers-not-museum-artists",
+  "kind": "inference",
+  "title": "查询历史舞者，避免误用馆藏工具",
+  "summary": "用户询问 19 世纪的著名舞者。唯一可用的 `get_museum_artists` 查询某座博物馆在指定时期的馆藏作品作者，需要填写 `museum_name` 和 `period`。",
+  "template": "comparison",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "Who are the famous dancers of the 19th Century?"
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "methods": [
+      {
+        "id": "bf16",
+        "name": "BF16",
+        "description": "说明工具无法查询舞者，没有调用馆藏工具。",
+        "turns": [
+          [
+            {
+              "type": "reply",
+              "text": "None of the available MCP tools can effectively address the query about 19th-century dancers.",
+              "excerpt": true,
+              "highlights": {
+                "text": [
+                  {
+                    "start": 0,
+                    "end": 65,
+                    "text": "None of the available MCP tools can effectively address the query",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/trajectory.json",
+                "message": 4,
+                "field": "content[0].text",
+                "originalText": "None of the available MCP tools can effectively address the query about 19th-century dancers."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "The parameters needed are museum_name, period, and optionally country. The period is specified as 19th Century. But the problem is the museum name isn't provided. Without knowing which museum to check, I can't fill that parameter. Also, the tool's description says \"artists,\" not dancers. So even if I used this tool, it might not give the right info.",
+            "highlights": [
+              {
+                "start": 163,
+                "end": 230,
+                "text": "Without knowing which museum to check, I can't fill that parameter.",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "BF16/trajectory.json",
+          "message": 4
+        }
+      },
+      {
+        "id": "ours",
+        "name": "SteerDistill",
+        "description": "说明工具无法查询舞者，没有调用馆藏工具。",
+        "turns": [
+          [
+            {
+              "type": "reply",
+              "text": "None of the available MCP tools can fulfill the request to identify famous dancers of the 19th Century.",
+              "excerpt": true,
+              "highlights": {
+                "text": [
+                  {
+                    "start": 0,
+                    "end": 55,
+                    "text": "None of the available MCP tools can fulfill the request",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/trajectory.json",
+                "message": 4,
+                "field": "content[0].text",
+                "originalText": "None of the available MCP tools can fulfill the request to identify famous dancers of the 19th Century."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "But according to the rules, I need to attempt to use the available tools. However, if the tool isn't appropriate, I should indicate that. So perhaps after checking the tools, I realize that the available tool isn't suited for finding dancers, hence cannot fulfill the request. Therefore, I should respond that none of the available functions can answer the question.",
+            "highlights": [
+              {
+                "start": 194,
+                "end": 241,
+                "text": "available tool isn't suited for finding dancers",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "Ours/trajectory.json",
+          "message": 4
+        }
+      },
+      {
+        "id": "qerl",
+        "name": "QeRL",
+        "description": "自行选择大都会艺术博物馆，用馆藏查询代替舞者查询。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_museum_artists",
+              "args": "museum_name=\"Metropolitan Museum of Art\", period=\"19th Century\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "get_museum_artists",
+                    "tone": "before"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 13,
+                    "end": 39,
+                    "text": "Metropolitan Museum of Art",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments",
+                "returnMessage": 5
+              }
+            },
+            {
+              "type": "reply",
+              "text": "To refine the search, we would need a tool tailored to historical performers or dance archives.",
+              "excerpt": true,
+              "highlights": {
+                "text": []
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/trajectory.json",
+                "message": 6,
+                "field": "content[0].text",
+                "originalText": "To refine the search, we would need a tool tailored to historical performers or dance archives."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "So, given the constraints, I have to use this tool despite the possible mismatch between 'artists' and 'dancers'. Perhaps the best approach is to proceed with the available tool, using the period as '19th Century', and maybe set the museum to a well-known one like Metropolitan Museum of Art in NYC. Country defaults to USA. Let's try that. The user might accept this as a closest approximation.",
+            "highlights": [
+              {
+                "start": 27,
+                "end": 112,
+                "text": "I have to use this tool despite the possible mismatch between 'artists' and 'dancers'",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "QeRL/trajectory.json",
+          "message": 4
+        }
+      },
+      {
+        "id": "qad",
+        "name": "On-Policy QAD",
+        "description": "自行选择大都会艺术博物馆，查询后才说明工具不适用。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_museum_artists",
+              "args": "museum_name=\"Metropolitan Museum of Art\", period=\"19th Century\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "get_museum_artists",
+                    "tone": "before"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 13,
+                    "end": 39,
+                    "text": "Metropolitan Museum of Art",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments",
+                "returnMessage": 5
+              }
+            },
+            {
+              "type": "reply",
+              "text": "However, this tool does not explicitly focus on dancers, so the results may not include prominent choreographers or performers.",
+              "excerpt": true,
+              "highlights": {
+                "text": []
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/trajectory.json",
+                "message": 6,
+                "field": "content[0].text",
+                "originalText": "However, this tool does not explicitly focus on dancers, so the results may not include prominent choreographers or performers."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "The parameters require museum_name and period. The user didn't specify a museum, but the default country is USA. Maybe I can assume a well-known museum in the USA, like the Metropolitan Museum of Art. So, I'll set museum_name to \"Metropolitan Museum of Art\", period as \"19th Century\", and country defaults to USA. Let's try calling that tool.",
+            "highlights": [
+              {
+                "start": 113,
+                "end": 200,
+                "text": "Maybe I can assume a well-known museum in the USA, like the Metropolitan Museum of Art.",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "On-Policy QAD/trajectory.json",
+          "message": 4
+        }
+      },
+      {
+        "id": "bitdistiller",
+        "name": "BitDistiller",
+        "description": "自行选择卢浮宫，查询后才说明工具不适用。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_museum_artists",
+              "args": "museum_name=\"Louvre\", period=\"19th Century\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "get_museum_artists",
+                    "tone": "before"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 13,
+                    "end": 19,
+                    "text": "Louvre",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments",
+                "returnMessage": 5
+              }
+            },
+            {
+              "type": "reply",
+              "text": "retrieves general artists associated with museums during specified periods but does not explicitly focus on dancers.",
+              "excerpt": true,
+              "highlights": {
+                "text": []
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/trajectory.json",
+                "message": 6,
+                "field": "content[0].text",
+                "originalText": "retrieves general artists associated with museums during specified periods but does not explicitly focus on dancers."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "The parameters require museum_name and period. The user didn't specify a museum, so I'll need to choose a default. Maybe the Louvre or Metropolitan Museum of Art? Also, the country defaults to USA, but if the dancer was from another country, that might miss them. But without more info, proceed with default.",
+            "highlights": [
+              {
+                "start": 47,
+                "end": 114,
+                "text": "The user didn't specify a museum, so I'll need to choose a default.",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "BitDistiller/trajectory.json",
+          "message": 4
+        }
+      },
+      {
+        "id": "efficientqat",
+        "name": "EfficientQAT",
+        "description": "调用馆藏工具时，没有提供必填的 `museum_name`。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_museum_artists",
+              "args": "period=\"19th Century\", country=\"France\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "get_museum_artists",
+                    "tone": "before"
+                  }
+                ],
+                "args": []
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments",
+                "returnMessage": 5
+              }
+            },
+            {
+              "type": "reply",
+              "text": "Based on the available tools and execution attempts, the MCP environment does not provide direct functionality to retrieve biographical or performance history data of individuals (including dancers) from specific centuries.",
+              "excerpt": true,
+              "highlights": {
+                "text": []
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/trajectory.json",
+                "message": 6,
+                "field": "content[0].text",
+                "originalText": "Based on the available tools and execution attempts, the MCP environment does not provide direct functionality to retrieve biographical or performance history data of individuals (including dancers) from specific centuries."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "But the museum name isn't specified, so I might have to choose a generic one. Alternatively, maybe the tool allows searching across museums. However, the parameters require a museum_name. Without knowing the exact name, this could lead to incomplete results.",
+            "highlights": [
+              {
+                "start": 150,
+                "end": 186,
+                "text": "the parameters require a museum_name",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "EfficientQAT/trajectory.json",
+          "message": 4
+        }
+      },
+      {
+        "id": "gptq",
+        "name": "GPTQ",
+        "description": "自行选择卢浮宫与法国，查询后才说明工具不适用。",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_museum_artists",
+              "args": "museum_name=\"Louvre Museum\", period=\"19th Century\", country=\"France\"",
+              "highlights": {
+                "name": [
+                  {
+                    "start": 0,
+                    "end": 18,
+                    "text": "get_museum_artists",
+                    "tone": "before"
+                  }
+                ],
+                "args": [
+                  {
+                    "start": 13,
+                    "end": 26,
+                    "text": "Louvre Museum",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/trajectory.json",
+                "message": 4,
+                "field": "tool_calls[0].function.arguments",
+                "returnMessage": 5
+              }
+            },
+            {
+              "type": "reply",
+              "text": "Unfortunately, there are no tools currently available to directly identify famous 19th-century dancers.",
+              "excerpt": true,
+              "highlights": {
+                "text": []
+              },
+              "source": {
+                "file": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/trajectory.json",
+                "message": 6,
+                "field": "content[0].text",
+                "originalText": "Unfortunately, there are no tools currently available to directly identify famous 19th-century dancers."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          ""
+        ],
+        "reasoning": [
+          {
+            "text": "But the tool might not have data on dancers specifically. However, since this is the only available tool, I have to use it. Let me try calling it with the period set to \"19th Century\" and a generic museum name, maybe \"Louvre Museum\" since it's well-known. Country could be France if the Louvre is in Paris.",
+            "highlights": [
+              {
+                "start": 67,
+                "end": 122,
+                "text": "since this is the only available tool, I have to use it",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/trajectory.json",
+              "message": 4,
+              "field": "content[0].text"
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "GPTQ/trajectory.json",
+          "message": 4
+        }
+      }
+    ],
+    "defaultPair": [
+      "bf16",
+      "ours"
+    ],
+    "turns": [
+      {
+        "label": "查看工具后的行动与回复"
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "Ours/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "BF16/actions.json",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/cot_and_actions.txt",
+        "label": "BF16/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BF16/done.json",
+        "label": "BF16/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/result.json",
+        "label": "BF16/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/actions.json",
+        "label": "BitDistiller/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/cot_and_actions.txt",
+        "label": "BitDistiller/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BitDistiller/done.json",
+        "label": "BitDistiller/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/result.json",
+        "label": "BitDistiller/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/score.json",
+        "label": "BitDistiller/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/trajectory.json",
+        "label": "BitDistiller · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/BitDistiller/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/actions.json",
+        "label": "EfficientQAT/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/cot_and_actions.txt",
+        "label": "EfficientQAT/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "EfficientQAT/done.json",
+        "label": "EfficientQAT/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/result.json",
+        "label": "EfficientQAT/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/score.json",
+        "label": "EfficientQAT/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/trajectory.json",
+        "label": "EfficientQAT · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/EfficientQAT/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/actions.json",
+        "label": "GPTQ/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/cot_and_actions.txt",
+        "label": "GPTQ/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "GPTQ/done.json",
+        "label": "GPTQ/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/result.json",
+        "label": "GPTQ/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/score.json",
+        "label": "GPTQ/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/trajectory.json",
+        "label": "GPTQ · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/GPTQ/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/actions.json",
+        "label": "On-Policy QAD/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/cot_and_actions.txt",
+        "label": "On-Policy QAD/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "On-Policy QAD/done.json",
+        "label": "On-Policy QAD/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/result.json",
+        "label": "On-Policy QAD/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/score.json",
+        "label": "On-Policy QAD/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/trajectory.json",
+        "label": "On-Policy QAD · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/On-Policy QAD/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/actions.json",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/cot_and_actions.txt",
+        "label": "Ours/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "Ours/done.json",
+        "label": "Ours/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/result.json",
+        "label": "Ours/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/score.json",
+        "label": "Ours/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/trajectory.json",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/actions.json",
+        "label": "QeRL/actions.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/cot_and_actions.txt",
+        "label": "QeRL/cot_and_actions.txt",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "QeRL/done.json",
+        "label": "QeRL/done.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/result.json",
+        "label": "QeRL/result.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/score.json",
+        "label": "QeRL/score.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/trajectory.json",
+        "label": "QeRL · 轨迹",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/QeRL/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "analysis.json",
+        "label": "analysis.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ground_truth.json",
+        "label": "ground_truth.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/inference/dancers-not-museum-artists/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/inference/dancers-not-museum-artists/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/inference/dancers-not-museum-artists/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

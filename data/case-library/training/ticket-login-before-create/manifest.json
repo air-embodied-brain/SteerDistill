@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 2,
+  "id": "ticket-login-before-create",
+  "kind": "training",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "source-training-case/after/attempt-0/execution.json",
+      "bytes": 69829,
+      "sha256": "c2c4ad9e97564d3ce36de5db827b6a0aa493d275edd1c56814eb879b49599af7"
+    },
+    {
+      "path": "source-training-case/after/attempt-0/local_gate.json",
+      "bytes": 6144,
+      "sha256": "919570d0a5026af246609fc8fc92c4d4e05a69ead57ec756e52ed918f89f1627"
+    },
+    {
+      "path": "source-training-case/after/attempt-0/score.json",
+      "bytes": 257,
+      "sha256": "ceee2d8200e08bad0f386ea944c2dd8cfde7c0b3b76dbd0de18bef9fe7e40016"
+    },
+    {
+      "path": "source-training-case/after/attempt-0/trajectory.json",
+      "bytes": 62496,
+      "sha256": "46d51cd2b34c01737315eb7775fc3a4667e6a8cc10a96acc670bc3237516271c"
+    },
+    {
+      "path": "source-training-case/before/execution.json",
+      "bytes": 76989,
+      "sha256": "ec3ec514a1c0457144ffe169deb6d81a3737bb9bbd0e89e3316e8c5ddd059d5c"
+    },
+    {
+      "path": "source-training-case/before/score.json",
+      "bytes": 12128,
+      "sha256": "4d2c061f3dd0344fb3281a98a3b00e1de2e12dd41e950a1aa2635c2122777d32"
+    },
+    {
+      "path": "source-training-case/before/trajectory.json",
+      "bytes": 63434,
+      "sha256": "e14f21879029528ed268b8945d1eb00d9cb8025ad41e4df09761f97ce5d4a099"
+    },
+    {
+      "path": "source-training-case/reference/attempt-0/execution.json",
+      "bytes": 69120,
+      "sha256": "99c53d906d8435a8f72fd5cafe6419204147baea0735515d3c09ff08ad6da283"
+    },
+    {
+      "path": "source-training-case/reference/attempt-0/score.json",
+      "bytes": 10790,
+      "sha256": "9f438cb82c3b7edaac775df1000684b2ff13afd2d56eafaff56b30a78029a9c8"
+    },
+    {
+      "path": "source-training-case/reference/attempt-0/trajectory.json",
+      "bytes": 56698,
+      "sha256": "bd5aad12b6019cc4b608d23ea4cc3e98fde6eeba328d7f53c071824162162d15"
+    },
+    {
+      "path": "source-training-case/reference/attempt-1/execution.json",
+      "bytes": 76721,
+      "sha256": "db405b852a034110de596fc73a2506e16bccbc741ef20f4ebd54d052811f0df4"
+    },
+    {
+      "path": "source-training-case/reference/attempt-1/score.json",
+      "bytes": 7623,
+      "sha256": "085f87cfb25d3fdf6832ce38aee19fa65ab946a84e473c51045cc6a8a872c965"
+    },
+    {
+      "path": "source-training-case/reference/attempt-1/trajectory.json",
+      "bytes": 58216,
+      "sha256": "f2311cf21650566f6ab967a1dc8890cd4726a7353bf860cf85feff7cb0c7efbe"
+    },
+    {
+      "path": "source-training-case/reference/attempt-2/execution.json",
+      "bytes": 69829,
+      "sha256": "c2c4ad9e97564d3ce36de5db827b6a0aa493d275edd1c56814eb879b49599af7"
+    },
+    {
+      "path": "source-training-case/reference/attempt-2/score.json",
+      "bytes": 229,
+      "sha256": "36892d7aab4f9a8dc9df373907f9914ca59169f46eb27016aa29c792fd7451e6"
+    },
+    {
+      "path": "source-training-case/reference/attempt-2/trajectory.json",
+      "bytes": 63360,
+      "sha256": "f6091da27090b15628b0939ccf4e587beed3454829c3d2029f1652e52a983c2a"
+    },
+    {
+      "path": "source-training-case/steering/attempt-0/analysis.json",
+      "bytes": 1963,
+      "sha256": "77030dbf2d94fbfe45999d786853c4528a71403135254f170434bf96471325b1"
+    },
+    {
+      "path": "source-training-case/steering/attempt-0/raw_steering_prompt.txt",
+      "bytes": 397,
+      "sha256": "9e14e9a611ba6d0c1ac1ab1aa9fca442f08614383eb7936a27b22b8788b69d07"
+    },
+    {
+      "path": "source-training-case/task.json",
+      "bytes": 33325,
+      "sha256": "5d41d07df5adb2d561c326939fbebac76ff2ebdcd1a0a5c0457f79c566cb1f02"
+    },
+    {
+      "path": "task.json",
+      "bytes": 33325,
+      "sha256": "5d41d07df5adb2d561c326939fbebac76ff2ebdcd1a0a5c0457f79c566cb1f02"
+    },
+    {
+      "path": "variants/external_structured/guidance/analysis.json",
+      "bytes": 1052,
+      "sha256": "235d29b4d257f3823c22e5f323bd557619d3f44fc085c32a06940e4e9462d6c7"
+    },
+    {
+      "path": "variants/external_structured/guidance/raw_steering_prompt.txt",
+      "bytes": 889,
+      "sha256": "cc39876158c548eed02733ffab31c0f0aab626c5b4e403569d0cf765e8436343"
+    },
+    {
+      "path": "variants/external_structured/student/execution.json",
+      "bytes": 70030,
+      "sha256": "13dc4ad7a85b7276cc99a732c68a3b33f76e4dc1693fcbdb3b5b34d526cd165e"
+    },
+    {
+      "path": "variants/external_structured/student/score.json",
+      "bytes": 4714,
+      "sha256": "031c908ce9569e2141c618a9a066e5e1f0fdcca4c3e5312ceb25dcbc6e3b4468"
+    },
+    {
+      "path": "variants/external_structured/student/trajectory.json",
+      "bytes": 59249,
+      "sha256": "6ae7271fa67d70a650c69ce7759030e8baafdc08c63d438f0921095b7d040bde"
+    },
+    {
+      "path": "variants/student_structured/guidance/analysis.json",
+      "bytes": 2008,
+      "sha256": "60f70537731b311189da3c65f0d5d604b72fd64c932ad66d14cf64f4186649ad"
+    },
+    {
+      "path": "variants/student_structured/guidance/raw_steering_prompt.txt",
+      "bytes": 463,
+      "sha256": "d1a0be78a4ae82379832377c040ff001009293b042b6bcd915e4a30f400c3773"
+    },
+    {
+      "path": "variants/student_structured/student/execution.json",
+      "bytes": 69829,
+      "sha256": "c2c4ad9e97564d3ce36de5db827b6a0aa493d275edd1c56814eb879b49599af7"
+    },
+    {
+      "path": "variants/student_structured/student/score.json",
+      "bytes": 358,
+      "sha256": "08a3178c61fe47a6cb3aedf278fbb10a14783e19cf5d872effe6e74606b2b381"
+    },
+    {
+      "path": "variants/student_structured/student/trajectory.json",
+      "bytes": 62688,
+      "sha256": "00749524c6723bfeb26aa30b3938ac81ace32b1a9c8a132012525cc9398ef4bd"
+    },
+    {
+      "path": "variants/teacher_freeform/guidance/analysis.json",
+      "bytes": 1958,
+      "sha256": "9f8cdad62c718fcd2008f320a7c6775c282398840877a20f0656868e1b32c072"
+    },
+    {
+      "path": "variants/teacher_freeform/guidance/raw_steering_prompt.txt",
+      "bytes": 443,
+      "sha256": "c56c7efaed26f46c97dc6ad982626d60a9593311d392d902f364bef0a0dd22b1"
+    },
+    {
+      "path": "variants/teacher_freeform/student/execution.json",
+      "bytes": 69126,
+      "sha256": "76c21c12b82c2fb1ef51f5d7f324361418c557750cb09d541c3eedf86135535c"
+    },
+    {
+      "path": "variants/teacher_freeform/student/score.json",
+      "bytes": 3988,
+      "sha256": "0ce59cf2bd299a4767d8924ab122bcc162a8b7dde75fa739b517a268980a7510"
+    },
+    {
+      "path": "variants/teacher_freeform/student/trajectory.json",
+      "bytes": 61382,
+      "sha256": "b6f920b66b96f161dc0fe6330fdea78a82ac0cce27813c4b702b066d36f8e524"
+    }
+  ]
+}

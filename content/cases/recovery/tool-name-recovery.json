@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "id": "tool-name-recovery",
+  "kind": "recovery",
+  "title": "查询油量报错后，改正工具名再加油",
+  "summary": "用户希望在公路旅行前加满油箱。车辆工具提供当前油量查询，油箱容量为 50 加仑，`fuelAmount` 表示本次新增的油量。",
+  "template": "sequence",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I'm about to embark on a road trip adventure and I want my car to be in peak condition. Could you make sure to increase the current fuel level to ensure that my tank is full, so I don't have to keep stopping to refuel along the way?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Before I hit the open road, I need to get the engine running smoothly. Can you confirm there's enough fuel, and ensure the engine's primed for a seamless start?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "I want to make certain my tires are roadworthy before setting off. If any of my car's tires are showing pressure below 40, point me in the direction of the closest tire service station, because I definitely don't want to run into tire trouble."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Moreover, could you set up the GPS to guide me directly to the nearest shop if my tires aren't up to the mark, so I'm not wandering off course?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Once my car is ready for the journey, it would be fantastic to let my friends know about my travel plans. Could you draft a tweet that says: \"Starting my road trip with a car that is fully prepared and raring to go!\" with hashtags #Roadtrip #Adventure?"
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "sequenceTitle": "SteerDistill",
+    "compact": true,
+    "reference": {
+      "title": "BF16 · 直接查询，再补足",
+      "tone": "after",
+      "position": "before",
+      "compact": true,
+      "collapsed": false,
+      "events": [
+        {
+          "type": "action",
+          "name": "displayCarStatus",
+          "args": "option=\"fuel\"",
+          "result": "… fuelLevel: 15.0",
+          "highlights": {},
+          "source": {
+            "file": "data/case-library/recovery/tool-name-recovery/raw/BF16/trajectory.json",
+            "message": 4,
+            "returnMessage": 5
+          }
+        },
+        {
+          "type": "action",
+          "name": "fillFuelTank",
+          "args": "fuelAmount=35",
+          "result": "fuelLevel: 50.0",
+          "highlights": {},
+          "source": {
+            "file": "data/case-library/recovery/tool-name-recovery/raw/BF16/trajectory.json",
+            "message": 6,
+            "returnMessage": 7
+          }
+        }
+      ],
+      "method": "BF16"
+    },
+    "steps": [
+      {
+        "title": "工具名不匹配，查询被拒绝",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "display_car_status",
+            "args": "option=\"fuel\"",
+            "result": "Error: Unknown method 'display_car_status'",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 18,
+                  "text": "display_car_status"
+                }
+              ],
+              "result": [
+                {
+                  "start": 7,
+                  "end": 21,
+                  "text": "Unknown method"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+              "message": 4,
+              "returnMessage": 5
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Oh, there's also mcp_tool_displayCarStatus with an option for \"fuel\" to check the current fuel level.",
+          "highlights": [
+            {
+              "start": 17,
+              "end": 42,
+              "text": "mcp_tool_displayCarStatus",
+              "tone": "after"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+            "message": 4,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "改正工具名，查到当前油量",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "displayCarStatus",
+            "args": "option=\"fuel\"",
+            "result": "… fuelLevel: 15.0",
+            "highlights": {
+              "name": [
+                {
+                  "start": 0,
+                  "end": 16,
+                  "text": "displayCarStatus"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+              "message": 6,
+              "returnMessage": 7
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Looking back at the tools listed earlier, the correct tool name is mcp_tool_displayCarStatus.",
+          "highlights": [
+            {
+              "start": 67,
+              "end": 92,
+              "text": "mcp_tool_displayCarStatus"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+            "message": 6,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "补入 35 加仑，油箱加满",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "fillFuelTank",
+            "args": "fuelAmount=35",
+            "result": "fuelLevel: 50.0",
+            "highlights": {
+              "result": [
+                {
+                  "start": 11,
+                  "end": 15,
+                  "text": "50.0"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+              "message": 8,
+              "returnMessage": 9
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "To fill the tank completely, the user needs to add 50 - 15 = 35 gallons.",
+          "highlights": [],
+          "source": {
+            "file": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+            "message": 8,
+            "field": "content[0].text/<think>"
+          }
+        }
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "Ours/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "BF16/actions.json",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/cot_and_actions.md",
+        "label": "BF16/cot_and_actions.md",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BF16/done.json",
+        "label": "BF16/done.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/recovery_excerpt.json",
+        "label": "BF16/recovery_excerpt.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/recovery_excerpt.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/result.json",
+        "label": "BF16/result.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16/score.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/actions.json",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/cot_and_actions.md",
+        "label": "Ours/cot_and_actions.md",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/cot_and_actions.md",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "Ours/done.json",
+        "label": "Ours/done.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/recovery_excerpt.json",
+        "label": "Ours/recovery_excerpt.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/recovery_excerpt.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/result.json",
+        "label": "Ours/result.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/score.json",
+        "label": "Ours/score.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/trajectory.json",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "analysis.json",
+        "label": "analysis.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ground_truth.json",
+        "label": "ground_truth.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/recovery/tool-name-recovery/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/recovery/tool-name-recovery/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/recovery/tool-name-recovery/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

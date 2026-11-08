@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Country restrictions",
+  "translations": {
+    "/title": "A country list alone does not restrict card use",
+    "/summary": "The user wants a new virtual card with a $2,000 monthly limit, usable only in the US and Canada. The card is active and the limit is already set; the country restriction remains to be configured. `international_allowed=1` permits all international transactions. Setting it to `0` enforces the country list.",
+    "/presentation/guidance/title": "Enable the country restriction",
+    "/presentation/guidance/checks": {
+      "Configuration": "`international_allowed=0`, `allowed_countries=\"US,CA\"`. The card remains active with a $2,000 monthly limit.",
+      "Reference comparison": "The configuration matches the state after the teacher’s reference action. The unguided branch enters the same country list, but `international_allowed=1` still permits all international transactions."
+    },
+    "/presentation/branches/0/summary": "The agent enters the US and Canada but leaves all international transactions enabled, so the country restriction does not take effect.",
+    "/presentation/branches/1/summary": "The agent sets the switch to 0, enabling the restriction and allowing use only in the US and Canada.",
+    "/presentation/branches/0/title": "Without guidance",
+    "/presentation/branches/0/reasoning/title": "Without guidance · Reasoning excerpt",
+    "/presentation/branches/1/title": "With teacher guidance",
+    "/presentation/branches/1/reasoning/title": "With teacher guidance · Reasoning excerpt",
+    "/records/sources/3/label": "Guided agent · Trajectory",
+    "/records/sources/7/label": "Unguided agent · Trajectory",
+    "/records/sources/11/label": "Teacher · Reference trajectory",
+    "/records/sources/12/label": "Configuration · Reference comparison",
+    "/records/sources/16/label": "Teacher · Guidance",
+    "/records/sources/18/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Verbatim original task and environment data."
+    },
+    {
+      "path": "/presentation/guidance/fields",
+      "reason": "Actual teacher guidance, preserved in its original language and wording."
+    },
+    {
+      "path": "/presentation/branches/0/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/0/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    },
+    {
+      "path": "/presentation/branches/1/events",
+      "reason": "Recorded tool calls and results, with original excerpting and emphasis."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/text",
+      "reason": "Verbatim reasoning excerpt, not editorial explanation."
+    },
+    {
+      "path": "/presentation/branches/1/reasoning/highlights",
+      "reason": "Offsets and text refer to the unchanged reasoning excerpt."
+    }
+  ],
+  "sourceSha256": "1dd83b0690af2965c2fbaa4e21d27c3517fcaa0abb5272fee6e67f3f62f62b49"
+}

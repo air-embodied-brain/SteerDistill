@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "id": "brake-pressure-retry",
+  "kind": "recovery",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "category_score.jsonl",
+      "bytes": 596475,
+      "sha256": "a639f5c0a99a682715212e77b0aafd4964dae4c489b30f25e994f40485e08ea4"
+    },
+    {
+      "path": "evidence.json",
+      "bytes": 731,
+      "sha256": "3c2ad1bb1e3c91d4b754033d785a7bf23f6f321d04d5acbdcb798529be5ee815"
+    },
+    {
+      "path": "recovery_excerpt.json",
+      "bytes": 11076,
+      "sha256": "ef4f3c569476de87915ca15d57a94e93a342fa8392d2991a8ea35be5d9153c59"
+    },
+    {
+      "path": "recovery_suffix.json",
+      "bytes": 15438,
+      "sha256": "3dbe58a17ace0d331beedfdfa25a64964e38a0ed362c50bba45e9ab8fce9f7a7"
+    },
+    {
+      "path": "trajectory.json",
+      "bytes": 39599,
+      "sha256": "c0f82d5ebd1606141adffe7dba0fd1c6cdbf21d4862b4b0141adf916e5ca86b1"
+    }
+  ]
+}

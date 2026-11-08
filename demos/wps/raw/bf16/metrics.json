@@ -1,0 +1,15 @@
+{
+  "label": "bf16",
+  "repeat": 2,
+  "env_id": "wps",
+  "task_id": "9",
+  "description": "Find the doc file in WPS that contains an 'Apple MACBook' image description.",
+  "success": true,
+  "steps": 5,
+  "episode_seconds": 7.046209061983973,
+  "inference_seconds": 3.4312802500789985,
+  "output_tokens": 253,
+  "initial_image_sha256": "15c3c3d9291b81eb2eba66e7dc145bb07f97be7163ace448abaacb97eb6a8f83",
+  "directory": "/redacted/benchmark-fast-other-20261103/bf16/repeat-2/wps-9",
+  "status": "completed"
+}

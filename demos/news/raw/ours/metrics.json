@@ -1,0 +1,15 @@
+{
+  "label": "ours",
+  "repeat": 1,
+  "env_id": "googlenews",
+  "task_id": "4",
+  "description": "Read at least 3 distinct articles from the 'Sports' category.",
+  "success": true,
+  "steps": 18,
+  "episode_seconds": 25.215270703018177,
+  "inference_seconds": 8.573801402875688,
+  "output_tokens": 925,
+  "initial_image_sha256": "6c9ce52bc4c03e328c41ad4b0f220f628a5a84af7afbbb06e0448f6bf35381ac",
+  "directory": "/redacted/benchmark-fast-news-20261103/ours/repeat-1/googlenews-4",
+  "status": "completed"
+}

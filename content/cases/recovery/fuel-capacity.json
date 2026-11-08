@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "id": "fuel-capacity",
+  "kind": "recovery",
+  "title": "加油超量报错后，查询余量再补足",
+  "summary": "用户希望在公路旅行前加满油箱。工具说明油箱容量为 50 加仑，`fuelAmount` 表示本次新增的油量。",
+  "template": "sequence",
+  "originalTask": {
+    "id": "multi_turn_miss_func_68",
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I'm about to embark on a road trip adventure and I want my car to be in peak condition. Could you make sure to increase the current fuel level to ensure that my tank is full, so I don't have to keep stopping to refuel along the way?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Before I hit the open road, I need to get the engine running smoothly. Can you confirm there's enough fuel, and ensure the engine's primed for a seamless start?"
+        }
+      ],
+      [],
+      [
+        {
+          "role": "user",
+          "content": "I want to make certain my tires are roadworthy before setting off. If any of my car's tires are showing pressure below 40, point me in the direction of the closest tire service station, because I definitely don't want to run into tire trouble."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Moreover, could you set up the GPS to guide me directly to the nearest shop if my tires aren't up to the mark, so I'm not wandering off course?"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Once my car is ready for the journey, it would be fantastic to let my friends know about my travel plans. Could you draft a tweet that says: \"Starting my road trip with a car that is fully prepared and raring to go!\" with hashtags #Roadtrip #Adventure?"
+        }
+      ]
+    ],
+    "initial_config": {
+      "VehicleControlAPI": {
+        "fuelLevel": 15,
+        "batteryVoltage": 12.6,
+        "engineState": "stopped",
+        "doorStatus": {
+          "driver": "unlocked",
+          "passenger": "unlocked",
+          "rear_left": "unlocked",
+          "rear_right": "unlocked"
+        },
+        "acTemperature": 25,
+        "fanSpeed": 50,
+        "acMode": "auto",
+        "humidityLevel": 50,
+        "headLightStatus": "off",
+        "parkingBrakeStatus": "released",
+        "parkingBrakeForce": 0,
+        "slopeAngle": 0,
+        "distanceToNextVehicle": 50,
+        "cruiseStatus": "inactive",
+        "destination": "None",
+        "frontLeftTirePressure": 35,
+        "frontRightTirePressure": 35,
+        "rearLeftTirePressure": 35,
+        "rearRightTirePressure": 35
+      },
+      "TwitterAPI": {
+        "authenticated": true,
+        "tweet_counter": 5,
+        "tweets": {
+          "0": {
+            "id": 0,
+            "username": "roadtripper23",
+            "content": "Excited for the road trip!",
+            "tags": [
+              "#roadtrip",
+              "#excited"
+            ],
+            "mentions": []
+          },
+          "1": {
+            "id": 1,
+            "username": "roadtripper23",
+            "content": "Can't wait to hit the road!",
+            "tags": [
+              "#roadlife",
+              "#adventure"
+            ],
+            "mentions": []
+          },
+          "2": {
+            "id": 2,
+            "username": "roadtripper23",
+            "content": "Adventure awaits!",
+            "tags": [
+              "#adventure",
+              "#wanderlust"
+            ],
+            "mentions": []
+          },
+          "3": {
+            "id": 3,
+            "username": "roadtripper23",
+            "content": "Road trip ready!",
+            "tags": [
+              "#roadtrip",
+              "#ready"
+            ],
+            "mentions": []
+          },
+          "4": {
+            "id": 4,
+            "username": "roadtripper23",
+            "content": "Let's go explore!",
+            "tags": [
+              "#explore",
+              "#adventure",
+              "#travel"
+            ],
+            "mentions": []
+          }
+        },
+        "username": "roadtripper23",
+        "password": "Tr1pP1ng2023!"
+      }
+    },
+    "path": [
+      "VehicleControlAPI.displayCarStatus",
+      "VehicleControlAPI.fillFuelTank",
+      "VehicleControlAPI.startEngine",
+      "VehicleControlAPI.check_tire_pressure",
+      "VehicleControlAPI.find_nearest_tire_shop",
+      "VehicleControlAPI.set_navigation",
+      "TwitterAPI.post_tweet"
+    ],
+    "involved_classes": [
+      "TwitterAPI",
+      "VehicleControlAPI"
+    ],
+    "missed_function": {
+      "2": [
+        "startEngine"
+      ]
+    }
+  },
+  "presentation": {
+    "sequenceTitle": "SteerDistill",
+    "steps": [
+      {
+        "title": "尝试加入 50 加仑，超出油箱容量",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "fillFuelTank",
+            "args": "fuelAmount=50",
+            "result": "Cannot fill gas above the tank capacity.",
+            "source": {
+              "method": "Ours",
+              "message": 4,
+              "returnMessage": 5
+            },
+            "highlights": {
+              "args": [
+                {
+                  "start": 11,
+                  "end": 13,
+                  "text": "50"
+                }
+              ],
+              "result": [
+                {
+                  "start": 0,
+                  "end": 40,
+                  "text": "Cannot fill gas above the tank capacity."
+                }
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "I'll go ahead and call the tool with the maximum allowed value, which is 50 gallons. That makes sense because the user wants the tank full.",
+          "highlights": [
+            {
+              "start": 41,
+              "end": 83,
+              "text": "maximum allowed value, which is 50 gallons"
+            }
+          ],
+          "source": {
+            "method": "Ours",
+            "message": 4,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "查询当前油量",
+        "tone": "",
+        "events": [
+          {
+            "type": "action",
+            "name": "displayCarStatus",
+            "args": "option=\"fuel\"",
+            "result": "fuelLevel: 15.0",
+            "source": {
+              "method": "Ours",
+              "message": 6,
+              "returnMessage": 7
+            },
+            "highlights": {}
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Maybe the tool expects the fuelAmount to be the amount to add, not the total.",
+          "highlights": [],
+          "source": {
+            "method": "Ours",
+            "message": 6,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "补入 35 加仑，油箱加满",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "fillFuelTank",
+            "args": "fuelAmount=35",
+            "result": "fuelLevel: 50.0",
+            "source": {
+              "method": "Ours",
+              "message": 8,
+              "returnMessage": 9
+            },
+            "highlights": {
+              "args": [
+                {
+                  "start": 11,
+                  "end": 13,
+                  "text": "35"
+                }
+              ],
+              "result": [
+                {
+                  "start": 11,
+                  "end": 15,
+                  "text": "50.0"
+                }
+              ]
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Then, I checked the current fuel level, which is 15.0 gallons. The tank's maximum is 50 gallons, so the difference is 50 - 15 = 35 gallons needed. Now, I need to call the fill Fuel Tank tool again with the correct amount of 35 gallons.",
+          "highlights": [
+            {
+              "start": 118,
+              "end": 130,
+              "text": "50 - 15 = 35"
+            }
+          ],
+          "source": {
+            "method": "Ours",
+            "message": 8,
+            "field": "content[0].text/<think>"
+          }
+        }
+      }
+    ],
+    "reference": {
+      "title": "BF16 · 先查余量，再补足",
+      "tone": "after",
+      "collapsed": false,
+      "events": [
+        {
+          "type": "action",
+          "name": "displayCarStatus",
+          "args": "option=\"fuel\"",
+          "result": "fuelLevel: 15.0",
+          "source": {
+            "method": "BF16",
+            "message": 4,
+            "returnMessage": 5
+          },
+          "highlights": {}
+        },
+        {
+          "type": "action",
+          "name": "fillFuelTank",
+          "args": "fuelAmount=35.0",
+          "result": "fuelLevel: 50.0",
+          "source": {
+            "method": "BF16",
+            "message": 6,
+            "returnMessage": 7
+          },
+          "highlights": {}
+        }
+      ],
+      "reasoning": {
+        "title": "Agent 推理 · 节选",
+        "text": "Once I have the current amount, subtract from 50 to determine fuelAmount. Then call fillFuelTank with that value.",
+        "highlights": [],
+        "source": {
+          "method": "BF16",
+          "message": 4,
+          "field": "content[0].text/<think>"
+        }
+      },
+      "position": "before",
+      "compact": true,
+      "method": "BF16"
+    },
+    "compact": true
+  },
+  "records": {
+    "defaultSource": "Ours/trajectory.json",
+    "defaultMessage": 4,
+    "sources": [
+      {
+        "id": "BF16/actions.json",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/cot_and_actions.md",
+        "label": "BF16/cot_and_actions.md",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/cot_and_actions.md",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/done.json",
+        "label": "BF16/done.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/recovery_excerpt.json",
+        "label": "BF16/recovery_excerpt.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/recovery_excerpt.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/result.json",
+        "label": "BF16/result.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16 · 任务核验",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/recovery/fuel-capacity/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/actions.json",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/cot_and_actions.md",
+        "label": "Ours/cot_and_actions.md",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/cot_and_actions.md",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/done.json",
+        "label": "Ours/done.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/recovery_excerpt.json",
+        "label": "Ours/recovery_excerpt.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/recovery_excerpt.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/result.json",
+        "label": "Ours/result.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/score.json",
+        "label": "SteerDistill · 任务核验",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/score.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/trajectory.json",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/recovery/fuel-capacity/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "analysis.json",
+        "label": "analysis.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ground_truth.json",
+        "label": "ground_truth.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/recovery/fuel-capacity/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/recovery/fuel-capacity/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/recovery/fuel-capacity/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

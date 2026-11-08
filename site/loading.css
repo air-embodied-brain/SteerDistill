@@ -1,0 +1,18 @@
+/* Inline in the shared shell: no unstyled text before fonts and locale settle. */
+html { background: var(--paper, #fffefa); }
+html[data-theme="dark"] { background: var(--paper, #20221f); color-scheme: dark; }
+html[data-fonts="loading"] body { visibility: hidden; }
+html[data-fonts="skeleton"] .font-placeholder {
+  color: transparent !important; text-shadow: none !important;
+  background: var(--loading-ink, #e8e6df);
+  border-radius: 2px; box-decoration-break: clone; -webkit-box-decoration-break: clone;
+}
+html[data-theme="dark"] { --loading-ink: #373933; }
+html[data-fonts="skeleton"] svg text { visibility: hidden; }
+/* A failed font request must not hide the page or trigger a late font swap. */
+html[data-fonts="fallback"] body, html[data-fonts="fallback"] body * { font-family: Arial, "PingFang SC", sans-serif !important; }
+html[data-fonts="fallback"] :is(h1,h2,h3,.site-brand) { font-family: Georgia, "Songti SC", serif !important; }
+html[data-fonts="fallback"] :is(code,pre,.ev-code,.ev-code *) { font-family: monospace !important; }
+
+/* Direct article entry is positioned before revealing the continuous surface. */
+html[data-reading-entry="pending"] main{visibility:hidden}

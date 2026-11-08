@@ -1,0 +1,731 @@
+{
+  "bf16": {
+    "precision": "BF16",
+    "steps": [
+      {
+        "thoughtHighlights": [
+          {
+            "text": "先激活顶部的搜索文档输入框",
+            "tone": "after",
+            "reason": "先聚焦搜索框，再输入搜索词。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "after",
+            "reason": "对应聚焦动作；坐标本身不体现能力差异，不高亮。"
+          }
+        ],
+        "actionTone": "after",
+        "review": "已核对本步完整思考、调用和前后截图；仅强调上述因果位置。",
+        "title": "Focus the search field"
+      },
+      {
+        "thoughtHighlights": [
+          {
+            "text": "搜索框已经激活",
+            "tone": "after",
+            "reason": "确认上一操作建立的输入条件。"
+          }
+        ],
+        "actionHighlights": [],
+        "actionTone": "after",
+        "review": "搜索词是共同任务参数，不额外高亮。",
+        "title": "Search for Apple MACBook"
+      },
+      {
+        "thoughtHighlights": [
+          {
+            "text": "现在点击这个“产品发布会讲稿.docx”文件",
+            "tone": "after",
+            "reason": "从搜索结果打开目标文档，继续核对内容。"
+          }
+        ],
+        "actionHighlights": [],
+        "actionTone": "after",
+        "review": "点击坐标不高亮。",
+        "title": "Open the matching document"
+      },
+      {
+        "thoughtHighlights": [],
+        "actionHighlights": [],
+        "actionTone": "neutral",
+        "review": "页面加载后的正常等待，无需额外强调。",
+        "title": "Wait for the document"
+      },
+      {
+        "thoughtHighlights": [
+          {
+            "text": "Apple的logo和笔记本电脑的图片",
+            "tone": "after",
+            "reason": "看到目标图像后再结束，而不是依据错误页面判断无结果。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "产品发布会讲稿.docx",
+            "tone": "after",
+            "reason": "提交与屏幕所示相符的目标文件名。"
+          }
+        ],
+        "actionTone": "after",
+        "review": "已核对本步完整思考、调用和前后截图；仅强调上述因果位置。",
+        "title": "Return the file name"
+      }
+    ],
+    "language": "zh-CN"
+  },
+  "ours": {
+    "precision": "W4A16",
+    "steps": [
+      {
+        "thoughtHighlights": [
+          {
+            "text": "首先点击顶部的搜索文档输入框",
+            "tone": "after",
+            "reason": "先聚焦再输入；与 BF16 的有效操作一致。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "after",
+            "reason": "强调聚焦操作，而非某个坐标数值。"
+          }
+        ],
+        "actionTone": "after",
+        "review": "已核对本步完整思考、调用和前后截图；仅强调上述因果位置。",
+        "title": "Focus the search field"
+      },
+      {
+        "thoughtHighlights": [
+          {
+            "text": "现在搜索框已经激活",
+            "tone": "after",
+            "reason": "输入前识别到正确的页面状态。"
+          }
+        ],
+        "actionHighlights": [],
+        "actionTone": "after",
+        "review": "共同搜索词不另设高亮。",
+        "title": "Search for Apple MACBook"
+      },
+      {
+        "thoughtHighlights": [
+          {
+            "text": "现在点击这个文档进入查看",
+            "tone": "after",
+            "reason": "打开匹配结果来确认内容。"
+          }
+        ],
+        "actionHighlights": [],
+        "actionTone": "after",
+        "review": "目标文件名已出现在上下文，无需在同一思考中重复标注。",
+        "title": "Open the matching document"
+      },
+      {
+        "thoughtHighlights": [],
+        "actionHighlights": [],
+        "actionTone": "neutral",
+        "review": "正常等待加载，未构成关键分歧，不高亮。",
+        "title": "Wait for the document"
+      },
+      {
+        "thoughtHighlights": [
+          {
+            "text": "Apple的笔记本图片",
+            "tone": "after",
+            "reason": "在目标文档内确认图像内容。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "产品发布会讲稿.docx",
+            "tone": "after",
+            "reason": "提交实际打开的文档名。"
+          }
+        ],
+        "actionTone": "after",
+        "review": "已核对本步完整思考、调用和前后截图；仅强调上述因果位置。",
+        "title": "Return the file name"
+      }
+    ],
+    "language": "zh-CN"
+  },
+  "qad": {
+    "precision": "W4A16",
+    "language": "zh-CN",
+    "steps": [
+      {
+        "title": "Try local-file authorization",
+        "review": "点击位置在授权按钮内；搜索框已经可见。下一帧仍在首页，不把这次点击误标为坐标错误。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "首先需要授权查看本地文档才能搜索目标文件",
+            "tone": "before",
+            "reason": "点击位置在授权按钮内；搜索框已经可见。下一帧仍在首页，不把这次点击误标为坐标错误。"
+          }
+        ],
+        "actionHighlights": []
+      },
+      {
+        "title": "Retry authorization instead of searching",
+        "review": "第二次仍点击相同按钮，后续画面没有进入搜索。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "先点击“授权查看”按钮完成授权",
+            "tone": "before",
+            "reason": "第二次仍点击相同按钮，后续画面没有进入搜索。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第二次仍点击相同按钮，后续画面没有进入搜索。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 3 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 3 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 3 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 4 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 4 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 4 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 5 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 5 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 5 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 6 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 6 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 6 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 7 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 7 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 7 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 8 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 8 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 8 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 9 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 9 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 9 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 10 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 10 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 10 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 11 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 11 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 11 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 12 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 12 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 12 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 13 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 13 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 13 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 14 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 14 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 14 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 15 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 15 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 15 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 16 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 16 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 16 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 17 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 17 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 17 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 18 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 18 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 18 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 19 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 19 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 19 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 20 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 20 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 20 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 21 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 21 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 21 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 22 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 22 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 22 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 23 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 23 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 23 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 24 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 24 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 24 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 25 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 25 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 25 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 26 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 26 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 26 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 27 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 27 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 27 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 28 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 28 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 28 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 29 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 29 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 29 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      },
+      {
+        "title": "Repeat the same authorization tap",
+        "review": "第 30 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。",
+        "actionTone": "before",
+        "thoughtHighlights": [
+          {
+            "text": "需要点击蓝色的“授权查看”按钮",
+            "tone": "before",
+            "reason": "第 30 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ],
+        "actionHighlights": [
+          {
+            "text": "device.click",
+            "tone": "before",
+            "reason": "第 30 步：页面仍为文档首页；思考和调用继续重复授权，没有使用搜索框。"
+          }
+        ]
+      }
+    ],
+    "repetition": {
+      "from": 2,
+      "label": "Repeated authorization taps",
+      "review": "Manually reviewed contiguous tail: no new task progress. The initial action and first repetition remain outside the fold."
+    }
+  }
+}

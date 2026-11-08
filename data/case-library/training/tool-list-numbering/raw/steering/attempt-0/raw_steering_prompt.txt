@@ -1,0 +1,6 @@
+{
+
+"precondition": "User reports car doors locked and requests unlocking along with activating headlights.",
+"decision_rule": "Check available tools for door unlocking and headlight activation functions.",
+"expected_transition": "Call mcp_tool_lockDoors with unlock=True and all doors, followed by mcp_tool_setHeadlights with mode=\"on\".",
+"recovery_check": "Verify door status and headlight status post-tool execution to ensure functionality."}

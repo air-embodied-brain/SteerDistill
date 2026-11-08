@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 2,
+  "id": "directory-navigation",
+  "kind": "training",
+  "recordScope": "Sanitized publication evidence for the displayed case; transport logs, database dumps and import archives excluded.",
+  "sanitization": {
+    "version": 1,
+    "machinePaths": "Experiment host and user roots replaced with /redacted; simulated task paths preserved.",
+    "taskData": "Benchmark-provided simulated users, credentials and tool arguments retained as task evidence."
+  },
+  "files": [
+    {
+      "path": "BF16/execution.json",
+      "bytes": 1552,
+      "sha256": "bcc0feaa4fa19d2589559fb91bcea06bfe2a55876c583cc9f3af12a768fec693"
+    },
+    {
+      "path": "BF16/score.json",
+      "bytes": 138,
+      "sha256": "0d5b572f8aa99534c1c75d26e03716ac41a21922f990beb0609c8ee367b38432"
+    },
+    {
+      "path": "BF16/trajectory.json",
+      "bytes": 42361,
+      "sha256": "28773139d31dd1c4a88111f3c4f98d21eb747d49d6a8716511ff1c2d76a67172"
+    },
+    {
+      "path": "after/execution.json",
+      "bytes": 909,
+      "sha256": "4be46225c052375963d2d6898e77a8ea9ccbd20ffd18f4bc45155da8f1965efe"
+    },
+    {
+      "path": "after/score.json",
+      "bytes": 139,
+      "sha256": "067283bd4bb4965a0e859c7d8db3ba340e77cd0ee51bf89ef555d2bf542001d9"
+    },
+    {
+      "path": "after/trajectory.json",
+      "bytes": 29618,
+      "sha256": "c3033317f3cb2e7be8f7253332ad35b7db1fc8730c948eb2de794aaf96d8351a"
+    },
+    {
+      "path": "before/execution.json",
+      "bytes": 341,
+      "sha256": "56007ccb59dce41ca93e83768784146668cf584a7db53a2d8edc862f3f51dc45"
+    },
+    {
+      "path": "before/score.json",
+      "bytes": 140,
+      "sha256": "95c76a40fb9a4488eeba77cde910d1c5740728b22ca4cf05fe2b20be17018cd1"
+    },
+    {
+      "path": "before/trajectory.json",
+      "bytes": 27593,
+      "sha256": "b4b415ce7eea087e357deec8c4226e4c356cd7ff7139bc572e6cb9ae728c78bd"
+    },
+    {
+      "path": "steering/response.json",
+      "bytes": 3241,
+      "sha256": "31dfb1d062fa5ccedbe03d0fd73af905dc37681775b3603c1d354c818a5483f8"
+    },
+    {
+      "path": "task.json",
+      "bytes": 3333,
+      "sha256": "79783db14fcf04e6fea1cbd1d9b28ab49e8209c21ed43137bb31e0734dbc93e2"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 283,
+      "sha256": "1938e7b1139c09a1446286747a4ae9cfc1e9fdb5431353e078dcac323b3ad8a5"
+    }
+  ]
+}

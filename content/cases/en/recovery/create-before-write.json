@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Create, then write",
+  "translations": {
+    "/title": "After a write fails, create the file and try again",
+    "/summary": "The user asks for a new `WebDevProjects` folder containing three files, each with specified text. The file tools separate creation (`touch`) from writing (`echo`).",
+    "/presentation/steps/0/title": "Writing directly fails because the file does not exist",
+    "/presentation/steps/1/title": "Create the file, then retry the write with the same arguments",
+    "/presentation/steps/1/reasoning/title": "Agent reasoning · Excerpt",
+    "/presentation/steps/2/title": "A later read confirms that the content was written",
+    "/presentation/steps/2/summary": "The agent also uses `touch` before `echo` for the other two files. When the user later asks to read the first file in the system’s listing order, it reads `styles.css`.",
+    "/records/sources/0/label": "SteerDistill · Full trajectory",
+    "/records/sources/1/label": "Category scores · Original records",
+    "/records/sources/2/label": "Recovery excerpt · Original record",
+    "/records/sources/3/label": "Continuation after recovery · Original record",
+    "/records/sources/4/label": "Archived evidence metadata",
+    "/records/sources/5/label": "File inventory and checksums",
+    "/records/download/label": "Download full records"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user turns and task configuration remain verbatim."
+    },
+    {
+      "path": "/presentation/steps/0/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/1/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/text",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/highlights",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/1/reasoning/source",
+      "reason": "Original reasoning excerpt and its annotation/source mapping remain unchanged; only the display title is translated."
+    },
+    {
+      "path": "/presentation/steps/2/events",
+      "reason": "Recorded calls, arguments, tool returns, source references and highlight spans remain unchanged."
+    }
+  ],
+  "sourceSha256": "906ed80b0a3a7aea720ded791faee98473bc6e8021b239ff735ce9dd77a76b03"
+}

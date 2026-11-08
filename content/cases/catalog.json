@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "groups": [
+    {
+      "id": "training",
+      "label": "训练修正",
+      "cases": [
+        {
+          "id": "directory-navigation",
+          "title": "读取文件前，先确认所在目录",
+          "url": "content/cases/training/directory-navigation.json",
+          "aliases": [
+            "multi_turn_base_22 · directory navigation",
+            "multi_turn_base_22"
+          ],
+          "code": "T1",
+          "indexTitle": "目录定位",
+          "section": "correction"
+        },
+        {
+          "id": "create-and-write-matching-sentence",
+          "title": "新建文件，写入第二个包含关键词的句子",
+          "url": "content/cases/training/create-and-write-matching-sentence.json",
+          "code": "T2",
+          "indexTitle": "匹配句写入",
+          "section": "correction"
+        },
+        {
+          "id": "tool-list-numbering",
+          "title": "解锁车门时，误把列表序号加进工具名",
+          "url": "content/cases/training/tool-list-numbering.json",
+          "code": "T3",
+          "indexTitle": "工具列表序号",
+          "section": "correction"
+        },
+        {
+          "id": "card-country-restriction",
+          "title": "限制银行卡的使用范围，不能只填国家名单",
+          "url": "content/cases/training/card-country-restriction.json",
+          "code": "T4",
+          "indexTitle": "国家限制开关",
+          "section": "correction"
+        },
+        {
+          "id": "ticket-login-before-create",
+          "title": "创建工单前，先登录工单系统",
+          "url": "content/cases/training/ticket-login-before-create.json",
+          "code": "T5",
+          "indexTitle": "登录后创建工单",
+          "section": "guidance-comparison"
+        }
+      ],
+      "aliases": [
+        "ablation"
+      ],
+      "sections": [
+        {
+          "id": "correction",
+          "label": "修正过程"
+        },
+        {
+          "id": "guidance-comparison",
+          "label": "指导对照"
+        }
+      ],
+      "retiredCases": [
+        "sales-order-header",
+        "enter-before-rename",
+        "sales-order-pricing",
+        "create-in-target-directory",
+        "lock-doors",
+        "convert-then-refuel"
+      ]
+    },
+    {
+      "id": "inference",
+      "label": "推理对照",
+      "cases": [
+        {
+          "id": "java-node-interface",
+          "title": "调用 Java 工具，保留工具名与参数名的大小写",
+          "url": "content/cases/inference/java-node-interface.json",
+          "code": "I1",
+          "indexTitle": "接口大小写",
+          "section": "request-interface"
+        },
+        {
+          "id": "recipe-science-tools",
+          "title": "查询两项科学发现，保持工具名一致",
+          "url": "content/cases/inference/recipe-science-tools.json",
+          "code": "I2",
+          "indexTitle": "连续调用工具名",
+          "section": "request-interface"
+        },
+        {
+          "id": "export-sort-direction",
+          "title": "查询导出列表，区分排序字段与方向",
+          "url": "content/cases/inference/export-sort-direction.json",
+          "code": "I3",
+          "indexTitle": "排序参数含义",
+          "section": "request-interface"
+        },
+        {
+          "id": "eleventh-month-flight",
+          "title": "预订十一月航班，避免误读为十二月",
+          "url": "content/cases/inference/eleventh-month-flight.json",
+          "code": "I4",
+          "indexTitle": "十一月与十二月",
+          "section": "request-interface"
+        },
+        {
+          "id": "dancers-not-museum-artists",
+          "title": "查询历史舞者，避免误用馆藏工具",
+          "url": "content/cases/inference/dancers-not-museum-artists.json",
+          "code": "I5",
+          "indexTitle": "不适用的工具",
+          "section": "action-conditions"
+        },
+        {
+          "id": "train-route-clarification",
+          "title": "预订火车票前，先补齐出发地与目的地",
+          "url": "content/cases/inference/train-route-clarification.json",
+          "code": "I6",
+          "indexTitle": "缺少起终点",
+          "section": "action-conditions"
+        },
+        {
+          "id": "watchlist-disambiguation",
+          "title": "移除自选股前，先确认公司名称",
+          "url": "content/cases/inference/watchlist-disambiguation.json",
+          "aliases": [
+            "030_multi_turn_miss_param_117",
+            "multi_turn_miss_param_117"
+          ],
+          "code": "I7",
+          "indexTitle": "澄清后执行删除",
+          "section": "action-conditions"
+        },
+        {
+          "id": "three-factorials",
+          "title": "计算三个阶乘，逐项完成工具调用",
+          "url": "content/cases/inference/three-factorials.json",
+          "code": "I8",
+          "indexTitle": "完成三次调用",
+          "section": "execution-state"
+        },
+        {
+          "id": "files-written-before-reading",
+          "title": "创建三个文件后，继续写入指定内容",
+          "url": "content/cases/inference/files-written-before-reading.json",
+          "code": "I9",
+          "indexTitle": "创建后继续写入",
+          "section": "execution-state"
+        }
+      ],
+      "retiredCases": [
+        "ttest-input-values"
+      ],
+      "sections": [
+        {
+          "id": "request-interface",
+          "label": "请求与接口"
+        },
+        {
+          "id": "action-conditions",
+          "label": "行动条件"
+        },
+        {
+          "id": "execution-state",
+          "label": "执行与状态"
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "label": "自主恢复",
+      "cases": [
+        {
+          "id": "fuel-capacity",
+          "title": "加油超量报错后，查询余量再补足",
+          "url": "content/cases/recovery/fuel-capacity.json",
+          "aliases": [
+            "multi_turn_miss_func_68"
+          ],
+          "code": "R1",
+          "indexTitle": "加油量修正"
+        },
+        {
+          "id": "tool-name-recovery",
+          "title": "查询油量报错后，改正工具名再加油",
+          "url": "content/cases/recovery/tool-name-recovery.json",
+          "code": "R2",
+          "indexTitle": "工具名纠错"
+        },
+        {
+          "id": "create-before-write",
+          "title": "写入报错后，先创建文件再重试",
+          "url": "content/cases/recovery/create-before-write.json",
+          "code": "R3",
+          "indexTitle": "创建后写入"
+        },
+        {
+          "id": "message-session-retry",
+          "title": "消息发送接连报错，修正参数并登录重试",
+          "url": "content/cases/recovery/message-session-retry.json",
+          "code": "R4",
+          "indexTitle": "登录后发送"
+        },
+        {
+          "id": "brake-pressure-retry",
+          "title": "刹车踩到一半仍无法启动，踩到底后重试成功",
+          "url": "content/cases/recovery/brake-pressure-retry.json",
+          "code": "R5",
+          "indexTitle": "刹车力度"
+        }
+      ]
+    }
+  ]
+}

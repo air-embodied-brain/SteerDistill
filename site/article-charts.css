@@ -1,0 +1,36 @@
+/* Research plates share the homepage's ink, rules, series colours and reveal cadence. */
+.article-chart{width:100%;margin:32px 0 36px;padding:22px 0 18px;border-block:1px solid var(--hair);font-family:var(--sans);color:var(--soft);container-type:inline-size}
+.ac-head{margin-bottom:20px}.ac-head h3{font:400 22px/1.5 var(--display);color:var(--ink);margin:0}.ac-subtitle{font:13px/1.7 var(--sans);color:var(--muted);margin:6px 0 0}
+.ac-settings{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;border-bottom:1px solid var(--hair);margin-bottom:18px}
+.ac-settings button{font:13px/1.5 var(--sans);text-align:left;cursor:pointer;background:none;border:0;border-bottom:2px solid transparent;padding:0 0 10px;color:var(--muted)}
+.ac-settings button span{display:block;font-size:11px;margin-top:3px}.ac-settings button[aria-pressed=true]{color:var(--blue);border-color:var(--blue)}
+.ac-settings button:focus-visible,.ac-retry:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.ac-plot{min-width:0}.ac-plot svg{display:block;width:100%;height:auto;overflow:visible}
+.ac-grid{stroke:var(--hair);stroke-width:1;stroke-dasharray:2 4}.ac-baseline{stroke:var(--muted);stroke-width:1}
+.ac-axis-title,.ac-tick{font:11px var(--sans);fill:var(--muted)}.ac-method{font:11px var(--sans);fill:var(--ink)}.ac-value{font:12px var(--sans);font-variant-numeric:tabular-nums;fill:var(--ink)}
+.ac-point-label{font:10px var(--sans);fill:var(--soft)}.ac-bar:focus,.ac-point:focus{outline:none;stroke:var(--ink);stroke-width:2}
+.ac-legend{display:flex;flex-wrap:wrap;gap:6px 16px;font:11px/1.6 var(--sans);color:var(--muted);margin:0 0 24px}.ac-legend span{display:flex;gap:6px;align-items:center}.ac-legend i{display:inline-block;width:8px;height:8px}
+.ac-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.ac-panel{min-width:0}.ac-panel h4{font:500 15px/1.5 var(--sans);color:var(--ink);margin:0 0 15px}
+.ac-band{opacity:.13}.ac-curve{fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.ac-reference{stroke:var(--red);stroke-width:1;stroke-dasharray:4 4}.ac-reference-label{font:10px var(--sans);fill:var(--red)}
+.ac-guide{fill:none;stroke:var(--blue);stroke-width:.8}.ac-callout{font:11px var(--sans);fill:var(--blue)}
+.ac-summary{font:13px/1.8 var(--sans);margin:12px 0 0;min-height:3.6em;color:var(--soft)}
+.ac-inspect{font:11px/1.7 var(--sans);margin:8px 0 0;min-height:3.4em;color:var(--muted);font-variant-numeric:tabular-nums}
+.ac-average .ac-inspect{min-height:1.7em;margin:0 0 10px}
+.article-chart .ac-caption{display:flex;justify-content:space-between;gap:20px;font:12px/1.8 var(--sans);color:var(--muted);margin-top:12px}.ac-caption a{white-space:nowrap}
+.ac-bar{transform-box:fill-box;transform-origin:center bottom;animation:ac-grow .95s cubic-bezier(.2,.7,.3,1) var(--delay,0ms) both}
+.ac-horizontal{transform-origin:left center;animation-name:ac-grow-x}
+.ac-scatter-mark{animation:ac-appear .65s ease var(--delay,0ms) both}
+.ac-line-window{transform-box:fill-box;transform-origin:left center;animation:ac-grow-x 1.65s cubic-bezier(.22,.61,.36,1) both}
+[data-chart-running=false] .ac-bar,[data-chart-running=false] .ac-scatter-mark,[data-chart-running=false] .ac-line-window{animation-play-state:paused}
+@keyframes ac-grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}@keyframes ac-grow-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes ac-appear{from{opacity:0}to{opacity:1}}
+.ac-retry{border:0;border-bottom:1px solid var(--hair);background:none;color:var(--blue);padding:6px 0;cursor:pointer}
+@container(max-width:560px){.ac-pair{grid-template-columns:1fr;gap:26px}.ac-settings{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.ac-head h3{font-size:20px}.ac-inspect{min-height:1.7em}.ac-summary{min-height:5.4em}.ac-average .ac-inspect{min-height:3.4em}.ac-method{font-size:12px}.ac-caption{flex-wrap:wrap}.ac-legend{gap:5px 13px}}
+@media(prefers-reduced-motion:reduce){.ac-bar,.ac-scatter-mark,.ac-line-window{animation:none!important}}
+@media print{.ac-bar,.ac-scatter-mark,.ac-line-window{animation:none!important}.ac-inspect{display:none}}
+
+.article-chart .ac-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;min-height:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.ac-value{animation:ac-appear .35s ease .7s both}
+.ac-callout,.ac-guide{animation:ac-appear .4s ease 1.25s both}
+[data-chart-running=false] .ac-value,[data-chart-running=false] .ac-callout,[data-chart-running=false] .ac-guide{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.ac-value,.ac-callout,.ac-guide{animation:none!important}}
+@media print{.ac-value,.ac-callout,.ac-guide{animation:none!important}}

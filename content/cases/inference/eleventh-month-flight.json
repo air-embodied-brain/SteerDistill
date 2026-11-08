@@ -1,0 +1,1051 @@
+{
+  "schemaVersion": 1,
+  "id": "eleventh-month-flight",
+  "kind": "inference",
+  "title": "预订十一月航班，避免误读为十二月",
+  "summary": "用户要在 2026 年第十一个月的 15 日，从旧金山飞往芝加哥，乘坐头等舱；先确认票价不超过 $5000，再用已提供的付款信息预订。",
+  "template": "comparison",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "I'm in the process of scheduling a journey from San Francisco to Chicago on the 15th of the year 2026's eleventh month. It's important the travel is in first class. Before booking, I really can't afford a ticket that is over $5000. If everything is good, then please proceed to book it using my credit card with ID 144756014165 and access token 'secureAccessToken12345'. My personal details should be integrated into the reservation."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "After reconsideration, I want to cancel one of the flights some time later"
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Oh the flight planned for London on the 15th is no longer necessary. I require the cancellation of this booking immediately."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Concerning the flight cancellation, it is crucial to alert customer service without delay. Kindly generate a high-priority ticket named 'Flight Cancellation Alert,' detailing the reservation specifics 'Request to cancel.'. My ticket username is `mthompson` and password is `securePass123"
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "methods": [
+      {
+        "id": "bf16",
+        "name": "BF16",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_flight_cost",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-11-15\", travel_class=\"first\"",
+              "result": "travel_cost_list: [4000.0]",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-11-15",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/BF16/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "travel_cost_list"
+                ],
+                "omittedArguments": [],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "book_flight",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-11-15\", travel_class=\"first\"",
+              "result": "booking_status: true",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-11-15",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/BF16/trajectory.json",
+                "message": 12,
+                "returnMessage": 13,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "booking_status"
+                ],
+                "omittedArguments": [
+                  "access_token",
+                  "card_id"
+                ],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "The user specified November 15, 2026, which should be formatted as YYYY-MM-DD, so 2026-11-15.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/BF16/trajectory.json",
+              "message": 8,
+              "field": "content[0].text within <think>",
+              "originalText": "The user specified November 15, 2026, which should be formatted as YYYY-MM-DD, so 2026-11-15.",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "BF16/trajectory.json",
+          "message": 8
+        },
+        "description": "保留了 11 月的日期。"
+      },
+      {
+        "id": "ours",
+        "name": "SteerDistill",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_flight_cost",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-11-15\", travel_class=\"first\"",
+              "result": "travel_cost_list: [4000.0]",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-11-15",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/Ours/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "travel_cost_list"
+                ],
+                "omittedArguments": [],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "book_flight",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-11-15\", travel_class=\"first\"",
+              "result": "booking_status: true",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-11-15",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/Ours/trajectory.json",
+                "message": 10,
+                "returnMessage": 11,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "booking_status"
+                ],
+                "omittedArguments": [
+                  "access_token",
+                  "card_id"
+                ],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "The user's date is November 15th, 2026, so that becomes \"2026-11-15\".",
+            "highlights": [
+              {
+                "start": 19,
+                "end": 38,
+                "text": "November 15th, 2026",
+                "tone": "after"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/Ours/trajectory.json",
+              "message": 8,
+              "field": "content[0].text within <think>",
+              "originalText": "The user's date is November 15th, 2026, so that becomes \"2026-11-15\".",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "Ours/trajectory.json",
+          "message": 8
+        },
+        "description": "按 11 月查询并预订。"
+      },
+      {
+        "id": "qerl",
+        "name": "QeRL",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_flight_cost",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-12-15\", travel_class=\"first\"",
+              "result": "travel_cost_list: [2000.0]",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-12-15",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/QeRL/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "travel_cost_list"
+                ],
+                "omittedArguments": [],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "book_flight",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-12-15\", travel_class=\"first\"",
+              "result": "booking_status: true",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-12-15",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/QeRL/trajectory.json",
+                "message": 10,
+                "returnMessage": 11,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "booking_status"
+                ],
+                "omittedArguments": [
+                  "access_token",
+                  "card_id"
+                ],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "The travel date is December 15, 2026, so formatted as 2026-12-15.",
+            "highlights": [
+              {
+                "start": 19,
+                "end": 36,
+                "text": "December 15, 2026",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/QeRL/trajectory.json",
+              "message": 8,
+              "field": "content[0].text within <think>",
+              "originalText": "The travel date is December 15, 2026, so formatted as 2026-12-15.",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "QeRL/trajectory.json",
+          "message": 8
+        },
+        "description": "按 12 月查询并预订。"
+      },
+      {
+        "id": "qad",
+        "name": "On-Policy QAD",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_flight_cost",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-12-15\", travel_class=\"first\"",
+              "result": "travel_cost_list: [2000.0]",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-12-15",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "travel_cost_list"
+                ],
+                "omittedArguments": [],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "reply",
+              "text": "The flight cost from SFO to ORD on 2026-12-15 in first class is $2000.00, which meets your budget requirement. Please provide your personal details (full name, date of birth, passport number) to proceed with the booking integration.",
+              "excerpt": true,
+              "highlights": {
+                "text": []
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/trajectory.json",
+                "message": 10,
+                "field": "content[0].text after </think>",
+                "originalText": "The flight cost from SFO to ORD on 2026-12-15 in first class is $2000.00, which meets your budget requirement. Please provide your personal details (full name, date of birth, passport number) to proceed with the booking integration.",
+                "normalization": "None; verbatim first paragraph excerpt."
+              }
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "The travel_date should be in YYYY-MM-DD format, which the user specified as December 15th, 2026, so that becomes 2026-12-15.",
+            "highlights": [
+              {
+                "start": 54,
+                "end": 95,
+                "text": "the user specified as December 15th, 2026",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/trajectory.json",
+              "message": 8,
+              "field": "content[0].text within <think>",
+              "originalText": "The travel_date should be in YYYY-MM-DD format, which the user specified as December 15th, 2026, so that becomes 2026-12-15.",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "On-Policy QAD/trajectory.json",
+          "message": 8
+        },
+        "description": "查到的是 12 月的价格。"
+      },
+      {
+        "id": "bitdistiller",
+        "name": "BitDistiller",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_flight_cost",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-12-15\", travel_class=\"first\"",
+              "result": "travel_cost_list: [2000.0]",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-12-15",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "travel_cost_list"
+                ],
+                "omittedArguments": [],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "book_flight",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-12-15\", travel_class=\"first\"",
+              "result": "booking_status: true",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-12-15",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/trajectory.json",
+                "message": 12,
+                "returnMessage": 13,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "booking_status"
+                ],
+                "omittedArguments": [
+                  "access_token",
+                  "card_id"
+                ],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "The goal is to book a first-class flight from San Francisco to Chicago on December 15, 2026, without exceeding $5000.",
+            "highlights": [
+              {
+                "start": 74,
+                "end": 91,
+                "text": "December 15, 2026",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/trajectory.json",
+              "message": 4,
+              "field": "content[0].text within <think>",
+              "originalText": "The goal is to book a first-class flight from San Francisco to Chicago on December 15, 2026, without exceeding $5000.",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "BitDistiller/trajectory.json",
+          "message": 8
+        },
+        "description": "按 12 月查询并预订。"
+      },
+      {
+        "id": "eqat",
+        "name": "EfficientQAT",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "book_flight",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-12-15\", travel_class=\"first\"",
+              "result": "booking_status: true",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-12-15",
+                    "tone": "before"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "booking_status"
+                ],
+                "omittedArguments": [
+                  "access_token",
+                  "card_id"
+                ],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "tones": [
+          "before"
+        ],
+        "reasoning": [
+          {
+            "text": "Travel date is 2026-12-15, from SFO to ORD, first class. All parameters seem covered. No issues detected, so the booking should go through.",
+            "highlights": [
+              {
+                "start": 15,
+                "end": 25,
+                "text": "2026-12-15",
+                "tone": "before"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/trajectory.json",
+              "message": 8,
+              "field": "content[0].text within <think>",
+              "originalText": "Travel date is 2026-12-15, from SFO to ORD, first class. All parameters seem covered. No issues detected, so the booking should go through.",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "EfficientQAT/trajectory.json",
+          "message": 8
+        },
+        "description": "首轮未查询票价，直接预订了 12 月的航班。"
+      },
+      {
+        "id": "gptq",
+        "name": "GPTQ",
+        "turns": [
+          [
+            {
+              "type": "action",
+              "name": "get_flight_cost",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-11-15\", travel_class=\"first\"",
+              "result": "travel_cost_list: [4000.0]",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-11-15",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/trajectory.json",
+                "message": 8,
+                "returnMessage": 9,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "travel_cost_list"
+                ],
+                "omittedArguments": [],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            },
+            {
+              "type": "action",
+              "name": "book_flight",
+              "args": "travel_from=\"SFO\", travel_to=\"ORD\", travel_date=\"2026-11-15\", travel_class=\"first\"",
+              "result": "booking_status: true",
+              "highlights": {
+                "args": [
+                  {
+                    "start": 49,
+                    "end": 59,
+                    "text": "2026-11-15",
+                    "tone": "after"
+                  }
+                ]
+              },
+              "source": {
+                "file": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/trajectory.json",
+                "message": 16,
+                "returnMessage": 17,
+                "argumentFields": [
+                  "travel_from",
+                  "travel_to",
+                  "travel_date",
+                  "travel_class"
+                ],
+                "returnFields": [
+                  "booking_status"
+                ],
+                "omittedArguments": [
+                  "access_token",
+                  "card_id"
+                ],
+                "nameNormalization": "Omit the shared mcp_tool_ prefix only."
+              },
+              "returnTone": "neutral"
+            }
+          ]
+        ],
+        "tones": [
+          "after"
+        ],
+        "reasoning": [
+          {
+            "text": "Okay, so the user wants to book a first-class flight from San Francisco to Chicago on November 15th, 2026, with a budget under $5000.",
+            "highlights": [],
+            "source": {
+              "file": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/trajectory.json",
+              "message": 8,
+              "field": "content[0].text within <think>",
+              "originalText": "Okay, so the user wants to book a first-class flight from San Francisco to Chicago on November 15th, 2026, with a budget under $5000.",
+              "normalization": "None; contiguous verbatim excerpt."
+            }
+          }
+        ],
+        "record": {
+          "sourceId": "GPTQ/trajectory.json",
+          "message": 8
+        },
+        "description": "保留了 11 月的日期。"
+      }
+    ],
+    "defaultPair": [
+      "bf16",
+      "ours"
+    ],
+    "turns": [
+      {
+        "label": "首轮行动摘录"
+      }
+    ]
+  },
+  "records": {
+    "defaultSource": "Ours/trajectory.json",
+    "defaultMessage": 8,
+    "sources": [
+      {
+        "id": "BF16/actions.json",
+        "label": "BF16/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BF16/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/cot_and_actions.txt",
+        "label": "BF16/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BF16/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BF16/done.json",
+        "label": "BF16/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BF16/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/result.json",
+        "label": "BF16/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BF16/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/score.json",
+        "label": "BF16/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BF16/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BF16/trajectory.json",
+        "label": "BF16 · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BF16/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/actions.json",
+        "label": "BitDistiller/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/cot_and_actions.txt",
+        "label": "BitDistiller/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "BitDistiller/done.json",
+        "label": "BitDistiller/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/result.json",
+        "label": "BitDistiller/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/score.json",
+        "label": "BitDistiller/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "BitDistiller/trajectory.json",
+        "label": "BitDistiller · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/BitDistiller/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/actions.json",
+        "label": "EfficientQAT/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/cot_and_actions.txt",
+        "label": "EfficientQAT/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "EfficientQAT/done.json",
+        "label": "EfficientQAT/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/result.json",
+        "label": "EfficientQAT/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/score.json",
+        "label": "EfficientQAT/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "EfficientQAT/trajectory.json",
+        "label": "EfficientQAT · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/EfficientQAT/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/actions.json",
+        "label": "GPTQ/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/cot_and_actions.txt",
+        "label": "GPTQ/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "GPTQ/done.json",
+        "label": "GPTQ/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/result.json",
+        "label": "GPTQ/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/score.json",
+        "label": "GPTQ/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "GPTQ/trajectory.json",
+        "label": "GPTQ · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/GPTQ/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/actions.json",
+        "label": "On-Policy QAD/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/cot_and_actions.txt",
+        "label": "On-Policy QAD/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "On-Policy QAD/done.json",
+        "label": "On-Policy QAD/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/result.json",
+        "label": "On-Policy QAD/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/score.json",
+        "label": "On-Policy QAD/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "On-Policy QAD/trajectory.json",
+        "label": "On-Policy QAD · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/On-Policy QAD/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/actions.json",
+        "label": "Ours/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/Ours/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/cot_and_actions.txt",
+        "label": "Ours/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/Ours/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "Ours/done.json",
+        "label": "Ours/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/Ours/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/result.json",
+        "label": "Ours/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/Ours/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/score.json",
+        "label": "Ours/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/Ours/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "Ours/trajectory.json",
+        "label": "SteerDistill · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/Ours/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/actions.json",
+        "label": "QeRL/actions.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/QeRL/actions.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/cot_and_actions.txt",
+        "label": "QeRL/cot_and_actions.txt",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/QeRL/cot_and_actions.txt",
+        "primary": false,
+        "format": "text"
+      },
+      {
+        "id": "QeRL/done.json",
+        "label": "QeRL/done.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/QeRL/done.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/result.json",
+        "label": "QeRL/result.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/QeRL/result.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/score.json",
+        "label": "QeRL/score.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/QeRL/score.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "QeRL/trajectory.json",
+        "label": "QeRL · 轨迹",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/QeRL/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "analysis.json",
+        "label": "analysis.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/analysis.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "ground_truth.json",
+        "label": "ground_truth.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/ground_truth.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "task.json",
+        "label": "task.json",
+        "url": "data/case-library/inference/eleventh-month-flight/raw/task.json",
+        "primary": false,
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/inference/eleventh-month-flight/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/inference/eleventh-month-flight/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

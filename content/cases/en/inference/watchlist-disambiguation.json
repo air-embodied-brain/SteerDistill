@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "indexTitle": "Confirm then remove",
+  "translations": {
+    "/title": "Confirm the company before removing it from the watchlist",
+    "/summary": "The user asks to remove a company from the watchlist without naming it. The list contains `NVDA` and `ZETA`; only in the next turn does the user identify Zeta Corp.",
+    "/presentation/methods/0/description": "Asks for the company name, then removes ZETA after the user replies.",
+    "/presentation/methods/0/result": "Removes only ZETA and keeps NVDA.",
+    "/presentation/methods/0/outcomes/2": "Removes only ZETA and keeps NVDA.",
+    "/presentation/methods/6/description": "Removes NVDA using a price-drop threshold of its own, then removes ZETA too.",
+    "/presentation/methods/6/result": "Removes ZETA later, but has already removed NVDA by mistake.",
+    "/presentation/methods/6/outcomes/2": "Removes ZETA later, but has already removed NVDA by mistake.",
+    "/presentation/methods/5/description": "Checks stock data first, then removes ZETA after receiving the company name.",
+    "/presentation/methods/5/result": "Removes ZETA after receiving the company name and keeps NVDA.",
+    "/presentation/methods/5/outcomes/2": "Removes ZETA after receiving the company name and keeps NVDA.",
+    "/presentation/methods/4/description": "Asks for a ticker symbol, then removes ZETA after receiving the company name.",
+    "/presentation/methods/4/result": "Removes only ZETA and keeps NVDA.",
+    "/presentation/methods/4/outcomes/2": "Removes only ZETA and keeps NVDA.",
+    "/presentation/methods/3/description": "Treats a failed stock-data lookup as evidence that the stock is invalid and still does not remove it after the company is named.",
+    "/presentation/methods/3/result": "Does not execute a removal; ZETA remains in the list.",
+    "/presentation/methods/3/outcomes/2": "Does not execute a removal; ZETA remains in the list.",
+    "/presentation/methods/2/description": "Removes both NVDA and ZETA without waiting for confirmation.",
+    "/presentation/methods/2/result": "Removes both companies in the first turn, leaving the list empty.",
+    "/presentation/methods/2/outcomes/2": "Removes both companies in the first turn, leaving the list empty.",
+    "/presentation/methods/1/description": "Checks the watchlist and asks for the company name, then removes ZETA after the user replies.",
+    "/presentation/methods/1/result": "Removes only ZETA and keeps NVDA.",
+    "/presentation/methods/1/outcomes/2": "Removes only ZETA and keeps NVDA.",
+    "/presentation/turns/0/label": "First-turn actions",
+    "/presentation/turns/1/label": "After the company is named",
+    "/presentation/turns/2/label": "Checking the current watchlist",
+    "/presentation/turns/1/title": "The user clarifies: the company is Zeta Corp",
+    "/presentation/turns/2/title": "What remains in the watchlist",
+    "/presentation/turns/2/summary": "The user asks to see the updated list. Only `NVDA` should remain.",
+    "/records/sources/4/label": "BF16 · Full-task verification",
+    "/records/sources/5/label": "BF16 · Trajectory",
+    "/records/sources/10/label": "BitDistiller · Full-task verification",
+    "/records/sources/11/label": "BitDistiller · Trajectory",
+    "/records/sources/16/label": "EfficientQAT · Full-task verification",
+    "/records/sources/17/label": "EfficientQAT · Trajectory",
+    "/records/sources/22/label": "GPTQ · Full-task verification",
+    "/records/sources/23/label": "GPTQ · Trajectory",
+    "/records/sources/28/label": "On-Policy QAD · Full-task verification",
+    "/records/sources/29/label": "On-Policy QAD · Trajectory",
+    "/records/sources/34/label": "SteerDistill · Full-task verification",
+    "/records/sources/35/label": "SteerDistill · Trajectory",
+    "/records/sources/40/label": "QeRL · Full-task verification",
+    "/records/sources/41/label": "QeRL · Trajectory",
+    "/records/sources/45/label": "File inventory and checksums",
+    "/records/download/label": "Download full records",
+    "/presentation/methods/5/turns/0/1/result": "percent_change: 0.34 (excerpt)",
+    "/presentation/methods/3/turns/0/1/result": "percent_change: 0.34 (excerpt)"
+  },
+  "preserved": [
+    {
+      "path": "/originalTask",
+      "reason": "Original user requests and environment data remain verbatim."
+    },
+    {
+      "path": "/presentation/methods/0/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/0/0/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/1/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/1/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/1/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/1/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/1/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/1/1/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/0/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/1/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/2/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/2/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/0/2/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/1/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/1/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/1/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/6/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/2/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/2/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/0/2/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/1/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/1/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/1/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/1/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/1/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/1/1/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/5/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/0/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/1/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/1/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/1/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/1/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/1/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/1/1/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/2/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/2/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/0/2/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/1/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/1/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/1/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/1/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/3/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/1/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/2/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/2/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/2/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/3/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/3/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/0/3/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/1/0/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/2/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/reasoning/0",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/reasoning/1",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/reasoning/2",
+      "reason": "Original reasoning excerpt and its evidence highlights remain unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/0/1/text",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/1/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/1/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/1/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/1/1/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/1/1/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/1/1/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/2/0/name",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/2/0/args",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    },
+    {
+      "path": "/presentation/methods/1/turns/2/0/result",
+      "reason": "Original tool call, returned excerpt or agent reply remains unchanged."
+    }
+  ],
+  "mixedFieldNotes": [
+    {
+      "path": "/presentation/methods/2/turns/0/1/result",
+      "reason": "Only the editor-added excerpt marker is translated; percent_change: 0.34 is unchanged."
+    },
+    {
+      "path": "/presentation/methods/4/turns/0/1/result",
+      "reason": "Only the editor-added excerpt marker is translated; percent_change: 0.34 is unchanged."
+    }
+  ],
+  "sourceSha256": "bcf99695a903d8efa74ccc9f0db23ed0f703d630755bdc9e9ed274f9b77c9224"
+}

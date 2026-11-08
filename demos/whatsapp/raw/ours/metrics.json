@@ -1,0 +1,15 @@
+{
+  "label": "ours",
+  "repeat": 2,
+  "env_id": "WhatsApp",
+  "task_id": "7",
+  "description": "Create a poll in the 'Project Alpha 🚀' group with the question 'Next meeting?' and options 'Monday' and 'Tuesday'.",
+  "success": true,
+  "steps": 19,
+  "episode_seconds": 21.119013098010328,
+  "inference_seconds": 8.6181084678974,
+  "output_tokens": 939,
+  "initial_image_sha256": "ebe822ad8c5b31609a59a9dcbaaabf68e2dbb6ad330aaf3ce7f548a5029b84f4",
+  "directory": "/redacted/benchmark-fast-20261103/ours/repeat-2/WhatsApp-7",
+  "status": "completed"
+}

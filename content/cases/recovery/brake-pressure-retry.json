@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "id": "brake-pressure-retry",
+  "kind": "recovery",
+  "title": "刹车踩到一半仍无法启动，踩到底后重试成功",
+  "summary": "用户要求以 `START` 模式启动发动机。此时已加油、锁门并启用驻车制动。脚刹工具的 `pedalPosition` 取值为 0 到 1，1 表示完全踩下。",
+  "template": "sequence",
+  "originalTask": {
+    "question": [
+      [
+        {
+          "role": "user",
+          "content": "My vehicle's fuel tank is low; please refuel it with 30 gallons. Following that, initiate the engine using ignition mode 'START', ensuring all doors are secured and the parking brake is set to avoid errors."
+        }
+      ],
+      [
+        {
+          "role": "user",
+          "content": "Post-engine start, verify tire pressure. If it's insufficient (less than 30.0 psi), proceed to the nearest tire shop at 456 Oakwood Avenue, Rivermist, 83214."
+        }
+      ]
+    ]
+  },
+  "presentation": {
+    "sequenceTitle": "SteerDistill",
+    "steps": [
+      {
+        "title": "未踩脚刹，首次启动被拒",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "startEngine",
+            "args": "ignitionMode=\"START\"",
+            "result": "error: \"Brake pedal needs to be pressed when starting the engine.\"",
+            "highlights": {
+              "result": [
+                {
+                  "start": 8,
+                  "end": 39,
+                  "text": "Brake pedal needs to be pressed"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 10,
+              "returnMessage": 11
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Before calling that tool, do I need to check anything else? The user mentioned ensuring doors are secured and parking brake is set, which we've done. So it's safe to proceed.",
+          "highlights": [],
+          "source": {
+            "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+            "message": 10,
+            "field": "content[0].text/<think>"
+          }
+        }
+      },
+      {
+        "title": "踩到一半后重试，仍未满足启动条件",
+        "tone": "before",
+        "events": [
+          {
+            "type": "action",
+            "name": "pressBrakePedal",
+            "args": "pedalPosition=0.5",
+            "result": "brakePedalStatus: \"pressed\", brakePedalForce: 500.0",
+            "highlights": {
+              "args": [
+                {
+                  "start": 14,
+                  "end": 17,
+                  "text": "0.5"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 12,
+              "returnMessage": 13
+            },
+            "returnTone": "neutral"
+          },
+          {
+            "type": "action",
+            "name": "startEngine",
+            "args": "ignitionMode=\"START\"",
+            "result": "error: \"Must press the brake fully before starting the engine.\"",
+            "highlights": {
+              "result": [
+                {
+                  "start": 13,
+                  "end": 34,
+                  "text": "press the brake fully"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 14,
+              "returnMessage": 15
+            }
+          }
+        ],
+        "reasoning": [
+          {
+            "title": "踩刹车前 · 推理节选",
+            "text": "The user's original instructions didn't mention pressing the brake pedal, but the tool's requirement suggests it's necessary. So the correct sequence might be: after engaging the parking brake, press the brake pedal slightly (maybe 0.5 position) before starting the engine.",
+            "highlights": [
+              {
+                "start": 194,
+                "end": 245,
+                "text": "press the brake pedal slightly (maybe 0.5 position)"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 12,
+              "field": "content[0].text/<think>"
+            },
+            "context": "踩刹车前"
+          },
+          {
+            "title": "再次启动前 · 推理节选",
+            "text": "After pressing the brake pedal, the system responded successfully, indicating the pedal is pressed with a force of 500.0. Now, the next step is to retry starting the engine. Since the brake pedal is now pressed, the earlier error should be resolved.",
+            "highlights": [
+              {
+                "start": 212,
+                "end": 248,
+                "text": "the earlier error should be resolved"
+              }
+            ],
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 14,
+              "field": "content[0].text/<think>"
+            },
+            "context": "重试启动前"
+          }
+        ]
+      },
+      {
+        "title": "改为踩到底，再次启动成功",
+        "tone": "after",
+        "events": [
+          {
+            "type": "action",
+            "name": "pressBrakePedal",
+            "args": "pedalPosition=1.0",
+            "result": "brakePedalStatus: \"pressed\", brakePedalForce: 1000.0",
+            "highlights": {
+              "args": [
+                {
+                  "start": 14,
+                  "end": 17,
+                  "text": "1.0"
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 16,
+              "returnMessage": 17
+            }
+          },
+          {
+            "type": "action",
+            "name": "startEngine",
+            "args": "ignitionMode=\"START\"",
+            "result": "engineState: \"running\", …",
+            "highlights": {
+              "result": [
+                {
+                  "start": 13,
+                  "end": 22,
+                  "text": "\"running\""
+                }
+              ]
+            },
+            "source": {
+              "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+              "message": 18,
+              "returnMessage": 19
+            }
+          }
+        ],
+        "reasoning": {
+          "title": "Agent 推理 · 节选",
+          "text": "Earlier, I pressed the brake pedal at 0.5, but the error now says it needs to be fully pressed. So the pedalPosition should be 1.0 instead of 0.5.",
+          "highlights": [
+            {
+              "start": 103,
+              "end": 145,
+              "text": "pedalPosition should be 1.0 instead of 0.5"
+            }
+          ],
+          "source": {
+            "file": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+            "message": 16,
+            "field": "content[0].text/<think>"
+          }
+        }
+      }
+    ],
+    "compact": true
+  },
+  "records": {
+    "defaultSource": "trajectory",
+    "defaultMessage": 10,
+    "sources": [
+      {
+        "id": "trajectory",
+        "label": "SteerDistill · 完整轨迹",
+        "url": "data/case-library/recovery/brake-pressure-retry/raw/trajectory.json",
+        "primary": true,
+        "format": "auto"
+      },
+      {
+        "id": "recovery-excerpt",
+        "label": "启动与重试片段",
+        "url": "data/case-library/recovery/brake-pressure-retry/raw/recovery_excerpt.json",
+        "format": "auto"
+      },
+      {
+        "id": "recovery-suffix",
+        "label": "恢复及后续轨迹",
+        "url": "data/case-library/recovery/brake-pressure-retry/raw/recovery_suffix.json",
+        "format": "auto"
+      },
+      {
+        "id": "category-score",
+        "label": "整类评分与失败记录",
+        "url": "data/case-library/recovery/brake-pressure-retry/raw/category_score.jsonl",
+        "format": "text"
+      },
+      {
+        "id": "evidence",
+        "label": "来源与核验索引",
+        "url": "data/case-library/recovery/brake-pressure-retry/raw/evidence.json",
+        "format": "auto"
+      },
+      {
+        "id": "publication-manifest",
+        "label": "文件清单与校验值",
+        "url": "data/case-library/recovery/brake-pressure-retry/manifest.json",
+        "format": "auto",
+        "primary": false
+      }
+    ],
+    "download": {
+      "href": "data/case-library/recovery/brake-pressure-retry/records.zip",
+      "label": "下载完整记录"
+    }
+  },
+  "taskTurns": [
+    0
+  ]
+}

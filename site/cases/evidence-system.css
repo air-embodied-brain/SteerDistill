@@ -1,0 +1,59 @@
+/* One evidence vocabulary. Case adapters choose content and reviewed spans. */
+/* Density is set by variables: inspection (case pages) by default, reading in the article scope. */
+.evidence-reader{--ev-body:15px;--ev-code:13px;--ev-code-line:1.7;--ev-code-wrap:anywhere;--ev-label:13px;--ev-label-weight:600;--ev-label-color:var(--soft);--ev-label-bg:var(--deep);--ev-label-pad:8px 14px;--ev-pad:12px 14px;--ev-edge:var(--hair);--ev-line:1.65;font:var(--ev-body)/var(--ev-line) var(--sans)}
+.evidence-reader .ev-frame{--ev-accent:var(--soft);margin:0;min-width:0;border:1px solid var(--ev-edge);border-top:2px solid var(--hair);background:var(--paper);color:var(--ink)}
+.evidence-reader .ev-before{--ev-accent:var(--red);border-top-color:var(--ev-accent)}.evidence-reader .ev-after{--ev-accent:var(--blue);border-top-color:var(--ev-accent)}
+.evidence-reader .ev-label{font:var(--ev-label-weight) var(--ev-label)/1.5 var(--sans);color:var(--ev-label-color);background:var(--ev-label-bg);border-bottom:1px solid var(--ev-edge);padding:var(--ev-label-pad);margin:0;letter-spacing:0}
+.evidence-reader .ev-body{padding:var(--ev-pad)}
+.evidence-reader .ev-prose{font:var(--ev-body)/var(--ev-line) var(--sans);white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.evidence-reader .ev-code{font:400 var(--ev-code)/var(--ev-code-line) var(--mono);white-space:pre-wrap;overflow-wrap:var(--ev-code-wrap);background:none;border:0;padding:0;margin:0;color:inherit}
+.evidence-reader .ev-code :where(span,mark,code){font:inherit;white-space:inherit;overflow-wrap:inherit;background:none;border:0;padding:0;margin:0;color:inherit}
+.evidence-reader :not(pre)>code{font:.88em/1.5 var(--mono);background:var(--deep);padding:.08em .25em;box-decoration-break:clone;overflow-wrap:anywhere;border:0;border-radius:0;color:inherit}
+.evidence-reader .ev-frame mark{background:color-mix(in srgb,var(--ev-accent) 12%,transparent);border:0;padding:1px 0;color:var(--ev-accent);font-weight:inherit;box-decoration-break:clone}
+.evidence-reader .ev-code .ev-function{color:var(--ev-accent);font-weight:600}
+.evidence-reader .ev-code .ev-return{color:var(--ev-accent)}
+.evidence-reader .ev-code .ev-return-before{color:var(--red)}
+.evidence-reader .ev-code .ev-return-after{color:var(--blue)}
+.evidence-reader .ev-code .ev-return-neutral{color:var(--ink)}
+.evidence-reader .ev-frame:not(.ev-before):not(.ev-after) mark:not(.ev-mark-before):not(.ev-mark-after){color:var(--ink);background:color-mix(in srgb,var(--ink) 9%,transparent)}
+.evidence-reader .ev-action-sequence>*+*{margin-top:4px}
+.evidence-reader .ev-action-sequence .ev-reply{margin-top:10px}
+.evidence-reader .ev-action-sequence .ev-reply:first-child{margin-top:0}
+.evidence-reader .ev-reply-label{font:400 var(--ev-label)/1.5 var(--sans);color:var(--muted);margin:0 0 7px}
+.evidence-reader .ev-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px}
+.evidence-reader .ev-pair>.ev-frame{height:100%}
+.evidence-reader .ev-arrow{height:28px;display:flex;align-items:center;justify-content:center;color:var(--blue)}.ev-arrow svg{width:24px;height:20px}.ev-arrow path{fill:currentColor;stroke:none}
+.evidence-reader .ev-body:has(>.ev-fields){padding:0}.evidence-reader .ev-fields{margin:0}
+.evidence-reader .ev-fields>div{display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px;padding:12px 14px;margin:0;border:0}
+.evidence-reader .ev-fields>div+div{border-top:1px solid var(--hair)}
+.evidence-reader .ev-fields dt{font:400 var(--ev-label)/1.5 var(--sans);margin:0;padding-top:2px;color:var(--soft)}.evidence-reader .ev-fields dd{margin:0;min-width:0}
+.evidence-reader .ev-disclosure{margin-top:14px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.evidence-reader .ev-disclosure>summary{cursor:pointer;list-style:none;font:var(--ev-label)/1.5 var(--sans);padding:10px 0;color:var(--soft);display:flex;gap:8px;align-items:center}
+.evidence-reader .ev-disclosure>summary::-webkit-details-marker{display:none}.evidence-reader .ev-disclosure>summary:before{content:'＋';font-size:16px;line-height:1}.evidence-reader .ev-disclosure[open]>summary:before{content:'−'}.evidence-reader .ev-disclosure[open]{padding-bottom:14px}
+.evidence-reader :is(a,button,summary):focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.evidence-reader .ev-fenced{padding:10px 12px;border:1px solid var(--hair);background:var(--deep);margin:8px 0}
+.evidence-reader .ev-markdown p{margin:0 0 10px}.evidence-reader .ev-markdown p:last-child{margin-bottom:0}.evidence-reader .ev-markdown :is(ul,ol){white-space:normal;margin:10px 0;padding-left:24px}.evidence-reader .ev-markdown h4{font:600 15px/1.65 var(--sans);margin:12px 0}
+@media(max-width:800px){.evidence-reader .ev-fields>div{grid-template-columns:1fr;gap:5px}.evidence-reader .ev-fields dt{padding-top:0}.evidence-reader .ev-pair{grid-template-columns:1fr;gap:16px}}
+
+/* Explicit per-span semantics can differ from the surrounding frame. */
+.evidence-reader .ev-frame mark.ev-mark-before{color:var(--red);background:color-mix(in srgb,var(--red) 12%,transparent)}
+.evidence-reader .ev-frame mark.ev-mark-after{color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,transparent)}
+
+/* Semantic marks keep one color treatment across prose, calls and inline code. */
+.evidence-reader .ev-frame mark :is(.ev-function,code){color:inherit}
+.evidence-reader .ev-frame mark code{background:transparent}
+
+/* A reviewed corrective action can have a different tone from its final-outcome frame. */
+.evidence-reader .ev-action.ev-neutral{--ev-accent:var(--soft)}
+
+/* Every frame uses the same content label and optional reading context. */
+.evidence-reader .ev-label{display:flex;align-items:baseline;justify-content:space-between;gap:6px 18px}
+.evidence-reader .ev-label-title{flex-shrink:0}
+.evidence-reader .ev-label-context{font-weight:400;color:var(--muted);text-align:right;min-width:0;overflow-wrap:anywhere}
+.case-site .ev-pair:has(>.ev-frame){grid-template-rows:auto 1fr}
+.case-site .ev-pair>.ev-frame{display:grid;grid-row:span 2;grid-template-rows:subgrid}
+@media(max-width:800px){
+ .case-site .ev-pair:has(>.ev-frame){grid-template-rows:none}
+ .case-site .ev-pair>.ev-frame{display:block;grid-row:auto}
+}
+@media(max-width:520px){.evidence-reader .ev-label{flex-direction:column;align-items:flex-start;gap:2px}.evidence-reader .ev-label-context{text-align:left}}

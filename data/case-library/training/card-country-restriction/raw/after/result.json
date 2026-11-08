@@ -1,0 +1,23 @@
+{
+  "local": {
+    "passed": true,
+    "native_state_verification": {
+      "result": "complete"
+    },
+    "scope": "The task must be complete immediately after the single guided response.",
+    "checked_before_continuation": true,
+    "first_response_reasoning_present": true
+  },
+  "final": {
+    "result": "complete"
+  },
+  "final_state": {
+    "passed": true,
+    "native_state_verification": {
+      "result": "complete"
+    },
+    "scope": "The task must be complete immediately after the single guided response."
+  },
+  "guidance_removed": true,
+  "turns": 2
+}
