@@ -95,10 +95,6 @@ The code branch `main` is the repository default. GitHub Pages serves `/` from
 `website`. Push changes to the website branch after running the publication
 checks.
 
-The website history was consolidated into a single commit on 2026-11-08; earlier development
-history is kept only in a local backup branch. Continue amending that single website commit
-and push with an explicit `--force-with-lease` against the verified remote tip.
-
 ## Release TODOs
 
 - TODO: Add checkpoint download links in the same resource navigation.
